@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createPostConstroller } from "../useCases/CreatePost";
+import { createPostConstroller } from "../useCases/Post/CreatePost";
 import { getPostsController } from "../useCases/GetAllPosts";
 import { getPostController } from "../useCases/GetPost";
 

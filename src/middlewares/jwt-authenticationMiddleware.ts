@@ -4,7 +4,7 @@ import ForbiddenError from '../entities/errors/Forbidden.error.model';
 
 async function JwtAuthenticationMiddleware(request: Request, response: Response, next: NextFunction) {
 
-    throw new Error('JWT authentication middleware not implemented');
+   // throw new Error('JWT authentication middleware not implemented');
     
     const authorizationHeader = request.headers.authorization;
 

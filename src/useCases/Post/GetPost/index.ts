@@ -1,4 +1,4 @@
-import { DatabasePostRepository } from "../../repositories/implementations/DatabasePostRepository";
+import { DatabasePostRepository } from "../../../repositories/implementations/DatabasePostRepository";
 import { GetPostController } from "./GetPostController";
 import { GetPostUseCase } from "./GetPostUseCase";
 

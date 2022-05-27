@@ -10,7 +10,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(UserRouter);
 app.use(PostRouter);
 
-// Configuração dos Handle de Erro.
 app.use(errorHandle);
 
 export { app };

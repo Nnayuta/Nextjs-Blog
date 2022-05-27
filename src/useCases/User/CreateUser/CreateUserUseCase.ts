@@ -1,6 +1,6 @@
-import { User } from '../../entities/User';
-import { IMailProvider } from '../../providers/IMailProvider';
-import { IUsersRepository } from '../../repositories/IUserRepository';
+import { User } from '../../../entities/User';
+import { IMailProvider } from '../../../providers/IMailProvider';
+import { IUsersRepository } from '../../../repositories/IUserRepository';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
 export class CreateUserUseCase {
@@ -22,17 +22,16 @@ export class CreateUserUseCase {
 
         await this.mailProvider.sendMail({
             to: {
-                name: data.name,
+                name: data.username,
                 email: data.email,
             },
             from: {
-                name: 'Equipe do Meu App',
-                email: 'equipe@localhost',
+                name: 'Equipe do Nizzy',
+                email: 'equipe@nizzy',
             },
-            subject: 'Seja bem-vindo á plataforma',
+            subject: 'Seja bem-vinda(o)!',
             body: ` <h1>Bem vinda(o)</h1>
-                    <p>Estamos felizes que você tenha se cadastrado no nosso site.</p>
-                    <p>Você já pode começar a usar o sistema.</p>`,
+                    <p>Estamos felizes que você tenha se cadastrado no nosso Blog.</p>`,
         })
     }
 }

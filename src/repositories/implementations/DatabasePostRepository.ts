@@ -10,7 +10,7 @@ export class DatabasePostRepository implements IPostRepository {
     }
 
     async findById(id: string): Promise<Post> {
-        return await db.findOne('Post', id);
+        return await db.findOne('Post', 'id', id);
     }
 
     async findAll(): Promise<Post[]> {

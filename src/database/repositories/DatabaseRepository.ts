@@ -1,10 +1,11 @@
 import fs from 'fs';
 import { join } from 'path';
+import { DatabaseError } from '../../entities/errors/DatabaseError.error.model';
 
 import { Post } from "../../entities/Post";
 import { User } from "../../entities/User";
 
-export const create = async (data: User | Post): Promise<void> => {
+export const create = async (data: User | Post): Promise<any> => {
     const fileName = data.constructor.name;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
@@ -21,11 +22,12 @@ export const create = async (data: User | Post): Promise<void> => {
         }
     }
     catch (err) {
-        console.log(err);
+        return new DatabaseError('Fail to create data');
     }
 }
 
-export const findOne = async (type: string, id: string): Promise<any> => {
+// Pesquisa um dado: 'where'= qual registro | 'what': oque vamos procurar
+export const findOne = async (type: string, where: string, what: string): Promise<any> => {
     const fileName = type;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
@@ -34,14 +36,14 @@ export const findOne = async (type: string, id: string): Promise<any> => {
         if (file) {
             const json = fs.readFileSync(filePath, 'utf8');
             const dataArray = JSON.parse(json);
-            const data = dataArray.find(data => data.id === id);
+            const data = dataArray.find(data => data[where] === what);
             return data;
         }else{
-            return new Error('ID not found');
+            return new DatabaseError('This user does not exist!');
         }
     }
     catch (err) {
-        console.log(err);
+        return new DatabaseError('Error to find the data');
     }
 }
 
@@ -57,14 +59,14 @@ export const findAll = async (type: string): Promise<any> => {
         }
     }
     catch (err) {
-        return new Error('Table not found');
+        return new DatabaseError('Table not found');
     }
 }
 
 export const update = async (data: User | Post): Promise<void> => {
-    throw new Error("Method not implemented.");
+    throw new DatabaseError("Method not implemented.");
 }
 
 export const remove = async (id: string, data: User | Post): Promise<void> => {
-    throw new Error("Method not implemented.");
+    throw new DatabaseError("Method not implemented.");
 }

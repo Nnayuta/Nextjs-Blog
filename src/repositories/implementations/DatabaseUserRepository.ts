@@ -1,16 +1,14 @@
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUserRepository";
+import * as db from '../../database/repositories/DatabaseRepository';
 
-export class DatabaseUsersRepository implements IUsersRepository{
-    private users: User[] = [];
-
+export class DatabaseUsersRepository implements IUsersRepository {
     async findByEmail(email: string): Promise<User> {
-        const user = this.users.find(user => user.email === email)
-
+        const user = await db.findOne('User', 'email', email);
         return user;
     }
 
     async save(user: User): Promise<void> {
-        this.users.push(user);
+        db.create(user);
     }
 }

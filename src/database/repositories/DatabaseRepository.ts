@@ -4,6 +4,7 @@ import { DatabaseError } from '../../entities/errors/DatabaseError.error.model';
 
 import { Post } from "../../entities/Post";
 import { User } from "../../entities/User";
+import { FindAllOptions, IFindOptions } from '../Models/IFind.Model';
 
 export const create = async (data: User | Post): Promise<DatabaseError> => {
     const fileName = data.constructor.name;
@@ -26,9 +27,8 @@ export const create = async (data: User | Post): Promise<DatabaseError> => {
     }
 }
 
-// Pesquisa um dado: 'where'= qual registro | 'what': oque vamos procurar
-export const findOne = async (type: string, where: string, what: string): Promise<Object | DatabaseError> => {
-    const fileName = type;
+export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<DatabaseError | Object> => {
+    const fileName = TABLE;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
 
@@ -36,9 +36,10 @@ export const findOne = async (type: string, where: string, what: string): Promis
         if (file) {
             const json = fs.readFileSync(filePath, 'utf8');
             const dataArray = JSON.parse(json);
-            const data = dataArray.find(data => data[where] === what);
+            const data = dataArray.find(data => data[WHERE] === VALUE);
+
             return data;
-        }else{
+        } else {
             return new DatabaseError('This user does not exist!');
         }
     }
@@ -47,8 +48,8 @@ export const findOne = async (type: string, where: string, what: string): Promis
     }
 }
 
-export const findAll = async (type: string): Promise<Object[] | DatabaseError> => {
-    const filePath = join(__dirname, `../data/${type}.json`);
+export const findAll = async ({ TABLE }: FindAllOptions): Promise<any> => {
+    const filePath = join(__dirname, `../data/${TABLE}.json`);
     const file = fs.existsSync(filePath);
 
     try {

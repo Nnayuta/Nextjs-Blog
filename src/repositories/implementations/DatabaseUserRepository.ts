@@ -4,8 +4,14 @@ import * as db from '../../database/repositories/DatabaseRepository';
 
 export class DatabaseUsersRepository implements IUsersRepository {
     async findByEmail(email: string): Promise<User> {
-        const user = await db.findOne('User', 'email', email);
-        return user;
+        // Preciso corrigir
+        const user = await db.findOne(
+            {
+                TABLE: 'User',
+                WHERE: 'email',
+                VALUE: email
+            });
+        return user as User;
     }
 
     async save(user: User): Promise<void> {

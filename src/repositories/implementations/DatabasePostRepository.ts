@@ -4,20 +4,23 @@ import * as db from '../../database/repositories/DatabaseRepository';
 
 export class DatabasePostRepository implements IPostRepository {
 
-    async findByTitle(title: string): Promise<Post> {
-        throw new Error("Method not implemented.");
-        // const post = this.posts.find(post => post.title === title)
-    }
-
     async findById(id: string): Promise<Post> {
-        return await db.findOne('Post', 'id', id);
+        const Post = await db.findOne({
+            TABLE: 'Post',
+            WHERE: 'id',
+            VALUE: id
+        });
+        
+        return Post as Post;
     }
 
     async findAll(): Promise<Post[]> {
-        return await db.findAll('Post');
+        return await db.findAll({
+            TABLE: 'Post'
+        });
     }
 
-    async save(post: Post): Promise<void> {
+    async save(post: Post){
         db.create(post);
     }
 

@@ -5,7 +5,7 @@ import { DatabaseError } from '../../entities/errors/DatabaseError.error.model';
 import { Post } from "../../entities/Post";
 import { User } from "../../entities/User";
 
-export const create = async (data: User | Post): Promise<any> => {
+export const create = async (data: User | Post): Promise<DatabaseError> => {
     const fileName = data.constructor.name;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
@@ -27,7 +27,7 @@ export const create = async (data: User | Post): Promise<any> => {
 }
 
 // Pesquisa um dado: 'where'= qual registro | 'what': oque vamos procurar
-export const findOne = async (type: string, where: string, what: string): Promise<any> => {
+export const findOne = async (type: string, where: string, what: string): Promise<Object | DatabaseError> => {
     const fileName = type;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
@@ -47,7 +47,7 @@ export const findOne = async (type: string, where: string, what: string): Promis
     }
 }
 
-export const findAll = async (type: string): Promise<any> => {
+export const findAll = async (type: string): Promise<Object[] | DatabaseError> => {
     const filePath = join(__dirname, `../data/${type}.json`);
     const file = fs.existsSync(filePath);
 

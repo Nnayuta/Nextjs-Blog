@@ -25,7 +25,7 @@ export class CreatePostConstroller {
             const post = await this.createPostUseCase.execute({
                 title,
                 content,
-                author: user,
+                author: user.id,
             })
 
             return response.status(StatusCodes.CREATED).json({

@@ -17,12 +17,16 @@ export class CreateUserUseCase {
             }
     
             const userAlreadyExists = await this.usersRepository.findByEmail(data.email)
+
+            if(userAlreadyExists === null){
+                throw new Error('Fail to get data');
+            }
     
             if (userAlreadyExists) {
                 throw new Error('Email address already used.');
             }
     
-            const user = new User(data as User);
+            const user = new User(data);
     
             await this.usersRepository.save(user)  
              

@@ -62,18 +62,18 @@ export const update = async ({ TABLE, WHERE, VALUE }: IUpdate): Promise<Database
     }
 }
 
-export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<object> => {
+export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<DatabaseError | object> => {
     const { exists, json } = loadAndDecrypt(TABLE);
     try {
         if (exists) {
             const data = json.find(data => data[WHERE] === VALUE);
             return data;
         } else {
-            return new DatabaseError('This user does not exist!');
+            throw new DatabaseError('Data not found');
         }
     }
     catch (err) {
-        return new DatabaseError('Error to find the data');
+        return err;
     }
 }
 

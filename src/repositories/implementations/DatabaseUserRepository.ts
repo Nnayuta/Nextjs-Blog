@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import * as db from '../../database/repositories/DatabaseRepository';
+import { DatabaseError } from '../../entities/errors/DatabaseError.error.model';
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUserRepository";
 
@@ -15,6 +16,11 @@ export class DatabaseUsersRepository implements IUsersRepository {
                 WHERE: 'email',
                 VALUE: email
             });
+
+        if (user instanceof DatabaseError) {
+            return null;
+        }
+
         return user as User;
     }
 

@@ -8,7 +8,7 @@ export class User {
 
     public name: string;
     public email: string;
-    public password: string;
+    public password?: string;
 
     constructor(props: Omit<User, 'id'>, id?: string) {
         if (!id) {
@@ -16,10 +16,12 @@ export class User {
         }
 
         Object.assign(this, props);
-        this.password = this.hashPassword(props.password);
+        if (this.password) {
+            this.password = this.hashPassword(props.password);
+        }
     }
 
-    private hashPassword(password: string): string {
+    private hashPassword?(password: string): string {
         return bcrypt.hashSync(password, Number(process.env.SALT_ROUNDS));
     }
 }

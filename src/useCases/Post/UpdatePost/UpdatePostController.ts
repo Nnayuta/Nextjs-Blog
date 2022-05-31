@@ -12,24 +12,24 @@ export class UpdatePostController {
     async handle(request: Request, response: Response): Promise<Response> {
         try {
             const { id } = request.params;
-            const { title, body } = request.body as IUpdatePostDTO;
+            const { title, content } = request.body as IUpdatePostDTO;
 
             if(!title){
                 await this.updatePostUseCase.execute(id,{
-                    body,
+                    content,
                 });
             }
 
-            if(!body){
+            if(!content){
                 await this.updatePostUseCase.execute(id,{
                     title,
                 });
             }
 
-            if(title && body){
+            if(title && content){
                 await this.updatePostUseCase.execute(id,{
                     title,
-                    body,
+                    content,
                 });
             }
 

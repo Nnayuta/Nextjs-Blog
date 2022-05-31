@@ -9,9 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(AuthRouter);
+app.use(UserRouter);
 
 app.use(JWTAuthenticationMiddleware);
-app.use(UserRouter);
 app.use(PostRouter);
 
 app.use(errorHandle);

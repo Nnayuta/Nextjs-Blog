@@ -10,28 +10,39 @@ export class CreateUserUseCase {
     ) { }
 
     async execute(data: ICreateUserRequestDTO) {
-        const userAlreadyExists = await this.usersRepository.findByEmail(data.email)
 
-        if (userAlreadyExists) {
-            throw new Error('User already exists');
+        try {
+            if(!data){
+                throw new Error('Data is required');
+            }
+    
+            const userAlreadyExists = await this.usersRepository.findByEmail(data.email)
+    
+            if (userAlreadyExists) {
+                throw new Error('Email address already used.');
+            }
+    
+            const user = new User(data as User);
+    
+            await this.usersRepository.save(user)  
+             
+        } catch (error) {
+            throw new Error(error.message);
         }
 
-        const user = new User(data);
-
-        await this.usersRepository.save(user)
-
-        await this.mailProvider.sendMail({
-            to: {
-                name: data.username,
-                email: data.email,
-            },
-            from: {
-                name: 'Equipe do Nizzy',
-                email: 'equipe@nizzy',
-            },
-            subject: 'Seja bem-vinda(o)!',
-            body: ` <h1>Bem vinda(o)</h1>
-                    <p>Estamos felizes que você tenha se cadastrado no nosso Blog.</p>`,
-        })
+        //Mail provider
+        // await this.mailProvider.sendMail({
+        //     to: {
+        //         name: data.name,
+        //         email: data.email,
+        //     },
+        //     from: {
+        //         name: 'Equipe do Nizzy',
+        //         email: 'equipe@nizzy.vercel.com',
+        //     },
+        //     subject: 'Seja bem-vinda(o)!',
+        //     body: ` <h1>Bem vinda(o)</h1>
+        //             <p>Estamos felizes que você tenha se cadastrado no nosso Blog.</p>`,
+        // })
     }
 }

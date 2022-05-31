@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ICreateUserRequestDTO } from './CreateUserDTO';
 import { CreateUserUseCase } from './CreateUserUseCase';
-import bcrypt from 'bcrypt';
 
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
@@ -11,11 +11,11 @@ export class CreateUserController {
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { username, email, password } = request.body;
+        const { name, email, password } = request.body as ICreateUserRequestDTO;
 
         try {
 
-            if(username.length < 3){
+            if(name.length < 3){
                 throw new Error('Username must be at least 3 characters long');
             }
     
@@ -28,12 +28,12 @@ export class CreateUserController {
                 throw new Error('Invalid email');
             }
 
-            const hashedPassword = await bcrypt.hash(password, 10);
+            const lowerCaseEmail = email.toLowerCase();
 
             await this.createUserUserCase.execute({
-                username,
-                email,
-                password: hashedPassword,
+                name,
+                email: lowerCaseEmail,
+                password,
             })
 
             return response.status(StatusCodes.CREATED).send();

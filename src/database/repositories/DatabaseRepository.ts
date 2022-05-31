@@ -4,7 +4,9 @@ import { DatabaseError } from '../../entities/errors/DatabaseError.error.model';
 
 import { Post } from "../../entities/Post";
 import { User } from "../../entities/User";
-import { FindAllOptions, IFindOptions } from '../Models/IFind.Model';
+
+import { IFindAllOptions, IFindOptions } from '../Models/IFind.Model';
+import { IRemove } from '../Models/IRemove.model';
 import { IUpdate } from '../Models/IUpdate.Mode';
 
 export const create = async (data: User | Post): Promise<DatabaseError> => {
@@ -47,7 +49,7 @@ export const update = async ({ TABLE, WHERE, VALUE }: IUpdate): Promise<Database
     }
 }
 
-export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<DatabaseError | object> => {
+export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<object> => {
     const fileName = TABLE;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
@@ -60,15 +62,15 @@ export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<Da
 
             return data;
         } else {
-            return new DatabaseError('This user does not exist!');
+            new DatabaseError('This user does not exist!');
         }
     }
     catch (err) {
-        return new DatabaseError('Error to find the data');
+        new DatabaseError('Error to find the data');
     }
 }
 
-export const findAll = async ({ TABLE }: FindAllOptions): Promise<DatabaseError | object[]> => {
+export const findAll = async ({ TABLE }: IFindAllOptions): Promise<DatabaseError | object[]> => {
     const filePath = join(__dirname, `../data/${TABLE}.json`);
     const file = fs.existsSync(filePath);
 
@@ -84,17 +86,12 @@ export const findAll = async ({ TABLE }: FindAllOptions): Promise<DatabaseError 
     }
 }
 
-interface IRemove {
-    TABLE: string;
-    WHERE: string;
-}
-
 export const remove = async ({ TABLE, WHERE }: IRemove): Promise<DatabaseError> => {
     const filePath = join(__dirname, `../data/${TABLE}.json`);
     const file = fs.existsSync(filePath);
 
     try {
-        if(file){
+        if (file) {
             const json = fs.readFileSync(filePath, 'utf8');
             const dataArray = JSON.parse(json);
             const index = dataArray.findIndex(item => item.id === WHERE);
@@ -103,7 +100,7 @@ export const remove = async ({ TABLE, WHERE }: IRemove): Promise<DatabaseError> 
 
             fs.writeFileSync(filePath, JSON.stringify(dataArray));
         }
-    }catch(err){
+    } catch (err) {
         return new DatabaseError('Error to find the data');
     }
 }

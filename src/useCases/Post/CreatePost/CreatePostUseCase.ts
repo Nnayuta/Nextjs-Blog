@@ -7,8 +7,9 @@ export class CreatePostUseCase{
         private postsRepository: IPostRepository,
     ){}
 
-    async execute(data: ICreatePostDTO){
+    async execute(data: ICreatePostDTO): Promise<Post>{
         const post = new Post(data);
         await this.postsRepository.save(post);
+        return post;
     }
 }

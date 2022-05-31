@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { User } from "../../../entities/User";
 import { CreatePostUseCase } from "./CreatePostUseCase";
 
 export class CreatePostConstroller {
@@ -8,31 +9,34 @@ export class CreatePostConstroller {
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { title, body } = request.body;
-
         try {
+            const { title, content } = request.body;
 
-            if(!title || !body) {
-                throw new Error('Title and body are required');
+            const user = request.user as User;
+
+            if (!user) {
+                throw new Error('User not found');
             }
 
-            await this.createPostUseCase.execute({
+            if (!title || !content) {
+                throw new Error('Title and Content are required');
+            }
+
+            const post = await this.createPostUseCase.execute({
                 title,
-                body
+                content,
+                author: user,
             })
 
             return response.status(StatusCodes.CREATED).json({
                 message: 'Post created with success',
-                post: {
-                    title,
-                    body
-                }
+                post: post
             });
         }
         catch (err) {
             return response.status(StatusCodes.BAD_REQUEST).json({
-                message: err.message || 'Unexpected error.'
-            })
+                message: err.message || 'Unexpected error',
+            });
         }
     }
 }

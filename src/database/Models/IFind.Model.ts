@@ -4,8 +4,6 @@ export interface IFindOptions {
     VALUE: string | number;
 }
 
-
-
 export interface FindAllOptions {
-    TABLE: object;
+    TABLE: string;
 }

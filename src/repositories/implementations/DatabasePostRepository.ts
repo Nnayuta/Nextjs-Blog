@@ -10,22 +10,32 @@ export class DatabasePostRepository implements IPostRepository {
             WHERE: 'id',
             VALUE: id
         });
-        
+
         return Post as Post;
     }
 
     async findAll(): Promise<Post[]> {
-        return await db.findAll({
-            TABLE: 'Post'
+        const Posts = await db.findAll({ TABLE: 'Post' });
+        return Posts as Post[];
+    }
+
+    async save(post: Post) {
+        await db.create(post);
+    }
+
+
+    async update(id: string, data: object): Promise<void> {
+        await db.update({
+            TABLE: 'Post',
+            WHERE: id,
+            VALUE: data
         });
     }
 
-    async save(post: Post){
-        db.create(post);
-    }
-
     async delete(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
-        //this.posts = this.posts.filter(post => post.id !== id);
+        await db.remove({
+            TABLE: 'Post',
+            WHERE: id
+        });
     }
 }

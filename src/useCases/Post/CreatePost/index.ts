@@ -2,10 +2,10 @@ import { DatabasePostRepository } from "../../../repositories/implementations/Da
 import { CreatePostConstroller } from "./CreatePostController";
 import { CreatePostUseCase } from "./CreatePostUseCase";
 
-const mongoPostRepository = new DatabasePostRepository();
+const databasePostRepository = new DatabasePostRepository();
 
 const createNewPostUseCase = new CreatePostUseCase(
-    mongoPostRepository
+    databasePostRepository
 );
 
 const createPostConstroller = new CreatePostConstroller(

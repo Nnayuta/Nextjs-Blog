@@ -5,6 +5,7 @@ import { DatabaseError } from '../../entities/errors/DatabaseError.error.model';
 import { Post } from "../../entities/Post";
 import { User } from "../../entities/User";
 import { FindAllOptions, IFindOptions } from '../Models/IFind.Model';
+import { IUpdate } from '../Models/IUpdate.Mode';
 
 export const create = async (data: User | Post): Promise<DatabaseError> => {
     const fileName = data.constructor.name;
@@ -27,7 +28,26 @@ export const create = async (data: User | Post): Promise<DatabaseError> => {
     }
 }
 
-export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<DatabaseError | Object> => {
+export const update = async ({ TABLE, WHERE, VALUE }: IUpdate): Promise<DatabaseError> => {
+    const filePath = join(__dirname, `../data/${TABLE}.json`);
+    const file = fs.existsSync(filePath);
+
+    try {
+        if (file) {
+            const json = fs.readFileSync(filePath, 'utf8');
+            const dataArray = JSON.parse(json);
+            const index = dataArray.findIndex(item => item.id === WHERE);
+
+            dataArray[index] = { ...dataArray[index], ...VALUE, updated: new Date().toISOString() };
+
+            fs.writeFileSync(filePath, JSON.stringify(dataArray));
+        }
+    } catch (error) {
+        return new DatabaseError('Error to find the data');
+    }
+}
+
+export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<DatabaseError | object> => {
     const fileName = TABLE;
     const filePath = join(__dirname, `../data/${fileName}.json`);
     const file = fs.existsSync(filePath);
@@ -48,7 +68,7 @@ export const findOne = async ({ TABLE, WHERE, VALUE }: IFindOptions): Promise<Da
     }
 }
 
-export const findAll = async ({ TABLE }: FindAllOptions): Promise<any> => {
+export const findAll = async ({ TABLE }: FindAllOptions): Promise<DatabaseError | object[]> => {
     const filePath = join(__dirname, `../data/${TABLE}.json`);
     const file = fs.existsSync(filePath);
 
@@ -64,10 +84,26 @@ export const findAll = async ({ TABLE }: FindAllOptions): Promise<any> => {
     }
 }
 
-export const update = async (data: User | Post): Promise<void> => {
-    throw new DatabaseError("Method not implemented.");
+interface IRemove {
+    TABLE: string;
+    WHERE: string;
 }
 
-export const remove = async (id: string, data: User | Post): Promise<void> => {
-    throw new DatabaseError("Method not implemented.");
+export const remove = async ({ TABLE, WHERE }: IRemove): Promise<DatabaseError> => {
+    const filePath = join(__dirname, `../data/${TABLE}.json`);
+    const file = fs.existsSync(filePath);
+
+    try {
+        if(file){
+            const json = fs.readFileSync(filePath, 'utf8');
+            const dataArray = JSON.parse(json);
+            const index = dataArray.findIndex(item => item.id === WHERE);
+
+            dataArray.splice(index, 1);
+
+            fs.writeFileSync(filePath, JSON.stringify(dataArray));
+        }
+    }catch(err){
+        return new DatabaseError('Error to find the data');
+    }
 }

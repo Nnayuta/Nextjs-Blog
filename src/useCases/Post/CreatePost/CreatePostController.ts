@@ -11,6 +11,11 @@ export class CreatePostConstroller {
         const { title, body } = request.body;
 
         try {
+
+            if(!title || !body) {
+                throw new Error('Title and body are required');
+            }
+
             await this.createPostUseCase.execute({
                 title,
                 body

@@ -12,14 +12,13 @@ import { IUpdate } from '../Models/IUpdate.Mode';
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET_KEY);
 
 const ecryptAndSave = async (data: object, table: string) => {
-    const filePath = join(__dirname, `../data/${table}.db`);
+    const filePath = join(__dirname, `../tables/${table}.db`);
     const encryptedData = cryptr.encrypt(JSON.stringify(data));
     fs.writeFileSync(filePath, encryptedData);
 }
 
 const loadAndDecrypt = (table: string) => {
-    const filePath = join(__dirname, `../data/${table}.db`);
-
+    const filePath = join(__dirname, `../tables/${table}.db`);
     if (!fs.existsSync(filePath)) {
         return { exists: false, json: null };
     }
@@ -33,7 +32,6 @@ const loadAndDecrypt = (table: string) => {
 export const create = async (data: User | Post): Promise<DatabaseError> => {
     const table = data.constructor.name;
     const { exists, json } = loadAndDecrypt(table);
-
     try {
         if (exists) {
             json.push(data);
@@ -50,7 +48,6 @@ export const create = async (data: User | Post): Promise<DatabaseError> => {
 
 export const update = async ({ TABLE, WHERE, VALUE }: IUpdate): Promise<DatabaseError> => {
     const { exists, json } = loadAndDecrypt(TABLE);
-
     try {
         if (exists) {
             const index = json.findIndex(item => item.id === WHERE);
@@ -91,7 +88,6 @@ export const findAll = async ({ TABLE }: IFindAllOptions): Promise<DatabaseError
 
 export const remove = async ({ TABLE, WHERE }: IRemove): Promise<DatabaseError> => {
     const { exists, json } = loadAndDecrypt(TABLE);
-
     try {
         if (exists) {
             const index = json.findIndex(item => item.id === WHERE);

@@ -1,7 +1,7 @@
-import { IMailProvider, IMessage } from "../IMailProvider";
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
 import Mail from "nodemailer/lib/mailer";
-require('dotenv').config()
+import { IMailProvider, IMessage } from "../IMailProvider";
+require('dotenv').config();
 
 export class MailtrapMailProvider implements IMailProvider {
     private transporter: Mail;

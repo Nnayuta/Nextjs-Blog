@@ -1,12 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
-import { User } from './User';
 
 export class Post {
     public readonly id: string;
 
     public title: string;
     public content: string;
-    public author: User;
+    public author: string;
     
     public readonly published: string;
     public updated?: string

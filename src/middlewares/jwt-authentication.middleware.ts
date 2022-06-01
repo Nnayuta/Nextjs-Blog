@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import JWT from "jsonwebtoken";
-import { User } from "../entities/User";
-import { DatabaseUsersRepository } from "../repositories/implementations/DatabaseUserRepository";
+import { User } from "@entities/User";
+import { DatabaseUsersRepository } from "@repositories/implementations/DatabaseUserRepository";
 require('dotenv').config();
 
 export async function JWTAuthenticationMiddleware(request: Request, response: Response, next: NextFunction) {

@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import JWT, { SignOptions } from 'jsonwebtoken';
-import { ForbiddenError } from '../../../entities/errors/Forbidden.error.model';
+import { ForbiddenError } from '@entities/errors/Forbidden.error.model';
+
 require('dotenv').config()
 
 export class AuthUserController {

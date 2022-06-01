@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
-import { basicAuthMiddleware } from "../middlewares/basic-auth.middleware";
-import { JWTAuthenticationMiddleware } from "../middlewares/jwt-authentication.middleware";
-import { authUserController } from '../useCases/Auth/AuthUser';
+import { basicAuthMiddleware } from "@middlewares/basic-auth.middleware";
+import { JWTAuthenticationMiddleware } from "@middlewares/jwt-authentication.middleware";
+import { authUserController } from '@useCases/Auth/AuthUser';
 
 
 const router = Router();

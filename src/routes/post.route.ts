@@ -1,10 +1,10 @@
 import { Router } from "express";
 
-import { createPostConstroller } from "../useCases/Post/CreatePost";
-import { getPostsController } from "../useCases/Post/GetAllPosts";
-import { getPostController } from "../useCases/Post/GetPost";
-import { removePostController } from "../useCases/Post/RemovePost";
-import { updatePostController } from "../useCases/Post/UpdatePost";
+import { createPostConstroller } from "@useCases/Post/CreatePost";
+import { getPostsController } from "@useCases/Post/GetAllPosts";
+import { getPostController } from "@useCases/Post/GetPost";
+import { removePostController } from "@useCases/Post/RemovePost";
+import { updatePostController } from "@useCases/Post/UpdatePost";
 
 const router = Router();
 

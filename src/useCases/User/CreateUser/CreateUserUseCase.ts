@@ -1,6 +1,6 @@
-import { User } from '../../../entities/User';
-import { IMailProvider } from '../../../providers/IMailProvider';
-import { IUsersRepository } from '../../../repositories/IUserRepository';
+import { User } from '@entities/User';
+import { IMailProvider } from '@providers/IMailProvider';
+import { IUsersRepository } from '@repositories/IUserRepository';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
 export class CreateUserUseCase {
@@ -17,10 +17,6 @@ export class CreateUserUseCase {
             }
     
             const userAlreadyExists = await this.usersRepository.findByEmail(data.email)
-
-            if(userAlreadyExists === null){
-                throw new Error('Fail to get data');
-            }
     
             if (userAlreadyExists) {
                 throw new Error('Email address already used.');

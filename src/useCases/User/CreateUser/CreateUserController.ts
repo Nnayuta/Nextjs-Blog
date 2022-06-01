@@ -23,7 +23,6 @@ export class CreateUserController {
                 throw new Error('Password must be at least 6 characters long');
             }
 
-
             if(!emailRegex.test(email)){
                 throw new Error('Invalid email');
             }
@@ -36,7 +35,9 @@ export class CreateUserController {
                 password,
             })
 
-            return response.status(StatusCodes.CREATED).send();
+            return response.status(StatusCodes.CREATED).json({
+                message: 'User created successfully'
+            })
             
         } catch (err) {
             return response.status(StatusCodes.BAD_REQUEST).json({

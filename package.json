@@ -2,12 +2,13 @@
   "name": "blogapi",
   "version": "1.0.0",
   "description": "Api para um blog que estou desenvolvendo",
+  "main": "./dist/server.js",
   "scripts": {
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+    "start": "tsnd -r tsconfig-paths/register --transpile-only --respawn --ignore-watch node_modules src/server.ts"
   },
   "keywords": [],
   "author": "Nnayuta",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cryptr": "^6.0.3",
@@ -16,6 +17,7 @@
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.7.5",
+    "tsconfig-paths": "^4.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

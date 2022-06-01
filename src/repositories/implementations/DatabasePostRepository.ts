@@ -1,6 +1,6 @@
-import { Post } from "../../entities/Post";
+import { Post } from "@entities/Post";
 import { IPostRepository } from "../IPostRepository";
-import * as db from '../../database/repositories/DatabaseRepository';
+import * as db from '@database/repositories/DatabaseRepository';
 
 export class DatabasePostRepository implements IPostRepository {
 

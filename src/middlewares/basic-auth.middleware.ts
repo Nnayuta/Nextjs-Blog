@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { ForbiddenError } from '../entities/errors/Forbidden.error.model';
-import { DatabaseUsersRepository } from '../repositories/implementations/DatabaseUserRepository';
+import { ForbiddenError } from '@entities/errors/Forbidden.error.model';
+import { DatabaseUsersRepository } from '@repositories/implementations/DatabaseUserRepository';
 
 export async function basicAuthMiddleware(request: Request, response: Response, next: NextFunction) {
     try {

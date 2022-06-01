@@ -1,4 +1,4 @@
-import { DatabasePostRepository } from "../../../repositories/implementations/DatabasePostRepository";
+import { DatabasePostRepository } from "@repositories/implementations/DatabasePostRepository";
 import { RemovePostController } from "./RemovePostController";
 import { RemovePostUseCase } from "./RemovePostUseCase";
 

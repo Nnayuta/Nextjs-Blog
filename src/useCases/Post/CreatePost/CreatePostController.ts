@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { User } from "../../../entities/User";
+import { User } from "@entities/User";
 import { CreatePostUseCase } from "./CreatePostUseCase";
 
 export class CreatePostConstroller {

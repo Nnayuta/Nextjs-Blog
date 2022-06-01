@@ -1,4 +1,4 @@
-import { Post } from "../entities/Post";
+import { Post } from "@entities/Post";
 
 export interface IPostRepository {
     findById(id: string): Promise<Post>;

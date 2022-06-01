@@ -1,7 +1,7 @@
 import express from "express";
 import { AuthRouter, PostRouter, UserRouter } from './routes'
-import { errorHandle } from './middlewares/errorHandle'
-import { JWTAuthenticationMiddleware } from "./middlewares/jwt-authentication.middleware";
+import { errorHandle } from '@middlewares/errorHandle'
+import { JWTAuthenticationMiddleware } from "@middlewares/jwt-authentication.middleware";
 
 const app = express();
 

@@ -5,8 +5,10 @@ export const Header = styled.header`
     flex-direction: column;
     height: 100%;
     width: 100%;
-    padding: 45px;
+    min-width: 1100px;
     align-items: center;
+    margin-top: 25px;
+    margin-bottom: 57px;
 `;
 export const Title = styled.div`
     display: flex;
@@ -29,6 +31,7 @@ export const Title = styled.div`
 export const ButtonArea = styled.div`
     display: flex;
     width: 100%;
+    height: 100%;
     justify-content: flex-end;
 `;
 

@@ -1,13 +1,22 @@
-import Header from '../components/Main/Header'
-import PostGallery from '../components/Main/PostGallery'
+import HeadSEO from "../components/Default/Head"
+import LayoutMain from "../components/Main/LayoutMain"
+import * as db from '../providers/Posts-Provider'
 
-import * as S from './styled'
+export async function getStaticProps() {
+  const posts = await db.getAllPosts()
 
-export default function Home() {
+  return {
+    props: {
+      posts,
+    },
+  }
+}
+
+export default function Home({ posts }) {
   return (
-    <S.Container>
-      <Header></Header>
-      <PostGallery></PostGallery>
-    </S.Container>
+    <>
+      <HeadSEO title="Home" url={'/'} />
+      <LayoutMain posts={posts} />
+    </>
   )
 }

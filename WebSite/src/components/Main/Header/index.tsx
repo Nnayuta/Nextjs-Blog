@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonIcon from '../../ButtonIcon';
+import ButtonIcon from '../../Default/ButtonIcon';
 import * as S from './styled';
 
 const Title = "DizzProject & Nayuta";
@@ -9,8 +9,8 @@ const Header = () => {
     return (
         <S.Header>
             <S.ButtonArea>
-                <ButtonIcon>search</ButtonIcon>
-                {isAdmin ? <ButtonIcon>settings</ButtonIcon> : null}
+                <ButtonIcon href='#'>search</ButtonIcon>
+                {isAdmin ? <ButtonIcon href='/dashboard'>settings</ButtonIcon> : null}
             </S.ButtonArea>
                 <S.Title>
                     <h1>{Title}</h1>

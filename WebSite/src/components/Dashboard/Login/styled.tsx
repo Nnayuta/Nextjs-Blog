@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
+export const FormContainer = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+`;
+
 export const LoginArea = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-    div{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
+    width: 100%;
+    height: 100%;
 
     label{
         color: #EE7674;
@@ -46,7 +47,6 @@ export const LoginArea = styled.form`
         border: none;
         width: 343px;
         height: 66px;
-
         font-family: 'Dosis';
         font-style: normal;
         font-weight: 600;
@@ -60,4 +60,10 @@ export const LoginArea = styled.form`
             box-shadow: 0px 0px 10px #EE7674;
         }
     }
+`;
+
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

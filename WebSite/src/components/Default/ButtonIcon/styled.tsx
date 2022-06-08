@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.a`
 background: transparent;
 border: none;
 font-family: 'Material Icons';
@@ -11,8 +11,14 @@ line-height: 36px;
 color: #9274EC;
 height: 32px;
 margin-left: 12px;
+user-select: none;
 
-  &:hover {
+  :hover {
     cursor: pointer;
+    color: #F0F0F0;
+  }
+
+  &#Active{
+    color: rgba(146, 116, 236, 0.4);
   }
 `

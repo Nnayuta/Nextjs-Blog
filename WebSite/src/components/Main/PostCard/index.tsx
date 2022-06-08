@@ -1,17 +1,28 @@
+import Link from 'next/link';
 import React from 'react';
 import * as S from './styled';
 
+interface PostModel{
+    title: string;
+    imagePath: string;
+}
+
 interface PostCardProps {
-    children: React.ReactNode;
-    image: string;
+    Post: object;
     Destaque?: boolean;
 }
 
-const PostCard = ({ children, image, Destaque }: PostCardProps) => {
+const PostCard = ({ Post, Destaque }: PostCardProps) => {
+
+    const { title, imagePath } = Post as PostModel;
+
     return (
-        <S.Card id={Destaque ? 'Destaque' : '' }>
-            <S.Image src={image} />
-        </S.Card>
+        <Link href={`/post/${title.replaceAll(' ' , '-') }`}>
+            <S.Card id={Destaque ? 'Destaque' : ''}>
+                <S.PostImage src={imagePath} />
+                {title}
+            </S.Card>
+        </Link>
     );
 }
 

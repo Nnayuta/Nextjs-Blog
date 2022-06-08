@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Main/Header/index.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Main/Header/index.tsx", "src/components/Dashboard/SidebarPainel/index.tsx"],
   "exclude": ["node_modules"]
 }

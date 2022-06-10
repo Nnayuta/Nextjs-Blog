@@ -50,16 +50,10 @@ export const ContainerFilterSearch = styled.div`
 
 export const FilterSearch = styled.div`
     display: flex;
-`;
 
-export const SearchInput = styled.input`
-    width: 100%;
-    height: 100%;
-    max-width: 170px;
-    max-height: 34px;
-    background: #FCFCFC;
-    border: 1px solid #ECECEC;
-    border-radius: 5px;
+    button{
+        font-size: 20px;
+    }
 `;
 
 export const Table = styled.table`
@@ -95,6 +89,19 @@ export const theadTr = styled.tr`
 
     th{
         text-align: start;
+        
+        h3{
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        button{
+            font-size: 20px;
+            color: #262322;
+        }
     }
 `;
 
@@ -102,8 +109,42 @@ export const tbodyTr = styled.tr`
     background: #FCFCFC;
 
     td{
-        text-align: start;
+        button{
+            font-size: 30px;
+        }
+
+        a{
+            font-size: 30px;
+        }
+
+        #CommentsContainer{
+            width: 0;
+            height: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+
+            button{
+                :hover{
+                    cursor: pointer;
+                    color: #9274EC;
+                }
+            }
         
+            span{
+                position: absolute;
+                margin-bottom: 5px;
+
+                font-family: 'Dosis';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 19px;
+                color: #262322;
+            }
+        }
     }
 
     :nth-child(odd){
@@ -118,9 +159,3 @@ export const tbodyTr = styled.tr`
     }
 `;
 
-
-export const ChecboxContainer = styled.div`
-`;
-
-export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-`;

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import ButtonIcon from '../../Default/ButtonIcon';
+import { ButtonIcon } from '../../Default/ButtonIcon';
 import DropDown from '../../Default/Dropdown';
+import LinkIcon from '../../Default/LinkIcon';
+import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
 const SidebarArtigo = ({ posts }) => {
@@ -38,7 +40,7 @@ const SidebarArtigo = ({ posts }) => {
                     <DropDown objects={categorias}>Categorias</DropDown>
                 </S.FilterSearch>
                 <S.FilterSearch>
-                    <S.SearchInput type="text" />
+                    <SearchInput />
                     <ButtonIcon>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>
@@ -51,7 +53,9 @@ const SidebarArtigo = ({ posts }) => {
                         <th>Título</th>
                         <th>Author</th>
                         <th>Categoria</th>
-                        <th><ButtonIcon>chat_bubble_outline</ButtonIcon></th>
+                        <th>
+                            <h3>chat_bubble_outline</h3>
+                        </th>
                         <th>Data</th>
                         <th></th>
                     </S.theadTr>
@@ -63,21 +67,23 @@ const SidebarArtigo = ({ posts }) => {
                                 <input type="checkbox" />
                             </td>
                             <td>
-                                {post.title}</td>
-                            <td>{post.author}</td>
-                            <td>{post.categoria}</td>
+                                {post?.title}</td>
+                            <td>{post?.author}</td>
+                            <td>{post?.categoria}</td>
                             <td>
-                                <ButtonIcon>chat_bubble_outline</ButtonIcon>
+                                <div id='CommentsContainer'>
+                                    <ButtonIcon>chat_bubble_outline</ButtonIcon>
+                                    <span>99</span>
+                                </div>
                             </td>
                             <td>
                                 <p>Última Modificação</p>
                                 <p>{post.date}</p>
                             </td>
                             <td>
-                                {post.published ? <ButtonIcon>public</ButtonIcon> : <ButtonIcon>vpn_lock</ButtonIcon>}
                                 <ButtonIcon>edit</ButtonIcon>
                                 <ButtonIcon>delete</ButtonIcon>
-                                <ButtonIcon href={`/post/${(post.title).replaceAll(" ", "-")}`}>preview</ButtonIcon>
+                                <LinkIcon href={`/post/${(post.title).replaceAll(" ", "-")}`}>preview</LinkIcon>
                             </td>
                         </S.tbodyTr>
                     ))}

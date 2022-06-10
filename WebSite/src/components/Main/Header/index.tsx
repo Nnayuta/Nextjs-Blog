@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonIcon from '../../Default/ButtonIcon';
+import ButtonIcon from '../../Default/LinkIcon';
 import * as S from './styled';
 
 const Title = "DizzProject & Nayuta";

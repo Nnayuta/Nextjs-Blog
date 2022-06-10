@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonIcon from '../../Default/ButtonIcon';
+import LinkIcon from '../../Default/LinkIcon';
 import HeadSEO from '../../Default/Head';
 import * as S from './styled';
 
@@ -10,13 +10,13 @@ const Header = () => {
             <S.Header>
                 <S.Container>
                     <S.Logo></S.Logo>
-                    <ButtonIcon href='/'>home</ButtonIcon>
-                    <ButtonIcon>mark_chat_unread</ButtonIcon>
+                    <LinkIcon href='/'>home</LinkIcon>
+                    <LinkIcon>mark_chat_unread</LinkIcon>
                 </S.Container>
                 <S.Container>
-                    <ButtonIcon>create</ButtonIcon>
-                    <ButtonIcon>search</ButtonIcon>
-                    <ButtonIcon isActive>settings</ButtonIcon>
+                    <LinkIcon>create</LinkIcon>
+                    <LinkIcon>search</LinkIcon>
+                    <LinkIcon isActive>settings</LinkIcon>
                 </S.Container>
             </S.Header>
         </>

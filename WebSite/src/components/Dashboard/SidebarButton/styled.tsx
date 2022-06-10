@@ -11,6 +11,7 @@ export const SideButton = styled.button`
     font-size: 30px;
     line-height: 38px;
     user-select: none;
+    background: transparent;
 
     &#active{
         color: #FCFCFC;

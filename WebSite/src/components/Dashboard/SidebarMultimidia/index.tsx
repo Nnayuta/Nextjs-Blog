@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonIcon from '../../Default/ButtonIcon';
+import { ButtonIcon } from '../../Default/ButtonIcon';
 import DropDown from '../../Default/Dropdown';
+import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
 const SidebarMultimidia = () => {
@@ -10,38 +11,25 @@ const SidebarMultimidia = () => {
     return (
         <S.Container>
             <div>
-                <button>Adicionar</button>
+                <S.AddButton>Adicionar</S.AddButton>
             </div>
             <S.FilterContainer>
-                <div>
-                    <ButtonIcon>view_list</ButtonIcon>
-                    <ButtonIcon>grid_view</ButtonIcon>
+                <S.WrapperFilter>
+                    <S.WrapperGridType>
+                        <ButtonIcon>view_list</ButtonIcon>
+                        <ButtonIcon id={'Active'}>grid_view</ButtonIcon>
+                    </S.WrapperGridType>
                     <DropDown objects={data}>Data</DropDown>
                     <DropDown objects={data}>Todos</DropDown>
-                </div>
-                <div>
-                    <input type="text" />
+                </S.WrapperFilter>
+                <S.WrapperFilter>
+                    <SearchInput />
                     <ButtonIcon>search</ButtonIcon>
-                </div>
+                </S.WrapperFilter>
             </S.FilterContainer>
             <S.GridContainer>
-                <p>A mostrar 7 de 7 itens multimidia</p>
+                <p>A mostrar 0 de 0 itens multimidia</p>
                 <S.GridImage>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
-                    
                 </S.GridImage>
             </S.GridContainer>
         </S.Container>

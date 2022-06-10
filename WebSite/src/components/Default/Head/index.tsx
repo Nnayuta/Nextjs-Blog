@@ -6,7 +6,7 @@ const HeadSEO = ({ title, url }) => {
         <NextSeo
             title={`Dizz & Nayuta | ${title}`}
             description="Blog about programming and design, and other things."
-            canonical={`http://localhost:3000/${url}`}
+            canonical={`http://localhost:3000${url}`}
             openGraph={{
                 url: 'https://www.url.ie/a',
                 title: 'Open Graph Title',

@@ -15,6 +15,24 @@ export const Container = styled.div`
     }
 `;
 
+export const AddButton = styled.button`
+    border: none;
+    background: #EE7674;
+    border-radius: 5px;
+    font-family: 'Dosis';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FCFCFC;
+    padding: 12px;
+
+    &:hover{
+        background: #ff7e7bd5;
+        cursor: pointer;
+    }
+`;
+
 export const FilterContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -22,7 +40,45 @@ export const FilterContainer = styled.div`
     align-items: center;
     width: 100%;
     margin-bottom: 20px;
+    margin-top: 19px;
 `;
+
+export const WrapperGridType = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FCFCFC;
+    border: 1px solid #ECECEC;
+    border-radius: 5px;
+    width: 68px;
+    height: 34px;;
+    margin-right: 9px;
+
+    button{
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 20px;
+        color: #262322;
+        margin: 8px 5px;
+
+        &#Active{
+            color: #EE7674;
+        }
+    }
+`;
+
+export const WrapperFilter = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    button{
+        font-size: 20px;
+    }
+`;
+
 
 export const GridContainer = styled.div`    
     display: flex;

@@ -1,4 +1,4 @@
-import ButtonIcon from "../../components/Default/ButtonIcon";
+import ButtonIcon from "../../components/Default/LinkIcon";
 
 export default function Post() {
     return (

@@ -1,19 +1,13 @@
 import React from 'react';
 import * as S from './styled';
-import Link from 'next/link';
 
 interface ButtonProps {
     children: React.ReactNode;
-    href?: string;
-    isActive?: boolean;
+    id?: string;
 }
 
-const ButtonIcon = ({ children, href = '#', isActive }: ButtonProps) => {
+export const ButtonIcon = ({ children, id }: ButtonProps) => {
     return (
-        <Link href={href}>
-            <S.Button className="material-icons" id={isActive ? 'Active' : ''}  >{children}</S.Button>
-        </Link>
+        <S.Button id={id}  >{children}</S.Button>
     );
 }
-
-export default ButtonIcon;

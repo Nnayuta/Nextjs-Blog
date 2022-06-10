@@ -1,4 +1,4 @@
-import ButtonIcon from "../../Default/ButtonIcon";
+import ButtonIcon from "../../Default/LinkIcon";
 import Header from "../Header";
 import * as S from "./styled";
 

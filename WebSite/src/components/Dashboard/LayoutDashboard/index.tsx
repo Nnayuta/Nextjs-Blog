@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import SideBar from "../Sidebar";
 import * as S from './styled';
@@ -10,7 +10,7 @@ import SideBarConfig from "../SidebarConfig";
 import CreatePost from "../CreatePost";
 import { PostModel } from "../../../models/posts.model";
 
-interface ILayoutDashboardProps{
+interface ILayoutDashboardProps {
     posts: PostModel[];
     user: object;
 }
@@ -18,6 +18,7 @@ interface ILayoutDashboardProps{
 const LayoutDashboard = ({ posts, user }: ILayoutDashboardProps) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
+    
     const OnClick = (index) => {
         setSideBarActive(index);
     }
@@ -45,7 +46,7 @@ const LayoutDashboard = ({ posts, user }: ILayoutDashboardProps) => {
     return (
         <>
             <Header createPostOnClick={createPostOnClick} />
-            {createPost ? PainelGeral() : <CreatePost /> }
+            {createPost ? PainelGeral() : <CreatePost />}
         </>
     );
 }

@@ -6,30 +6,30 @@ const HeadSEO = ({ title, url }) => {
         <NextSeo
             title={`DizzProject & Nayuta | ${title}`}
             description="Blog about programming and design, and other things."
-            canonical={`http://localhost:3000${url}`}
+            canonical={`https://nizzy.vercel.app${url}`}
             openGraph={{
-                url: 'https://www.url.ie/a',
-                title: 'Open Graph Title',
-                description: 'Open Graph Description',
+                url: 'https://nizzy.vercel.app/',
+                title: '`DizzProject & Nayuta',
+                description: 'Blog about programming and design, and other things.',
                 images: [
                     {
-                        url: 'https://www.example.ie/og-image-01.jpg',
+                        url: 'https://nizzy.vercel.app/images/og-image.png',
                         width: 800,
                         height: 600,
-                        alt: 'Og Image Alt',
+                        alt: 'blog image',
                         type: 'image/jpeg',
                     },
                     {
-                        url: 'https://www.example.ie/og-image-02.jpg',
+                        url: 'https://nizzy.vercel.app/images/og-image.png',
                         width: 900,
                         height: 800,
-                        alt: 'Og Image Alt Second',
+                        alt: 'blog image',
                         type: 'image/jpeg',
                     },
-                    { url: 'https://www.example.ie/og-image-03.jpg' },
-                    { url: 'https://www.example.ie/og-image-04.jpg' },
+                    { url: 'https://nizzy.vercel.app/images/og-image.png' },
+                    { url: 'https://nizzy.vercel.app/images/og-image.png' },
                 ],
-                site_name: 'SiteName',
+                site_name: 'Nizzy Blog',
             }}
             twitter={{
                 handle: '@handle',

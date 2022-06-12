@@ -40,30 +40,30 @@ const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
             if (category != '') {
                 setPostList(
                     postProps.filter(post => post.category === categoria
-                        && post.title.toLowerCase().includes(search.toLowerCase())
-                        || post.author.toLowerCase().includes(search.toLowerCase())
-                    ))
+                        && (post.title.toLowerCase().includes(search.toLowerCase()) ||
+                            post.author.toLowerCase().includes(search.toLowerCase())
+                        )))
             }
             else {
                 setPostList(
-                    postProps.filter(post => post.title.toLowerCase().includes(search.toLowerCase())
-                        || post.author.toLowerCase().includes(search.toLowerCase())
+                    postProps.filter(post => (post.title.toLowerCase().includes(search.toLowerCase())
+                        || post.author.toLowerCase().includes(search.toLowerCase()))
                     ))
             }
         }
 
         switch (filter) {
             case 'publicados':
-                setPostListByCategoryAndSearch(publicados, categoria);
                 setDropdownCategoryByPostList(publicados)
+                setPostListByCategoryAndSearch(publicados, categoria);
                 break;
             case 'rascunhos':
-                setPostListByCategoryAndSearch(rascunhos, categoria)
                 setDropdownCategoryByPostList(rascunhos)
+                setPostListByCategoryAndSearch(rascunhos, categoria)
                 break;
             default:
-                setPostListByCategoryAndSearch(posts, categoria)
                 setDropdownCategoryByPostList(posts)
+                setPostListByCategoryAndSearch(posts, categoria)
                 break;
         }
 

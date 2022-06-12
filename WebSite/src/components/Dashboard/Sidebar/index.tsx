@@ -13,7 +13,7 @@ const sideBarItems = [
     },
     {
         title: 'Configurações',
-    }
+    },
 ];
 
 const SideBar = ({ active, onClick }) => {

@@ -31,41 +31,39 @@ const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
         setPublicados(publicados);
         setRascunhos(rascunhos);
 
-        const categorias = (cat: PostModel[]) => {
+        const setDropdownCategoryByPostList = (cat: PostModel[]) => {
             const categorias = cat.map(postsList => postsList.category).filter((categoria, index, self) => self.indexOf(categoria) === index);
             setCategorias(categorias)
         }
 
+        const setPostListByCategoryAndSearch = (postProps: PostModel[], category) => {
+            if (category != '') {
+                setPostList(
+                    postProps.filter(post => post.category === categoria
+                        && post.title.toLowerCase().includes(search.toLowerCase())
+                        || post.author.toLowerCase().includes(search.toLowerCase())
+                    ))
+            }
+            else {
+                setPostList(
+                    postProps.filter(post => post.title.toLowerCase().includes(search.toLowerCase())
+                        || post.author.toLowerCase().includes(search.toLowerCase())
+                    ))
+            }
+        }
+
         switch (filter) {
             case 'publicados':
-                if (categoria != '') {
-                    setPostList(publicados.filter(post => post.category === categoria && post.title.toLowerCase().includes(search.toLowerCase())));
-                }
-                else {
-                    setPostList(publicados.filter(post => post.title.toLowerCase().includes(search.toLowerCase())))
-                }
-                categorias(publicados)
-
+                setPostListByCategoryAndSearch(publicados, categoria);
+                setDropdownCategoryByPostList(publicados)
                 break;
             case 'rascunhos':
-                if (categoria != '') {
-                    setPostList(rascunhos.filter(post => post.category === categoria && post.title.toLowerCase().includes(search.toLowerCase())))
-                }
-                else {
-                    setPostList(rascunhos.filter(post => post.title.toLowerCase().includes(search.toLowerCase())))
-                }
-                categorias(rascunhos)
+                setPostListByCategoryAndSearch(rascunhos, categoria)
+                setDropdownCategoryByPostList(rascunhos)
                 break;
             default:
-                if (categoria != '') {
-                    setPostList(
-                        posts.filter(post => post.category === categoria && post.title.toLowerCase().includes(search.toLowerCase()))
-                    )
-                }
-                else {
-                    setPostList(posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase())))
-                }
-                categorias(posts)
+                setPostListByCategoryAndSearch(posts, categoria)
+                setDropdownCategoryByPostList(posts)
                 break;
         }
 

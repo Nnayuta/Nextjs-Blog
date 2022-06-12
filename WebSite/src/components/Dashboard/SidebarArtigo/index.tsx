@@ -1,46 +1,137 @@
 import { useEffect, useState } from 'react';
+import { PostModel } from '../../../models/posts.model';
 import { ButtonIcon } from '../../Default/ButtonIcon';
+import Checkbox from '../../Default/Checkbox';
 import DropDown from '../../Default/Dropdown';
 import LinkIcon from '../../Default/LinkIcon';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
-const SidebarArtigo = ({ posts }) => {
+interface ISidebarArtigoProps {
+    posts: PostModel[];
+}
 
-    const [publicados, setPublicados] = useState(0);
-    const [rascunhos, setRascunhos] = useState(0);
-    const [tudo, setTudo] = useState(0);
+const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
+
+    const [filter, setFilter] = useState('tudo');
+    const [postList, setPostList] = useState<PostModel[]>([]);
+    const [search, setSearch] = useState('');
+
+    const [publicados, setPublicados] = useState<PostModel[]>([]);
+    const [rascunhos, setRascunhos] = useState<PostModel[]>([]);
+
     const [categorias, setCategorias] = useState([]);
+    const [categoria, setCategoria] = useState('');
     const [date, setDate] = useState([]);
 
     useEffect(() => {
-        const publicados = posts.filter(post => post.published === true).length;
-        const rascunhos = posts.filter(post => post.published === false).length;
-        const tudo = posts.length;
-        const categorias = posts.map(post => post.categoria).filter((categoria, index, self) => self.indexOf(categoria) === index);
+        const publicados = posts.filter(postsList => postsList.public === true);
+        const rascunhos = posts.filter(postsList => postsList.public === false);
 
         setPublicados(publicados);
         setRascunhos(rascunhos);
-        setTudo(tudo);
-        setCategorias(categorias);
 
-    }, [posts]);
+        const categorias = (cat: PostModel[]) => {
+            const categorias = cat.map(postsList => postsList.category).filter((categoria, index, self) => self.indexOf(categoria) === index);
+            setCategorias(categorias)
+        }
 
+        switch (filter) {
+            case 'publicados':
+                if (categoria != '') {
+                    setPostList(publicados.filter(post => post.category === categoria && post.title.toLowerCase().includes(search.toLowerCase())));
+                }
+                else {
+                    setPostList(publicados.filter(post => post.title.toLowerCase().includes(search.toLowerCase())))
+                }
+                categorias(publicados)
+
+                break;
+            case 'rascunhos':
+                if (categoria != '') {
+                    setPostList(rascunhos.filter(post => post.category === categoria && post.title.toLowerCase().includes(search.toLowerCase())))
+                }
+                else {
+                    setPostList(rascunhos.filter(post => post.title.toLowerCase().includes(search.toLowerCase())))
+                }
+                categorias(rascunhos)
+                break;
+            default:
+                if (categoria != '') {
+                    setPostList(
+                        posts.filter(post => post.category === categoria && post.title.toLowerCase().includes(search.toLowerCase()))
+                    )
+                }
+                else {
+                    setPostList(posts.filter(post => post.title.toLowerCase().includes(search.toLowerCase())))
+                }
+                categorias(posts)
+                break;
+        }
+
+    }, [posts, filter, categoria, search]);
+
+
+    // SideBar Checkbox
+
+    const [isCheckedAll, setIsCheckedAll] = useState(false);
+    const [isChecked, setIsChecked] = useState([]);
+
+    const tableCheckboxOnChange = (e) => {
+        const { id, checked } = e.target;
+        setIsChecked([...isChecked, id])
+        if (!checked) {
+            setIsChecked(isChecked.filter(item => item !== id));
+        }
+    }
+
+    const tableCheckboxOnChangeAll = (e) => {
+        setIsCheckedAll(!isCheckedAll);
+        setIsChecked(posts.map((post, index) => index.toString()));
+        if (isCheckedAll) {
+            setIsChecked([]);
+        }
+    }
+
+    //
+
+    const categoryDropdownonChange = (e) => {
+        const { value } = e.target;
+        setCategoria(value);
+    }
+
+    const searchInputOnChange = (e) => {
+        const { value } = e.target;
+        setSearch(value);
+    }
 
     return (
         <S.Container>
             <S.ContainerPostCount>
-                <button>Tudo ({tudo})</button>
-                <button>Publicados ({publicados})</button>
-                <button>Rascunhos ({rascunhos})</button>
+
+                <button
+                    id={filter === 'tudo' ? 'active' : ''}
+                    onClick={() => { setFilter('tudo') }}
+                >Tudo ({posts.length})</button>
+
+                <button
+                    id={filter === 'publicados' ? 'active' : ''}
+                    onClick={() => { setFilter('publicados') }}
+                >Publicados ({publicados.length})</button>
+
+                <button
+                    id={filter === 'rascunhos' ? 'active' : ''}
+                    onClick={() => { setFilter('rascunhos') }}
+                >Rascunhos ({rascunhos.length})</button>
+
             </S.ContainerPostCount>
             <S.ContainerFilterSearch>
                 <S.FilterSearch>
                     <DropDown objects={date}>Datas</DropDown>
-                    <DropDown objects={categorias}>Categorias</DropDown>
+                    <DropDown onChange={categoryDropdownonChange} objects={categorias}>Categorias</DropDown>
                 </S.FilterSearch>
                 <S.FilterSearch>
-                    <SearchInput />
+                    <SearchInput onChange={searchInputOnChange} />
                     <ButtonIcon>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>
@@ -48,7 +139,11 @@ const SidebarArtigo = ({ posts }) => {
                 <thead>
                     <S.theadTr>
                         <th>
-                            <input type="checkbox" />
+                            <Checkbox
+                                id='selectAll'
+                                name='selectAll'
+                                isChecked={isCheckedAll}
+                                onChange={tableCheckboxOnChangeAll} />
                         </th>
                         <th>Título</th>
                         <th>Author</th>
@@ -61,24 +156,29 @@ const SidebarArtigo = ({ posts }) => {
                     </S.theadTr>
                 </thead>
                 <tbody>
-                    {posts.map(post => (
-                        <S.tbodyTr>
+                    {postList.map((post, index) => (
+                        <S.tbodyTr key={index}>
                             <td>
-                                <input type="checkbox" />
+                                <Checkbox
+                                    id={index.toString()}
+                                    name={post.title}
+                                    isChecked={isChecked.includes(index.toString())}
+                                    onChange={tableCheckboxOnChange}
+                                />
                             </td>
                             <td>
                                 {post?.title}</td>
                             <td>{post?.author}</td>
-                            <td>{post?.categoria}</td>
+                            <td>{post?.category}</td>
                             <td>
                                 <div id='CommentsContainer'>
                                     <ButtonIcon>chat_bubble_outline</ButtonIcon>
-                                    <span>99</span>
+                                    <span>{post.comments.length}</span>
                                 </div>
                             </td>
                             <td>
                                 <p>Última Modificação</p>
-                                <p>{post.date}</p>
+                                <p>{post.published}</p>
                             </td>
                             <td>
                                 <ButtonIcon>edit</ButtonIcon>

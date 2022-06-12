@@ -7,8 +7,15 @@ import SidebarArtigo from "../SidebarArtigo";
 import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
 import SideBarConfig from "../SidebarConfig";
+import CreatePost from "../CreatePost";
+import { PostModel } from "../../../models/posts.model";
 
-const LayoutDashboard = ({ posts, user }) => {
+interface ILayoutDashboardProps{
+    posts: PostModel[];
+    user: object;
+}
+
+const LayoutDashboard = ({ posts, user }: ILayoutDashboardProps) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
     const OnClick = (index) => {
@@ -38,7 +45,7 @@ const LayoutDashboard = ({ posts, user }) => {
     return (
         <>
             <Header createPostOnClick={createPostOnClick} />
-            {createPost ? PainelGeral() : 'a' }
+            {createPost ? PainelGeral() : <CreatePost /> }
         </>
     );
 }

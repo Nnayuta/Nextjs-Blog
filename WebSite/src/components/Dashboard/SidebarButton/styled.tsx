@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const liContainer = styled.li`
+    list-style: none;
+    background: #F0F0F0;
+
+
+    :nth-child(odd){
+         background: #FCFCFC;
+    }
+`;
+
 export const SideButton = styled.button`
     color: rgba(38, 35, 34, 0.3);
     border: none;
@@ -11,7 +21,7 @@ export const SideButton = styled.button`
     font-size: 30px;
     line-height: 38px;
     user-select: none;
-    background: transparent;
+    background-color: transparent;
 
     &#active{
         color: #FCFCFC;

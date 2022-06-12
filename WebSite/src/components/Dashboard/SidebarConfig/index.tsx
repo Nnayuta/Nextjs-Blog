@@ -31,13 +31,13 @@ const SideBarConfig = ({ user }) => {
                 <S.GeneralDataContainer>
                     <div>
                         <S.WrapperDataInputs>
-                            <label htmlFor="">E-mail:</label>
+                            <label>E-mail:</label>
                             <input type="email" placeholder={email} disabled={changeEmail} />
                             <ButtonIcon onClick={() => {setChangeEmail(!changeEmail);}}>create</ButtonIcon>
                         </S.WrapperDataInputs>
                         <S.WrapperDataInputs>
-                            <label htmlFor="password">Senha:</label>
-                            <input type="password" placeholder={'*****'} disabled={changePassword} />
+                            <label>Senha:</label>
+                            <input type="text" placeholder={'*****'} disabled={changePassword} />
                             <ButtonIcon onClick={() => {setChangePassword(!changePassword);}}>create</ButtonIcon>
                         </S.WrapperDataInputs>
                         <S.WrapperAvatar>

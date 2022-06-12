@@ -13,10 +13,6 @@ export const SideContainer = styled.aside`
 export const Container = styled.ul`
     display: flex;
     flex-direction: column;
-
-    li{
-        list-style: none;
-    }
 `;
 
 export const Logout = styled.button`

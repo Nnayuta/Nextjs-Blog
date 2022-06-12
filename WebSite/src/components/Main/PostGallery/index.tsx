@@ -1,9 +1,14 @@
 import React from 'react';
+import { PostModel } from '../../../models/posts.model';
 import ButtonIcon from '../../Default/LinkIcon';
 import PostCard from '../PostCard';
 import * as S from './styled';
 
-const PostGallery = ({ posts }) => {
+interface IPostGalleryProps {
+    posts: PostModel[];
+}
+
+const PostGallery = ({ posts }: IPostGalleryProps) => {
     return (
         <S.Container>
             <S.GridPosts>

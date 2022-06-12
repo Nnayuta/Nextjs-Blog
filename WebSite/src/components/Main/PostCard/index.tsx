@@ -1,20 +1,16 @@
 import Link from 'next/link';
 import React from 'react';
+import { PostModel } from '../../../models/posts.model';
 import * as S from './styled';
 
-interface PostModel{
-    title: string;
-    imagePath: string;
-}
-
 interface PostCardProps {
-    Post: object;
+    Post: PostModel;
     Destaque?: boolean;
 }
 
 const PostCard = ({ Post, Destaque }: PostCardProps) => {
 
-    const { title, imagePath } = Post as PostModel;
+    const { title, imagePath } = Post
 
     return (
         <Link href={`/post/${title.replaceAll(' ' , '-') }`}>

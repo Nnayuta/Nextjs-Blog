@@ -19,13 +19,17 @@ export const ContainerPostCount = styled.div`
         font-weight: 600;
         font-size: 20px;
         line-height: 25px;
-        color: #EE7674;
+        color: rgba(38, 35, 34, 0.3);
 
         border: none;
         background: none;
 
         :hover{
             cursor: pointer;;
+        }
+
+        &#active{
+            color: #EE7674;
         }
     }
 
@@ -38,6 +42,10 @@ export const ContainerPostCount = styled.div`
         line-height: 25px;
         margin: 0 9px;
         color: rgba(38, 35, 34, 0.3);
+    }
+
+    button:last-child::after{
+        content: "";
     }
 `;
 

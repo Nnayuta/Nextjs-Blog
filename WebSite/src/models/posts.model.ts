@@ -1,9 +1,17 @@
 export interface PostModel {
-    id: string;
     title: string;
     imagePath: string;
-    content?: string;
-    author?: string;
-    published?: Date;
-    updated?: Date;
+    content: string;
+    category: string;
+    author: string;
+    published: string;
+    updated?: string;
+    public: boolean;
+    comments: CommentModel[];
+}
+
+interface CommentModel {
+    author: string;
+    content: string;
+    published: string;
 }

@@ -5,16 +5,16 @@ interface SideBarProps {
     children: React.ReactNode;
     onclick?: () => void;
     isActive?: boolean;
-    background: string;
 }
 
-const SidebarButton = ({ children, onclick, isActive, background }: SideBarProps) => {
+const SidebarButton = ({ children, onclick, isActive }: SideBarProps) => {
     return (
-        <S.SideButton
-            id={isActive ? 'active' : 'notActive'}
-            onClick={onclick}
-            style={{ background }}
-        >{children}</S.SideButton>
+        <S.liContainer>
+            <S.SideButton
+                id={isActive ? 'active' : 'notActive'}
+                onClick={onclick}
+            >{children}</S.SideButton>
+        </S.liContainer>
     );
 }
 

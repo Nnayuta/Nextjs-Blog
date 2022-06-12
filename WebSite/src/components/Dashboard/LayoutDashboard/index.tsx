@@ -8,26 +8,37 @@ import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
 import SideBarConfig from "../SidebarConfig";
 
-const LayoutDashboard = ({ posts }) => {
+const LayoutDashboard = ({ posts, user }) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
-
     const OnClick = (index) => {
         setSideBarActive(index);
     }
 
-    return (
-        <>
-            <Header />
+    const [createPost, setCreatePost] = useState(true);
+
+    const PainelGeral = () => {
+        return (
             <S.Container>
                 <SideBar active={sideBarActive} onClick={OnClick} />
                 <S.Content>
                     {sideBarActive === 0 && <SidebarPainel />}
                     {sideBarActive === 1 && <SidebarArtigo posts={posts} />}
                     {sideBarActive === 2 && <SidebarMultimidia />}
-                    {sideBarActive === 3 && <SideBarConfig />}
+                    {sideBarActive === 3 && <SideBarConfig user={user} />}
                 </S.Content>
             </S.Container>
+        )
+    }
+
+    const createPostOnClick = () => {
+        setCreatePost(!createPost);
+    }
+
+    return (
+        <>
+            <Header createPostOnClick={createPostOnClick} />
+            {createPost ? PainelGeral() : 'a' }
         </>
     );
 }

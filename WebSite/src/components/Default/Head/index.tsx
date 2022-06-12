@@ -4,7 +4,7 @@ import { NextSeo } from 'next-seo';
 const HeadSEO = ({ title, url }) => {
     return (
         <NextSeo
-            title={`Dizz & Nayuta | ${title}`}
+            title={`DizzProject & Nayuta | ${title}`}
             description="Blog about programming and design, and other things."
             canonical={`http://localhost:3000${url}`}
             openGraph={{

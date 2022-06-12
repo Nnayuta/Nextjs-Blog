@@ -53,3 +53,12 @@ export async function getAllPosts() {
 export async function getPost(title: string) {
     return posts.find(post => post.title === title);
 }
+
+export async function getUser() {
+    return {
+        email: 'nayuta@example.com',
+        name: 'Nayuta',
+        avatar: 'http://github.com/nnayuta.png',
+        isAdmin: true,
+    }
+}

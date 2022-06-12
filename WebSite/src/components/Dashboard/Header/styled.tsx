@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.header`
     display: flex;
+    position: relative;
     background: #fff;
     justify-content: space-between;
     align-items: center;
@@ -15,11 +16,24 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     margin: 40px;
+
+    button {
+        margin-left: 24px;
+    }
+
+    a{
+        margin-right: 24px;
+
+        &.home{
+            font-size: 40px;
+        }
+    }
 `
 
 export const Logo = styled.div`
     width: 79px;
     height: 79px;
     background-color: #BBBBBB;
+    margin-right: 18px;
 `;
 

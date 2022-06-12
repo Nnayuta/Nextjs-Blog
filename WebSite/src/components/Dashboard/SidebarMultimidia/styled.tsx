@@ -19,13 +19,15 @@ export const AddButton = styled.button`
     border: none;
     background: #EE7674;
     border-radius: 5px;
+
+    padding: 5px 12px;
+
     font-family: 'Dosis';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 25px;
     color: #FCFCFC;
-    padding: 12px;
 
     &:hover{
         background: #ff7e7bd5;
@@ -86,19 +88,26 @@ export const GridContainer = styled.div`
 `;
 
 export const GridImage = styled.div`
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 22px;
+    display: flex;
     margin-top: 18px;
+    flex-wrap: wrap;
+    overflow:scroll;
+    overflow-x:hidden;
+    height: 680px;
+    width: 100%;
+    
 
     div{
+        margin-right: 22px;
+        margin-bottom: 18px;
+
         display: flex;
         width: 214px;
         height: 214px;
         background: #BBBBBB;
 
         :hover{
-            background: #EBEBEB;
+            border: 5px solid #EE7674;
             cursor: pointer;
         }
     }

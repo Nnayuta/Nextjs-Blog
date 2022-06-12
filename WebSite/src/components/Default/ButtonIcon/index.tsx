@@ -3,11 +3,12 @@ import * as S from './styled';
 
 interface ButtonProps {
     children: React.ReactNode;
+    onClick?: () => void;
     id?: string;
 }
 
-export const ButtonIcon = ({ children, id }: ButtonProps) => {
+export const ButtonIcon = ({ children, onClick, id }: ButtonProps) => {
     return (
-        <S.Button id={id}  >{children}</S.Button>
+        <S.Button onClick={onClick} id={id}>{children}</S.Button>
     );
 }

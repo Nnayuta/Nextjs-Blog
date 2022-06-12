@@ -6,12 +6,13 @@ interface ButtonProps {
     children: React.ReactNode;
     href?: string;
     isActive?: boolean;
+    className?: string;
 }
 
-const LinkIcon = ({ children, href = '#', isActive }: ButtonProps) => {
+const LinkIcon = ({ children, href = '#', isActive, className }: ButtonProps) => {
     return (
         <Link href={href}>
-            <S.Button className="material-icons" id={isActive ? 'Active' : ''}  >{children}</S.Button>
+            <S.Button className={className} id={isActive ? 'Active' : ''}  >{children}</S.Button>
         </Link>
     );
 }

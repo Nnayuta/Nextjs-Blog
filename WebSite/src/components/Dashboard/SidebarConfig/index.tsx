@@ -1,46 +1,84 @@
-import React from 'react';
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import * as S from './styled';
 
-const SideBarConfig = () => {
+import defaultAvatar from '../../../../public/images/default_avatar.jpg';
+import { ButtonIcon } from '../../Default/ButtonIcon';
+
+const SideBarConfig = ({ user }) => {
+
+    const [avatar, setAvatar] = useState(defaultAvatar);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    useEffect(() => {
+        if (user) {
+            setAvatar(user.avatar);
+            setName(user.name);
+            setEmail(user.email);
+        }
+    }, [user]);
+
+    const [changeAvatar, setChangeAvatar] = useState(true);
+    const [changeName, setChangeName] = useState(true);
+    const [changeEmail, setChangeEmail] = useState(true);
+    const [changePassword, setChangePassword] = useState(true);
+
     return (
-        <div>
-            <div>
-                <h1>Dados Pessoais</h1>
-                <div>
+        <S.Container>
+            <S.WrapperGeneralData>
+                <S.Title>Dados Pessoais</S.Title>
+                <S.GeneralDataContainer>
                     <div>
-                        <div>
+                        <S.WrapperDataInputs>
                             <label htmlFor="">E-mail:</label>
-                            <div>
-                                <p>nayutagay@hotmail.com</p>
-                                <input type="email" />
-                            </div>
-                        </div>
-                        <div>
-                            <label htmlFor="">Senha:</label>
-                            <div>
-                                <p>*****</p>
-                                <input type="password" />
-                            </div>
-                        </div>
-                        <div>
-                            <picture>
-                                <source media='(min-width:177px)' srcSet="" />
-                                <source media='(min-width:128px)' srcSet="" />
-                                <img src="" alt="" />
-                            </picture>
-                        </div>
+                            <input type="email" placeholder={email} disabled={changeEmail} />
+                            <ButtonIcon onClick={() => {setChangeEmail(!changeEmail);}}>create</ButtonIcon>
+                        </S.WrapperDataInputs>
+                        <S.WrapperDataInputs>
+                            <label htmlFor="password">Senha:</label>
+                            <input type="password" placeholder={'*****'} disabled={changePassword} />
+                            <ButtonIcon onClick={() => {setChangePassword(!changePassword);}}>create</ButtonIcon>
+                        </S.WrapperDataInputs>
+                        <S.WrapperAvatar>
+                            <label htmlFor="">Avatar:</label>
+                            <section>
+                                <img src={`${avatar}`} className={'avatar'} alt="me" width="177" height="177" />
+                                <img src={`${avatar}`} className={'avatar'} alt="me" width="128" height="128" />
+                                <img src={`${avatar}`} className={'avatar'} alt="me" width="70" height="70" />
+                            </section>
+                        </S.WrapperAvatar>
                     </div>
                     <div>
-                        <div>
+                        <S.WrapperDataInputs>
                             <label htmlFor="">Nome de Exibição:</label>
+                            <input type="text" placeholder={name} id={'name'} disabled={changeName} />
+                            <ButtonIcon onClick={() => {setChangeName(!changeName);}}>create</ButtonIcon>
+                        </S.WrapperDataInputs>
+                        <S.WrapperTextArea>
+                            <label htmlFor="biografia">Biografia:</label>
                             <div>
-                                <p>Birolinha</p>
-                                <input type="text" />
+                                <textarea name="biografia" id="biografia" cols={40} rows={10} disabled></textarea>
                             </div>
-                        </div>
+                        </S.WrapperTextArea>
                     </div>
+                </S.GeneralDataContainer>
+            </S.WrapperGeneralData>
+            <div>
+                <S.Title>Dados Gerais</S.Title>
+                <div>
+                    <S.WrapperDataInputs>
+                        <label htmlFor="">Título do site:</label>
+                        <input type="text" value={'Gostosa.com'} disabled />
+                        <ButtonIcon>create</ButtonIcon>
+                    </S.WrapperDataInputs>
+                    <S.WrapperTextArea>
+                        <label htmlFor="descricao">Descrição:</label>
+                        <textarea name="descricao" id="descricao" cols={40} rows={10} disabled></textarea>
+                    </S.WrapperTextArea>
                 </div>
             </div>
-        </div>
+        </S.Container>
     );
 }
 

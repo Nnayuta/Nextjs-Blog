@@ -5,7 +5,7 @@ export const Header = styled.header`
     flex-direction: column;
     height: 100%;
     width: 100%;
-    min-width: 1100px;
+    min-width: 1150px;
     align-items: center;
     margin-top: 25px;
     margin-bottom: 57px;
@@ -33,6 +33,10 @@ export const ButtonArea = styled.div`
     width: 100%;
     height: 100%;
     justify-content: flex-end;
+
+    a {
+        margin-left: 24px;
+    }
 `;
 
 export const Paragraph = styled.p`

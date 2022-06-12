@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const SideContainer = styled.aside`
     display: flex;
+    position: relative;
     width: 373px;
     flex-direction: column;
     justify-content: space-between;
@@ -12,6 +13,10 @@ export const SideContainer = styled.aside`
 export const Container = styled.ul`
     display: flex;
     flex-direction: column;
+
+    li{
+        list-style: none;
+    }
 `;
 
 export const Logout = styled.button`

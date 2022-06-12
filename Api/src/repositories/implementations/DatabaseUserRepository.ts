@@ -40,4 +40,14 @@ export class DatabaseUsersRepository implements IUsersRepository {
 
         return userTyped;
     }
+
+    async findById(id: string): Promise<User> {
+        const user = await db.findOne({ TABLE: 'User', WHERE: 'id', VALUE: id });
+
+        if (user instanceof DatabaseError) {
+            return null;
+        }
+
+        return user as User;
+    }
 }

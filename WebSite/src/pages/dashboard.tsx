@@ -6,19 +6,21 @@ const isLoggedIn = true;
 
 export async function getStaticProps() {
     const posts = await db.getAllPosts()
+    const user = await db.getUser()
   
     return {
       props: {
         posts,
+        user,
       },
     }
   }
 
-export default function Dashboard({ posts }) {
+export default function Dashboard({ posts, user }) {
     return (
         <>
             {isLoggedIn ?
-                <LayoutDashboard posts={posts} />
+                <LayoutDashboard posts={posts} user={user} />
                 :
                 <LoginArea />
             }

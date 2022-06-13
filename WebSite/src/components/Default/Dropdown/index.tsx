@@ -1,13 +1,13 @@
 import React from 'react';
 import * as S from './styled';
 
-interface Props {
+interface IDropdownProps {
     objects?: string[];
     children: React.ReactNode;
     onChange?: (e) => void;
 }
 
-const DropDown = ({ objects, children, onChange }: Props) => {
+const DropDown: React.FC<IDropdownProps> = ({ objects, children, onChange }) => {
     
     return (
         <S.DropDown onChange={onChange}>

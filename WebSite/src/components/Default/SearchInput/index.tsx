@@ -1,12 +1,13 @@
 import React from 'react';
 import * as S from './styled';
 
-interface ISearchInput {
+export interface ISearchInputProps {
     onChange?: (e) => void;
+    display?: boolean;
 }
 
-export const SearchInput = ({ onChange }: ISearchInput) => {
+export const SearchInput: React.FC<ISearchInputProps> = ({ onChange, display }) => {
     return (
-        <S.SearchInput onChange={onChange} type="text" />
+        <S.SearchInput display={display} onChange={onChange} type="text" />
     );
 }

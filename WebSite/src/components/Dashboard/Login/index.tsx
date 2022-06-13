@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './styled';
 
-const LoginArea = () => {
+const LoginArea: React.FC = () => {
     return (
         <S.FormContainer>
             <S.LoginArea>

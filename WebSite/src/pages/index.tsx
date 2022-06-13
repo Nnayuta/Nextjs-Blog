@@ -2,12 +2,12 @@ import HeadSEO from "../components/Default/Head"
 import LayoutMain from "../components/Main/LayoutMain"
 import * as db from '../providers/Posts-Provider'
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const posts = await db.getAllPosts()
 
   return {
     props: {
-      posts,
+      posts
     },
   }
 }

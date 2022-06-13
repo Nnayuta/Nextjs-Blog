@@ -4,26 +4,26 @@ import * as db from '../providers/Posts-Provider'
 
 const isLoggedIn = true;
 
-export async function getStaticProps() {
-    const posts = await db.getAllPosts()
-    const user = await db.getUser()
-  
-    return {
-      props: {
-        posts,
-        user,
-      },
-    }
+export async function getServerSideProps() {
+  const posts = await db.getAllPosts()
+  const user = await db.getUser()
+
+  return {
+    props: {
+      posts,
+      user,
+    },
   }
+}
 
 export default function Dashboard({ posts, user }) {
-    return (
-        <>
-            {isLoggedIn ?
-                <LayoutDashboard posts={posts} user={user} />
-                :
-                <LoginArea />
-            }
-        </>
-    )
+  return (
+    <>
+      {isLoggedIn ?
+        <LayoutDashboard posts={posts} user={user} />
+        :
+        <LoginArea />
+      }
+    </>
+  )
 }

@@ -1,7 +1,13 @@
 import { NextSeo } from 'next-seo';
+import React from 'react';
+
+interface IHeadProps {
+    title: string;
+    url: string;
+}
 
 
-const HeadSEO = ({ title, url }) => {
+const HeadSEO: React.FC<IHeadProps> = ({ title, url }) => {
     return (
         <NextSeo
             title={`DizzProject & Nayuta | ${title}`}

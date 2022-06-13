@@ -1,13 +1,16 @@
-import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styled';
 
-import defaultAvatar from '../../../../public/images/default_avatar.jpg';
+import { UserModel } from '../../../models/user.model';
 import { ButtonIcon } from '../../Default/ButtonIcon';
 
-const SideBarConfig = ({ user }) => {
+interface SidebarConfigProps {
+    user: UserModel;
+}
 
-    const [avatar, setAvatar] = useState(defaultAvatar);
+const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
+
+    const [avatar, setAvatar] = useState('/images/default_avatar.jpg');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
@@ -33,12 +36,12 @@ const SideBarConfig = ({ user }) => {
                         <S.WrapperDataInputs>
                             <label>E-mail:</label>
                             <input type="email" placeholder={email} disabled={changeEmail} />
-                            <ButtonIcon onClick={() => {setChangeEmail(!changeEmail);}}>create</ButtonIcon>
+                            <ButtonIcon onClick={() => { setChangeEmail(!changeEmail); }}>create</ButtonIcon>
                         </S.WrapperDataInputs>
                         <S.WrapperDataInputs>
                             <label>Senha:</label>
                             <input type="text" placeholder={'*****'} disabled={changePassword} />
-                            <ButtonIcon onClick={() => {setChangePassword(!changePassword);}}>create</ButtonIcon>
+                            <ButtonIcon onClick={() => { setChangePassword(!changePassword); }}>create</ButtonIcon>
                         </S.WrapperDataInputs>
                         <S.WrapperAvatar>
                             <label htmlFor="">Avatar:</label>
@@ -53,7 +56,7 @@ const SideBarConfig = ({ user }) => {
                         <S.WrapperDataInputs>
                             <label htmlFor="">Nome de Exibição:</label>
                             <input type="text" placeholder={name} id={'name'} disabled={changeName} />
-                            <ButtonIcon onClick={() => {setChangeName(!changeName);}}>create</ButtonIcon>
+                            <ButtonIcon onClick={() => { setChangeName(!changeName); }}>create</ButtonIcon>
                         </S.WrapperDataInputs>
                         <S.WrapperTextArea>
                             <label htmlFor="biografia">Biografia:</label>

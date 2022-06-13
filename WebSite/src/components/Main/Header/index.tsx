@@ -9,7 +9,7 @@ const Description = 'Caros amigos, a infinita diversidade da realidade única cu
 
 const isAdmin = true;
 
-const Header = () => {
+const Header: React.FC = () => {
     return (
         <S.Header>
             <S.ButtonArea>

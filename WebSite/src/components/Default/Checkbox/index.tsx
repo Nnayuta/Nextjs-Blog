@@ -7,7 +7,7 @@ interface ICheckboxProps {
     isChecked?: boolean;
 }
 
-const Checkbox = ({ id, name, onChange, isChecked }: ICheckboxProps) => {
+const Checkbox: React.FC<ICheckboxProps> = ({ id, name, onChange, isChecked }) => {
     return (
         <input type='checkbox' name={name} id={id} checked={isChecked} onChange={onChange}/>
     );

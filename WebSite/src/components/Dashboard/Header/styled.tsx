@@ -21,6 +21,15 @@ export const Container = styled.div`
         margin-left: 24px;
     }
 
+    #Notification{
+        margin-left: 0;
+        top: 3px;
+    
+        ::after{
+            color: white;
+        }
+    }
+
     a{
         margin-right: 24px;
 

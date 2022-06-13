@@ -7,7 +7,7 @@ interface IPostLayoutProps {
     children: React.ReactNode;
 }
 
-const PostLayout = ({ children }: IPostLayoutProps) => {
+const PostLayout: React.FC<IPostLayoutProps> = ({ children }) => {
     return (
         <S.Container>
             <Header></Header>

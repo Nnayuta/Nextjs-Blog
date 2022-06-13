@@ -7,7 +7,7 @@ interface SideBarProps {
     isActive?: boolean;
 }
 
-const SidebarButton = ({ children, onclick, isActive }: SideBarProps) => {
+const SidebarButton: React.FC<SideBarProps> = ({ children, onclick, isActive }) => {
     return (
         <S.liContainer>
             <S.SideButton

@@ -1,7 +1,7 @@
 import React from 'react';
 import DropDown from '../../Default/Dropdown';
 
-const CreatePost = () => {
+const CreatePost: React.FC = () => {
     return (
         <div>
             <div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PostModel } from '../../../models/posts.model';
 import { ButtonIcon } from '../../Default/ButtonIcon';
 import Checkbox from '../../Default/Checkbox';
@@ -11,7 +11,7 @@ interface ISidebarArtigoProps {
     posts: PostModel[];
 }
 
-const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
+const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
 
     const [filter, setFilter] = useState('tudo');
     const [postList, setPostList] = useState<PostModel[]>([]);
@@ -103,6 +103,12 @@ const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
         setSearch(value);
     }
 
+    const [searchInputOpen, setSearchInputOpen] = useState(false);
+
+    const searchInputOnClick = () => {
+        setSearchInputOpen(!searchInputOpen);
+    }
+
     return (
         <S.Container>
             <S.ContainerPostCount>
@@ -128,9 +134,9 @@ const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
                     <DropDown objects={date}>Datas</DropDown>
                     <DropDown onChange={categoryDropdownonChange} objects={categorias}>Categorias</DropDown>
                 </S.FilterSearch>
-                <S.FilterSearch>
-                    <SearchInput onChange={searchInputOnChange} />
-                    <ButtonIcon>search</ButtonIcon>
+                <S.FilterSearch>            
+                    <SearchInput display={searchInputOpen} onChange={searchInputOnChange} />
+                    <ButtonIcon insideValue={search ? 'Search': ''} onClick={searchInputOnClick} hoverActive isActive={searchInputOpen}>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>
             <S.Table>
@@ -146,9 +152,7 @@ const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
                         <th>Título</th>
                         <th>Author</th>
                         <th>Categoria</th>
-                        <th>
-                            <h3>chat_bubble_outline</h3>
-                        </th>
+                        <th id='icon'>chat_bubble_outline</th>
                         <th>Data</th>
                         <th></th>
                     </S.theadTr>
@@ -169,18 +173,15 @@ const SidebarArtigo = ({ posts }: ISidebarArtigoProps) => {
                             <td>{post?.author}</td>
                             <td>{post?.category}</td>
                             <td>
-                                <div id='CommentsContainer'>
-                                    <ButtonIcon>chat_bubble_outline</ButtonIcon>
-                                    <span>{post.comments.length}</span>
-                                </div>
+                                <ButtonIcon insideValue={post.comments.length}>chat_bubble_outline</ButtonIcon>
                             </td>
                             <td>
-                                <p>Última Modificação</p>
-                                <p>{post.published}</p>
+                                <p>{post.updated ? 'Última Modificação': 'Data de Publicação'}</p>
+                                <p>{post.updated ? `${post.updated}`: `${post.published}`}</p>
                             </td>
                             <td>
-                                <ButtonIcon>edit</ButtonIcon>
-                                <ButtonIcon>delete</ButtonIcon>
+                                <ButtonIcon hoverActive>edit</ButtonIcon>
+                                <ButtonIcon hoverActive>delete</ButtonIcon>
                                 <LinkIcon href={`/post/${(post.title).replaceAll(" ", "-")}`}>preview</LinkIcon>
                             </td>
                         </S.tbodyTr>

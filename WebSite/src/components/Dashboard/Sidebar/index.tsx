@@ -1,22 +1,15 @@
+import React from 'react';
 import SidebarButton from '../SidebarButton';
+import { sideBarItems } from './sidebarItems';
+
 import * as S from './styled';
 
-const sideBarItems = [
-    {
-        title: 'Painel',
-    },
-    {
-        title: 'Artigos',
-    },
-    {
-        title: 'Multimidia',
-    },
-    {
-        title: 'Configurações',
-    },
-];
+interface ISideBarProps {
+    active: number;
+    onClick: (index: number) => void;
+}
 
-const SideBar = ({ active, onClick }) => {
+const SideBar: React.FC<ISideBarProps> = ({ active, onClick }) => {
 
     return (
         <S.SideContainer>

@@ -3,12 +3,12 @@ import React from 'react';
 import { PostModel } from '../../../models/posts.model';
 import * as S from './styled';
 
-interface PostCardProps {
+interface IPostCardProps {
     Post: PostModel;
     Destaque?: boolean;
 }
 
-const PostCard = ({ Post, Destaque }: PostCardProps) => {
+const PostCard: React.FC<IPostCardProps> = ({ Post, Destaque }) => {
 
     const { title, imagePath } = Post
 

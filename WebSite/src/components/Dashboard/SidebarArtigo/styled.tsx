@@ -59,13 +59,16 @@ export const ContainerFilterSearch = styled.div`
 export const FilterSearch = styled.div`
     display: flex;
 
+    input{
+        margin-right: 8px;
+    }
+
     button{
         font-size: 20px;
     }
 `;
 
 export const Table = styled.table`
-    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
 
@@ -76,19 +79,7 @@ export const Table = styled.table`
     line-height: 25px;
     color: #262322;
 
-    input[type="checkbox"]{
-        width: 17px;
-        height: 17px;
-        margin-left: 11px;
-        color: #EE7674;
-        box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.25);
-
-        &:hover{
-            cursor: pointer;
-        }
-    }
 `;
-
 export const theadTr = styled.tr`
     background: #FCFCFC;
     border: 1px solid #ECECEC;
@@ -97,73 +88,31 @@ export const theadTr = styled.tr`
 
     th{
         text-align: start;
-        
-        h3{
+        padding-left: 11px;
+
+        &#icon{
+            padding-left: 15px;
             font-family: 'Material Icons';
             font-style: normal;
             font-weight: 400;
-            font-size: 20px;
-            line-height: 20px;
-        }
-
-        button{
-            font-size: 20px;
-            color: #262322;
+            font-size: 20px
         }
     }
-`;
 
+`;
 export const tbodyTr = styled.tr`
     background: #FCFCFC;
+    height: 52px;
 
     td{
-        button{
+        padding: 0 11px;
+
+        button, a {
             font-size: 30px;
-        }
-
-        a{
-            font-size: 30px;
-        }
-
-        #CommentsContainer{
-            width: 0;
-            height: 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            user-select: none;
-
-            button{
-                :hover{
-                    cursor: pointer;
-                    color: #9274EC;
-                }
-            }
-        
-            span{
-                position: absolute;
-                margin-bottom: 5px;
-
-                font-family: 'Dosis';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 15px;
-                line-height: 19px;
-                color: #262322;
-            }
-        }
+        } 
     }
 
     :nth-child(odd){
         background: #F0F0F0;
     }
-
-    p{
-        font-family: 'Dosis';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 15px;
-    }
 `;
-

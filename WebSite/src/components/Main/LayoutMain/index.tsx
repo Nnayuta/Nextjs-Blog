@@ -7,7 +7,7 @@ interface ILayoutMainProps {
     posts: PostModel[];
 }
 
-const LayoutMain = ({ posts }: ILayoutMainProps) => {
+const LayoutMain: React.FC<ILayoutMainProps> = ({ posts }) => {
     return (
         <S.Container>
             <Header></Header>

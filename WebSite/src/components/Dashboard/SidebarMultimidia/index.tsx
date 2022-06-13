@@ -4,9 +4,7 @@ import DropDown from '../../Default/Dropdown';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
-const SidebarMultimidia = () => {
-
-    const data = []
+const SidebarMultimidia: React.FC = () => {
 
     return (
         <S.Container>
@@ -19,8 +17,8 @@ const SidebarMultimidia = () => {
                         <ButtonIcon>view_list</ButtonIcon>
                         <ButtonIcon id={'Active'}>grid_view</ButtonIcon>
                     </S.WrapperGridType>
-                    <DropDown objects={data}>Data</DropDown>
-                    <DropDown objects={data}>Todos</DropDown>
+                    <DropDown >Data</DropDown>
+                    <DropDown >Todos</DropDown>
                 </S.WrapperFilter>
                 <S.WrapperFilter>
                     <SearchInput />

@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../Header";
 import SideBar from "../Sidebar";
 import * as S from './styled';
 
+import CreatePost from "../CreatePost";
 import SidebarArtigo from "../SidebarArtigo";
+import SideBarConfig from "../SidebarConfig";
 import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
-import SideBarConfig from "../SidebarConfig";
-import CreatePost from "../CreatePost";
+
 import { PostModel } from "../../../models/posts.model";
+import { UserModel } from "../../../models/user.model";
 
 interface ILayoutDashboardProps {
     posts: PostModel[];
-    user: object;
+    user: UserModel;
 }
 
-const LayoutDashboard = ({ posts, user }: ILayoutDashboardProps) => {
+const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user }) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
     

@@ -8,7 +8,7 @@ interface IPostGalleryProps {
     posts: PostModel[];
 }
 
-const PostGallery = ({ posts }: IPostGalleryProps) => {
+const PostGallery: React.FC<IPostGalleryProps> = ({ posts }) => {
     return (
         <S.Container>
             <S.GridPosts>

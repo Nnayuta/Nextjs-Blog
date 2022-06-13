@@ -15,7 +15,7 @@ export const LoginArea = styled.form`
     height: 100%;
 
     label{
-        color: #EE7674;
+        color: ${({ theme }) => theme.colors.primary};;
         font-family: 'Dosis';
         font-style: normal;
         font-weight: 400;

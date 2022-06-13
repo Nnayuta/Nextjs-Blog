@@ -13,7 +13,7 @@ export const Button = styled.button`
     line-height: 36px;
     user-select: none;
     
-    color: ${(props: IButtonProps) => props.isActive ? '#9274ec66' : '#9274EC'} ;
+    color: ${(props: IButtonProps) => props.isActive ? ({ theme }) => theme.colors.buttonHover :   ({ theme }) => theme.colors.button} ;
 
     ${(props: IButtonProps) => props.hoverActive &&
     `:hover {
@@ -23,7 +23,7 @@ export const Button = styled.button`
 
   
     &#Active{
-      color: rgba(146, 116, 236, 0.4);
+      color: ${({ theme }) => theme.colors.buttonHover};
     }
 
     ::after{
@@ -38,6 +38,6 @@ export const Button = styled.button`
       font-weight: 400;
       font-size: 15px;
       line-height: 19px;
-      color: #262322;
+      color: ${({ theme }) => theme.colors.text};
     }
 `

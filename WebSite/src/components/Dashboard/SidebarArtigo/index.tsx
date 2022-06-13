@@ -175,7 +175,7 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
                             <td>
                                 <ButtonIcon insideValue={post.comments.length}>chat_bubble_outline</ButtonIcon>
                             </td>
-                            <td>
+                            <td id='Data'>
                                 <p>{post.updated ? 'Última Modificação': 'Data de Publicação'}</p>
                                 <p>{post.updated ? `${post.updated}`: `${post.published}`}</p>
                             </td>

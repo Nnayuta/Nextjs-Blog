@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const Header = styled.header`
     display: flex;
     position: relative;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.background};
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 126px;
-    border-bottom: 1px solid #F0F0F0;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const Container = styled.div`
@@ -42,7 +42,7 @@ export const Container = styled.div`
 export const Logo = styled.div`
     width: 79px;
     height: 79px;
-    background-color: #BBBBBB;
+    background-color: ${({ theme }) => theme.colors.noImage};
     margin-right: 18px;
 `;
 

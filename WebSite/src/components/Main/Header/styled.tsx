@@ -25,6 +25,8 @@ export const Title = styled.div`
         font-weight: 400;
         font-size: 50px;
         line-height: 68px;
+
+        color: ${({ theme }) => theme.colors.text};
     }
 `
 
@@ -46,7 +48,7 @@ export const Paragraph = styled.p`
     font-size: 16px;
     line-height: 20px;
     text-align: center;
-    color: #262322;
+    color: ${({ theme }) => theme.colors.text};
 
     max-width: 870px;
 `

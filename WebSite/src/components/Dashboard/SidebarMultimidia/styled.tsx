@@ -17,7 +17,7 @@ export const Container = styled.div`
 
 export const AddButton = styled.button`
     border: none;
-    background: #EE7674;
+    background: ${({ theme }) => theme.colors.primary};
     border-radius: 5px;
 
     padding: 5px 12px;
@@ -27,10 +27,10 @@ export const AddButton = styled.button`
     font-weight: 600;
     font-size: 20px;
     line-height: 25px;
-    color: #FCFCFC;
+    color: ${({ theme }) => theme.colors.textMenuActive};
 
     &:hover{
-        background: #ff7e7bd5;
+        background: ${({ theme }) => theme.colors.hover};
         cursor: pointer;
     }
 `;
@@ -49,8 +49,8 @@ export const WrapperGridType = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FCFCFC;
-    border: 1px solid #ECECEC;
+    background: ${({ theme }) => theme.colors.background};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 5px;
     width: 68px;
     height: 34px;;
@@ -65,7 +65,7 @@ export const WrapperGridType = styled.div`
         margin: 8px 5px;
 
         &#Active{
-            color: #EE7674;
+            color: ${({ theme }) => theme.colors.primary};
         }
     }
 `;
@@ -104,10 +104,10 @@ export const GridImage = styled.div`
         display: flex;
         width: 214px;
         height: 214px;
-        background: #BBBBBB;
+        background: ${({ theme }) => theme.colors.noImage};
 
         :hover{
-            border: 5px solid #EE7674;
+            border: 5px solid ${({ theme }) => theme.colors.primary};
             cursor: pointer;
         }
     }

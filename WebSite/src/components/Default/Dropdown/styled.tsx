@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const DropDown = styled.select`
     height: 34px;
-    background: #FCFCFC;
-    border: 1px solid #ECECEC;
+    background: ${({ theme }) => theme.colors.background};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 5px;
     margin-right: 9px;
 

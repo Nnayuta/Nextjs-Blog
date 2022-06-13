@@ -9,10 +9,12 @@ interface ILayoutMainProps {
 
 const LayoutMain: React.FC<ILayoutMainProps> = ({ posts }) => {
     return (
-        <S.Container>
-            <Header></Header>
-            <PostGallery posts={posts}></PostGallery>
-        </S.Container>
+        <S.MainContainer>
+            <S.Container>
+                <Header></Header>
+                <PostGallery posts={posts}></PostGallery>
+            </S.Container>
+        </S.MainContainer>
     );
 }
 

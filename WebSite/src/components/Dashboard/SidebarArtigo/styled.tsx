@@ -19,7 +19,7 @@ export const ContainerPostCount = styled.div`
         font-weight: 600;
         font-size: 20px;
         line-height: 25px;
-        color: rgba(38, 35, 34, 0.3);
+        color: ${({ theme }) => theme.colors.textDisabled};
 
         border: none;
         background: none;
@@ -29,7 +29,7 @@ export const ContainerPostCount = styled.div`
         }
 
         &#active{
-            color: #EE7674;
+            color: ${({ theme }) => theme.colors.primary};
         }
     }
 
@@ -77,12 +77,12 @@ export const Table = styled.table`
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-    color: #262322;
+    color: ${({ theme }) => theme.colors.text};
 
 `;
 export const theadTr = styled.tr`
-    background: #FCFCFC;
-    border: 1px solid #ECECEC;
+    background: ${({ theme }) => theme.colors.background};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     height: 34px;
     user-select: none;
 
@@ -101,7 +101,7 @@ export const theadTr = styled.tr`
 
 `;
 export const tbodyTr = styled.tr`
-    background: #FCFCFC;
+    background: ${({ theme }) => theme.colors.background};
     height: 52px;
 
     td{
@@ -109,10 +109,14 @@ export const tbodyTr = styled.tr`
 
         button, a {
             font-size: 30px;
-        } 
+        }
+
+        &#Data{
+            font-size: 15px;
+        }
     }
 
     :nth-child(odd){
-        background: #F0F0F0;
+        background: ${({ theme }) => theme.colors.background2};
     }
 `;

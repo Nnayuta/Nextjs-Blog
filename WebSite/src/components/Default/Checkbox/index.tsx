@@ -1,4 +1,5 @@
 import React from 'react';
+import * as S from './styled';
 
 interface ICheckboxProps {
     id?: string;
@@ -9,7 +10,10 @@ interface ICheckboxProps {
 
 const Checkbox: React.FC<ICheckboxProps> = ({ id, name, onChange, isChecked }) => {
     return (
-        <input type='checkbox' name={name} id={id} checked={isChecked} onChange={onChange}/>
+        <S.Checkbox >
+            <input type='checkbox' name={name} id={id} checked={isChecked} onChange={onChange} />
+            <span></span>
+        </S.Checkbox>
     );
 }
 

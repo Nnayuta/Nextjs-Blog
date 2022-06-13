@@ -7,11 +7,18 @@ export const SearchInput = styled.input`
     height: 100%;
     width: 250px;
     max-height: 34px;
-    background: #FCFCFC;
+    background: ${({ theme }) => theme.colors.background};
     border: 1px solid #ECECEC;
     border-radius: 5px;
     padding: 0 10px;
     transition: opacity 0.5s ease-in-out;
+
+    font-family: 'Dosis';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    color: #262322;
 
     ${(props: ISearchInputProps) => props.display ?
         `

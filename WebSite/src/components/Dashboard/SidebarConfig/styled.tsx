@@ -33,14 +33,14 @@ export const WrapperDataInputs = styled.div`
     line-height: 25px;
 
     label {
-        color: #EE7674;
+        color: ${({ theme }) => theme.colors.primary};
     }
 
     input {
         height: 25px;
         color: #262322;
         background-color: transparent;
-        border: 1px solid #EE7674;
+        border: 1px solid ${({ theme }) => theme.colors.primary};
         border-radius: 5px;
         padding: 0 10px;
 
@@ -66,13 +66,13 @@ export const WrapperAvatar = styled.div`
 
     
     label {
-        color: #EE7674;
+        color: ${({ theme }) => theme.colors.primary};
         margin-bottom: 28px;
     }
 
     img{
-        background: #F0F0F0;
-        border: 1px solid #F0F0F0;
+        background: ${({ theme }) => theme.colors.background};
+        border: 1px solid ${({ theme }) => theme.colors.border};
         margin-right: 24px;
     }
 
@@ -97,29 +97,29 @@ export const WrapperTextArea = styled.div`
     line-height: 25px;
 
     label {
-        color: #EE7674;
+        color: ${({ theme }) => theme.colors.primary};
         margin-bottom: 18px;
     }
 
     #biografia {
         width: 531px;
         height: 78px;
-        color: #262322;
+        color: ${({ theme }) => theme.colors.text};
 
         :disabled{
             border: none;
-            background: #F0F0F0;
+            background: ${({ theme }) => theme.colors.background2};
         }
     }
 
     #descricao{
         width: 423px;
         height: 52px;
-        color: #262322;
+        color: ${({ theme }) => theme.colors.text};
 
         :disabled{
             border: none;
-            background: #F0F0F0;
+            background: ${({ theme }) => theme.colors.background2};
         }
     }
         

@@ -8,16 +8,16 @@ export const Button = styled.a`
   font-weight: 400;
   font-size: 36px;
   line-height: 36px;
-  color: #9274EC;
+  color: ${({ theme }) => theme.colors.button};
   height: 32px;
   user-select: none;
 
   :hover {
     cursor: pointer;
-    color: #F0F0F0;
+    color: ${({ theme }) => theme.colors.background2};
   }
 
   &#Active{
-    color: rgba(146, 116, 236, 0.4);
+    color: ${({ theme }) => theme.colors.buttonHover};
   }
 `

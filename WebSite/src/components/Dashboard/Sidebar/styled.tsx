@@ -6,7 +6,7 @@ export const SideContainer = styled.aside`
     width: 373px;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid #F0F0F0;
+    border-right: 1px solid ${({ theme }) => theme.colors.border};
     user-select: none;
 `;
 
@@ -24,7 +24,7 @@ export const Logout = styled.button`
     font-weight: 600;
     font-size: 25px;
     line-height: 38px;
-    color: #EE7674;
+    color: ${({ theme }) => theme.colors.primary};
 
     &:hover {
         cursor: pointer;

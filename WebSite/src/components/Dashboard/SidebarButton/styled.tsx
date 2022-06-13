@@ -2,16 +2,16 @@ import styled from "styled-components";
 
 export const liContainer = styled.li`
     list-style: none;
-    background: #F0F0F0;
+    background: ${({ theme }) => theme.colors.background};
 
 
     :nth-child(odd){
-         background: #FCFCFC;
+         background: ${({ theme }) => theme.colors.backgrund2};
     }
 `;
 
 export const SideButton = styled.button`
-    color: rgba(38, 35, 34, 0.3);
+    color: ${({ theme }) => theme.colors.textMenu};
     border: none;
     width: 100%;
     height: 66px;
@@ -24,10 +24,11 @@ export const SideButton = styled.button`
     background-color: transparent;
 
     &#active{
-        color: #FCFCFC;
+        color: ${({ theme }) => theme.colors.textMenuActive} ;
+        
         font-weight: 600;
         position: relative;
-        background: #EE7674;
+        background: ${({ theme }) => theme.colors.primary} ;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
     }
 

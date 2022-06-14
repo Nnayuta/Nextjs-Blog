@@ -135,7 +135,7 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
                     <DropDown onChange={categoryDropdownonChange} objects={categorias}>Categorias</DropDown>
                 </S.FilterSearch>
                 <S.FilterSearch>            
-                    <SearchInput display={searchInputOpen} onChange={searchInputOnChange} />
+                    <SearchInput name='Search on table' display={searchInputOpen} onChange={searchInputOnChange} />
                     <ButtonIcon insideValue={search ? 'Search': ''} onClick={searchInputOnClick} hoverActive isActive={searchInputOpen}>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>

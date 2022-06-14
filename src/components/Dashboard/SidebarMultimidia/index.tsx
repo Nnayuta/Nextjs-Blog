@@ -21,7 +21,7 @@ const SidebarMultimidia: React.FC = () => {
                     <DropDown >Todos</DropDown>
                 </S.WrapperFilter>
                 <S.WrapperFilter>
-                    <SearchInput />
+                    <SearchInput name='Search on List'/>
                     <ButtonIcon>search</ButtonIcon>
                 </S.WrapperFilter>
             </S.FilterContainer>

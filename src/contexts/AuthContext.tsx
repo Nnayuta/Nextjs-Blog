@@ -1,11 +1,12 @@
 import Router from "next/router";
 import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from "react";
+import { User } from "../models/User";
 import { recoveryUserByToken } from "../providers/user-Provider";
 
 export const AuthContext = createContext({} as AuthContextType);
 
-interface User {
+interface UserLogin {
     email: string;
     password: string;
 }
@@ -31,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     }, [])
 
-    async function signIn({ email, password }: User) {
+    async function signIn({ email, password }: UserLogin) {
 
         try {
 

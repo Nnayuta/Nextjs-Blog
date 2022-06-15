@@ -20,7 +20,7 @@ export class User {
 
     }
 
-    private hashPassword(password: string): string {
+    private hashPassword?(password: string): string {
         return bcrypt.hashSync(password, 10);
     }
 }

@@ -3,7 +3,6 @@ import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from "react";
 import { recoveryUserByToken } from "../providers/user-Provider";
 
-
 export const AuthContext = createContext({} as AuthContextType);
 
 interface User {

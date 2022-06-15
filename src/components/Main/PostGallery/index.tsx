@@ -1,11 +1,12 @@
 import React from 'react';
-import { PostModel } from '../../../models/posts.model';
 import ButtonIcon from '../../Default/LinkIcon';
 import PostCard from '../PostCard';
 import * as S from './styled';
 
+import { Post } from '../../../models/Post';
+
 interface IPostGalleryProps {
-    posts: PostModel[];
+    posts: Post[];
 }
 
 const PostGallery: React.FC<IPostGalleryProps> = ({ posts }) => {

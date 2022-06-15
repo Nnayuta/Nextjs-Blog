@@ -1,4 +1,5 @@
-import { PostModel } from "../models/posts.model";
+import { Post } from "../models/Post";
+
 
 const posts = [
     {
@@ -7,7 +8,7 @@ const posts = [
         "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
         "author": "Dizzy",
         "category": "Paisagem",
-        "published": "01/05/1882 ás 00:00",
+        "publisedAt": "01/05/1882 ás 00:00",
         "public": true,
         "comments": [
             {
@@ -17,7 +18,7 @@ const posts = [
             }
         ]
     }
-] as PostModel[];
+] as Post[];
 
 export async function getAllPosts() {
     return posts;

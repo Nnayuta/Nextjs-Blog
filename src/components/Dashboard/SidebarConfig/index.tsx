@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import * as S from './styled';
 
-import { UserModel } from '../../../models/user.model';
 import { ButtonIcon } from '../../Default/ButtonIcon';
+import { User } from '../../../models/User';
 
 interface SidebarConfigProps {
-    user: UserModel;
+    user: User;
 }
 
 const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {

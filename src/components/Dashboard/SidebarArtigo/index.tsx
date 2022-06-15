@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { PostModel } from '../../../models/posts.model';
 import { ButtonIcon } from '../../Default/ButtonIcon';
 import Checkbox from '../../Default/Checkbox';
 import DropDown from '../../Default/Dropdown';
@@ -7,18 +6,20 @@ import LinkIcon from '../../Default/LinkIcon';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
+import { Post } from '../../../models/Post';
+
 interface ISidebarArtigoProps {
-    posts: PostModel[];
+    posts: Post[];
 }
 
 const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
 
     const [filter, setFilter] = useState('tudo');
-    const [postList, setPostList] = useState<PostModel[]>([]);
+    const [postList, setPostList] = useState<Post[]>([]);
     const [search, setSearch] = useState('');
 
-    const [publicados, setPublicados] = useState<PostModel[]>([]);
-    const [rascunhos, setRascunhos] = useState<PostModel[]>([]);
+    const [publicados, setPublicados] = useState<Post[]>([]);
+    const [rascunhos, setRascunhos] = useState<Post[]>([]);
 
     const [categorias, setCategorias] = useState([]);
     const [categoria, setCategoria] = useState('');
@@ -31,12 +32,12 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
         setPublicados(publicados);
         setRascunhos(rascunhos);
 
-        const setDropdownCategoryByPostList = (cat: PostModel[]) => {
+        const setDropdownCategoryByPostList = (cat: Post[]) => {
             const categorias = cat.map(postsList => postsList.category).filter((categoria, index, self) => self.indexOf(categoria) === index);
             setCategorias(categorias)
         }
 
-        const setPostListByCategoryAndSearch = (postProps: PostModel[], category) => {
+        const setPostListByCategoryAndSearch = (postProps: Post[], category) => {
             if (category != '') {
                 setPostList(
                     postProps.filter(post => post.category === categoria
@@ -176,8 +177,8 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
                                 <ButtonIcon insideValue={post.comments.length}>chat_bubble_outline</ButtonIcon>
                             </td>
                             <td id='Data'>
-                                <p>{post.updated ? 'Última Modificação': 'Data de Publicação'}</p>
-                                <p>{post.updated ? `${post.updated}`: `${post.published}`}</p>
+                                <p>{post.updatedAt ? 'Última Modificação': 'Data de Publicação'}</p>
+                                <p>{post.updatedAt ? `${post.updatedAt}`: `${post.publisedAt}`}</p>
                             </td>
                             <td>
                                 <ButtonIcon hoverActive>edit</ButtonIcon>

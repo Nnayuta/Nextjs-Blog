@@ -6,15 +6,13 @@ import JWT, { SignOptions } from 'jsonwebtoken';
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === 'POST') {
-            const auth = await basicAuthMiddleware(req, res);
-
-            if (!auth) {
-                return res.status(StatusCodes.UNAUTHORIZED).json({
-                    error: 'Unauthorized'
-                });
-            }
+            await basicAuthMiddleware(req, res);
 
             const user = req.user;
+
+            if(!user){
+                throw new Error('Unauthorized');
+            }
 
             const JwTPayLoad = {
                 id: user.uuid,
@@ -31,8 +29,13 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
                 "user": user
             });
         }
+        else{
+            return res.status(StatusCodes.METHOD_NOT_ALLOWED).json({
+                "message": "Method not allowed"
+            });
+        }
     } catch (error) {
-        return res.status(StatusCodes.BAD_REQUEST).json({
+        return res.status(StatusCodes.UNAUTHORIZED).json({
             error: error.message || 'Unexpected error'
         });
     }

@@ -25,11 +25,10 @@ export async function basicAuthMiddleware(req: NextApiRequest, res: NextApiRespo
         const user = await findByEmailAndPassword(email, password);
 
         if (!user) {
-            throw new Error('Invalid authorization header');
+            throw new Error('Unauthorized');
         }
 
         req.user = user;
-        return true
 
     } catch (error) {
         throw error;

@@ -16,7 +16,7 @@ const SideBar: React.FC<ISideBarProps> = ({ active, onClick }) => {
 
     const handleLogout = () => {
         destroyCookie(null, 'blog-token');
-        Router.push('/');
+        Router.reload();
     }
 
 

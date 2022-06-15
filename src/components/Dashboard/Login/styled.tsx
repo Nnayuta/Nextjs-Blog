@@ -4,6 +4,8 @@ export const FormContainer = styled.div`
     display: flex;
     width: 100vw;
     height: 100vh;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const LoginArea = styled.form`
@@ -11,11 +13,16 @@ export const LoginArea = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+`;
+
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 31px;
 
     label{
-        color: ${({ theme }) => theme.colors.primary};;
+        color: ${({ theme }) => theme.colors.primary};
         font-family: 'Dosis';
         font-style: normal;
         font-weight: 400;
@@ -24,13 +31,22 @@ export const LoginArea = styled.form`
         text-align: center;
     }
 
+
     input{
-        background: #FCFCFC;
-        border: 1px solid #ECECEC;
+
+        font-family: 'Dosis';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+
+        background: ${({ theme }) => theme.colors.background};
+        border: 1px solid ${({ theme }) => theme.colors.border};
         border-radius: 10px;
-        width: 507px;
+        width: 490px;
         height: 66px;
         margin-left: 10px;
+
+        padding: 17px;
 
         &::placeholder{
         }
@@ -40,9 +56,10 @@ export const LoginArea = styled.form`
         }
     }
 
+    
     button{
-        margin: 56px;
-        background-color: #EE7674;
+
+        background-color: ${({ theme }) => theme.colors.primary};
         border-radius: 30px;
         border: none;
         width: 343px;
@@ -57,13 +74,7 @@ export const LoginArea = styled.form`
         cursor: pointer;
 
         &:hover{
-            box-shadow: 0px 0px 10px #EE7674;
+            box-shadow: 0px 0px 3px ${({ theme }) => theme.colors.primary};
         }
     }
-`;
-
-export const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
 `;

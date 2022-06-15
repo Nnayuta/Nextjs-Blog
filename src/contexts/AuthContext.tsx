@@ -35,7 +35,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async function signIn({ email, password }: UserLogin) {
 
         try {
-
             const credentials = Buffer.from(`${email}:${password}`).toString('base64');
             const auth = { Authorization: `Basic ${credentials}` };
 
@@ -46,9 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 }
             }).then(res => res.json());
 
-            console.log(data)
-
-            if (data) {
+            if (data.token && data.user) {
                 setUser(data.user);
                 setCookie(null, 'blog-token', data.token, {
                     maxAge: 60 * 5, // 5 minutes

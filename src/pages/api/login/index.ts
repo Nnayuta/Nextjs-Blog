@@ -3,8 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { basicAuthMiddleware } from "../../../middlewares/basic-auth.middleware";
 import JWT, { SignOptions } from 'jsonwebtoken';
 
-
-const handle = async (req: NextApiRequest, res: NextApiResponse) => {
+const login = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === 'POST') {
             const auth = await basicAuthMiddleware(req, res);
@@ -25,7 +24,7 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
                 subject: user.uuid
             }
 
-            const token = JWT.sign(JwTPayLoad, '123', options);
+            const token = JWT.sign(JwTPayLoad, process.env.JWT_SECRET_KEY, options);
 
             return res.status(StatusCodes.OK).json({
                 "token": token,
@@ -39,4 +38,4 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 
-export default handle;
+export default login;

@@ -13,7 +13,11 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Main/Header/index.tsx", "src/components/Dashboard/SidebarPainel/index.tsx"],
   "exclude": ["node_modules"]

@@ -10,7 +10,7 @@ import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
 
 import { Post } from "../../../models/Post";
-import { User } from "../../../models/User";
+import { User } from "../../../models/UserModel";
 
 
 interface ILayoutDashboardProps {

@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
-
+import mongoose from 'mongoose';
 
 export class MongoConnection {
     public async connect(): Promise<void> {
         try {
-            await mongoose.connect(process.env.MONGO_URI);
+            await mongoose.connect(process.env.MONGO_URI, {
+                dbName: process.env.MONGO_DB_NAME,
+            });
             console.log("MongoDB connected")
         } catch (err) {
             console.log(err)

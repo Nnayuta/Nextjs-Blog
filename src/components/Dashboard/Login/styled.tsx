@@ -11,14 +11,14 @@ export const FormContainer = styled.div`
 export const LoginArea = styled.form`
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
 `;
 
 export const Container = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     margin-bottom: 31px;
 
     label{
@@ -28,25 +28,24 @@ export const Container = styled.div`
         font-weight: 400;
         font-size: 30px;
         line-height: 38px;
-        text-align: center;
     }
 
 
     input{
-
         font-family: 'Dosis';
         font-style: normal;
         font-weight: 400;
-        font-size: 15px;
+        font-size: 20px;
 
         background: ${({ theme }) => theme.colors.background};
         border: 1px solid ${({ theme }) => theme.colors.border};
         border-radius: 10px;
-        width: 490px;
+        width: 100%;
+        min-width: 490px;
         height: 66px;
         margin-left: 10px;
 
-        padding: 17px;
+        padding: 20px;
 
         &::placeholder{
         }

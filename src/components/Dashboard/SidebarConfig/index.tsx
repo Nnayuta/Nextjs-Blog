@@ -2,29 +2,30 @@ import React, { useContext, useEffect, useState } from 'react';
 import * as S from './styled';
 
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import { User } from '../../../models/User';
+import { UserModel } from '../../../models/UserModel';
 
 interface SidebarConfigProps {
-    user: User;
+    user: UserModel;
 }
 
 const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
 
     const [avatar, setAvatar] = useState('/images/default_avatar.jpg');
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         if (user) {
             setAvatar(user?.avatar);
-            setName(user?.name);
-            setEmail(user?.email);
+            setName(user?.displayName);
+            setUsername(user?.username);
         }
     }, [user]);
 
     const [changeAvatar, setChangeAvatar] = useState(true);
     const [changeName, setChangeName] = useState(true);
-    const [changeEmail, setChangeEmail] = useState(true);
+
+    const [changeUsername, setChangeUsername] = useState(true);
     const [changePassword, setChangePassword] = useState(true);
 
     return (
@@ -34,9 +35,9 @@ const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
                 <S.GeneralDataContainer>
                     <div>
                         <S.WrapperDataInputs>
-                            <label>E-mail:</label>
-                            <input type="email" placeholder={email} disabled={changeEmail} />
-                            <ButtonIcon onClick={() => { setChangeEmail(!changeEmail); }}>create</ButtonIcon>
+                            <label>Username:</label>
+                            <input type="email" placeholder={username} disabled={changeUsername} />
+                            <ButtonIcon onClick={() => { setChangeUsername(!changeUsername); }}>create</ButtonIcon>
                         </S.WrapperDataInputs>
                         <S.WrapperDataInputs>
                             <label>Senha:</label>

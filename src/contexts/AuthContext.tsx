@@ -1,41 +1,48 @@
 import Router from "next/router";
 import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from "react";
-import { User } from "../models/User";
-import { recoveryUserByToken } from "../providers/user-Provider";
+import { IUserLogin } from "../interface/IUserLogin";
+import { UserModel } from "../models/UserModel";
+import UserSchema from "../schema/UserSchema";
+import { JWToken } from "../services/JWToken";
 
 export const AuthContext = createContext({} as AuthContextType);
-
-interface UserLogin {
-    email: string;
-    password: string;
-}
+const jwt = new JWToken();
 
 interface AuthContextType {
     isAuthenticated: boolean;
-    user: User | null;
-    signIn: (user: User) => Promise<void>;
+    user: UserModel | null;
+    signIn: ({ username, password }: IUserLogin) => Promise<void>;
 }
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(null)
+
+interface IAuthProviderProps {
+    children: React.ReactNode;
+}
+
+export function AuthProvider({ children }: IAuthProviderProps) {
+    const [user, setUser] = useState<UserModel | null>(null)
 
     const isAuthenticated = !!user;
 
     useEffect(() => {
-        const { 'blog-token': token } = parseCookies();
+        async function findUser() {
+            const { 'blog-token': token } = parseCookies();
 
-        const user = recoveryUserByToken(token)
-
-        if (user) {
-            setUser(user)
+            if(token){
+                const userJWT = jwt.verify(token);
+                const data = await fetch(`/api/user/${userJWT.sub}`).then(res => res.json());
+                 if(userJWT){
+                    setUser(data);
+                 }
+            }
         }
 
+        findUser()
     }, [])
 
-    async function signIn({ email, password }: UserLogin) {
-
+    async function signIn({ username, password }: IUserLogin) {
         try {
-            const credentials = Buffer.from(`${email}:${password}`).toString('base64');
+            const credentials = Buffer.from(`${username}:${password}`).toString('base64');
             const auth = { Authorization: `Basic ${credentials}` };
 
             const data = await fetch(`/api/login`, {
@@ -45,13 +52,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 }
             }).then(res => res.json());
 
-            if (data.token && data.user) {
-                setUser(data.user);
-                setCookie(null, 'blog-token', data.token, {
+            if (data.token) {
+                const tokenPayload = jwt.verify(data.token)
+
+                if (typeof tokenPayload !== 'object' || !tokenPayload.sub) {
+                    throw new Error('Invalid token');
+                }
+
+                const DToken = data.token as string;
+                const DUser = tokenPayload.user as UserModel;
+
+                setUser(DUser);
+                setCookie(null, 'blog-token', DToken, {
                     maxAge: 60 * 5, // 5 minutes
                     path: '/'
                 })
                 Router.push('/')
+            } else {
+                return Promise.reject(data.message)
             }
 
         } catch (error) {

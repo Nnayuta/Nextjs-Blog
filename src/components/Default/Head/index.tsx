@@ -40,7 +40,7 @@ const HeadSEO: React.FC<IHeadProps> = ({ title, url }) => {
             twitter={{
                 handle: '@handle',
                 site: '@site',
-                cardType: 'summary_large_image',
+                cardType: 'summary_large_imagew3',
             }}
         />
     );

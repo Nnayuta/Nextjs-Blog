@@ -1,26 +1,29 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthContext';
+import { IUserLogin } from '../../../interface/IUserLogin';
+import HeadSEO from '../../Default/Head';
 import * as S from './styled';
 
 const LoginArea: React.FC = () => {
     const { register, handleSubmit } = useForm();
     const { signIn } = useContext(AuthContext);
 
-    const handleSignIn = async (data) => {
+    const handleSignIn = async (data: IUserLogin) => {
         await signIn(data);
     }
 
     return (
         <S.FormContainer>
+            <HeadSEO title='Login' url='/dashboard' />
             <S.LoginArea onSubmit={handleSubmit(handleSignIn)}>
                 <S.Container>
-                    <label>E-mail:</label>
+                    <label>Login:</label>
                     <input
-                        {...register('email')}
-                        name="email"
+                        {...register('username')}
+                        name="username"
                         type="text"
-                        autoComplete='email'
+                        autoComplete='username'
                         required
                         placeholder=''
                     />

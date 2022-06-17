@@ -1,4 +1,4 @@
-import User from "../schema/users-schema";
+import User from "../schema/UserSchema";
 
 declare module 'next'{
     interface NextApiRequest{

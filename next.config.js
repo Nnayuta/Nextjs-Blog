@@ -6,8 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   env:{
-    JWT_SECRET: process.env.JWT_SECRET,
-    VERCEL_URL: process.env.VERCEL_URL,
+    JWT_SECRET: process.env.JWT_SECRET
   }
 }
 

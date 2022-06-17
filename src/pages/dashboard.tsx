@@ -25,7 +25,7 @@ export default function Dashboard({ posts, multimidia }) {
 export async function getServerSideProps() {
   const posts = await db.getAllPosts();
   
-  const resMul = await fetch(`${process.env.VERCEL_URL}/api/files/upload`);
+  const resMul = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/files/upload`);
   const multimidia = await resMul.json();
 
   return {

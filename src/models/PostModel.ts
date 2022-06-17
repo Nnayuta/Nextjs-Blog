@@ -1,5 +1,5 @@
 export class PostModel {
-    public _id?: string;
+    public id?: string;
 
     public title: string;
     public content: string;
@@ -20,7 +20,7 @@ export class PostModel {
 }
 
 export class CommentModel {
-    public _id?: string;
+    public id?: string;
     public author: string;
     public content: string;
 

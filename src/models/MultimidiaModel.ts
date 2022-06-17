@@ -1,5 +1,5 @@
 export class MultimidiaModel {
-    public _id?: string;
+    public id?: string;
     
     public name: string;
     public path: string;

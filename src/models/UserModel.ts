@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 export class UserModel {
 
-    public _id?: string;
+    public id?: string;
     public displayName?: string;
     public username: string;
     public password: string;

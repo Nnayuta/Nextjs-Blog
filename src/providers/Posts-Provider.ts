@@ -1,4 +1,4 @@
-import { Post } from "../models/PostModel";
+import { PostModel } from "../models/PostModel";
 
 
 const posts = [
@@ -8,13 +8,13 @@ const posts = [
         "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
         "author": "Dizzy",
         "category": "Paisagem",
-        "publisedAt": "01/05/1882 ás 00:00",
+        "createdAt": "01/05/1882 ás 00:00",
         "public": true,
         "comments": [
             {
                 "author": "Nayuta",
                 "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
-                "published": "01/05/1882 ás 00:00"
+                "createdAt": "01/05/1882 ás 00:00"
             }
         ]
     },
@@ -24,13 +24,13 @@ const posts = [
         "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
         "author": "Dizzy",
         "category": "Paisagem",
-        "publisedAt": "01/05/1882 ás 00:00",
+        "createdAt": "01/05/1882 ás 00:00",
         "public": true,
         "comments": [
             {
                 "author": "Nayuta",
                 "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
-                "published": "01/05/1882 ás 00:00"
+                "createdAt": "01/05/1882 ás 00:00"
             }
         ]
     },
@@ -40,13 +40,13 @@ const posts = [
         "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
         "author": "Dizzy",
         "category": "Paisagem",
-        "publisedAt": "01/05/1882 ás 00:00",
+        "createdAt": "01/05/1882 ás 00:00",
         "public": true,
         "comments": [
             {
                 "author": "Nayuta",
                 "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
-                "published": "01/05/1882 ás 00:00"
+                "createdAt": "01/05/1882 ás 00:00"
             }
         ]
     },
@@ -56,13 +56,13 @@ const posts = [
         "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
         "author": "Dizzy",
         "category": "Paisagem",
-        "publisedAt": "01/05/1882 ás 00:00",
+        "createdAt": "01/05/1882 ás 00:00",
         "public": true,
         "comments": [
             {
                 "author": "Nayuta",
                 "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
-                "published": "01/05/1882 ás 00:00"
+                "createdAt": "01/05/1882 ás 00:00"
             }
         ]
     },
@@ -72,17 +72,17 @@ const posts = [
         "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
         "author": "Dizzy",
         "category": "Paisagem",
-        "publisedAt": "01/05/1882 ás 00:00",
+        "createdAt": "01/05/1882 ás 00:00",
         "public": true,
         "comments": [
             {
                 "author": "Nayuta",
                 "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illum earum dolorum! Nam dolores iste excepturi velit labore, debitis culpa dolorum. Nostrum perferendis labore illum vel eveniet esse, eius illo.",
-                "published": "01/05/1882 ás 00:00"
+                "createdAt": "01/05/1882 ás 00:00"
             }
         ]
     },
-] as Post[];
+] as PostModel[];
 
 export async function getAllPosts() {
     return posts;

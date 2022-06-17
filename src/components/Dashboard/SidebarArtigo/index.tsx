@@ -6,20 +6,20 @@ import LinkIcon from '../../Default/LinkIcon';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
-import { Post } from '../../../models/PostModel';
+import { PostModel } from '../../../models/PostModel';
 
 interface ISidebarArtigoProps {
-    posts: Post[];
+    posts: PostModel[];
 }
 
 const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
 
     const [filter, setFilter] = useState('tudo');
-    const [postList, setPostList] = useState<Post[]>([]);
+    const [postList, setPostList] = useState<PostModel[]>([]);
     const [search, setSearch] = useState('');
 
-    const [publicados, setPublicados] = useState<Post[]>([]);
-    const [rascunhos, setRascunhos] = useState<Post[]>([]);
+    const [publicados, setPublicados] = useState<PostModel[]>([]);
+    const [rascunhos, setRascunhos] = useState<PostModel[]>([]);
 
     const [categorias, setCategorias] = useState([]);
     const [categoria, setCategoria] = useState('');
@@ -32,12 +32,12 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
         setPublicados(publicados);
         setRascunhos(rascunhos);
 
-        const setDropdownCategoryByPostList = (cat: Post[]) => {
+        const setDropdownCategoryByPostList = (cat: PostModel[]) => {
             const categorias = cat.map(postsList => postsList.category).filter((categoria, index, self) => self.indexOf(categoria) === index);
             setCategorias(categorias)
         }
 
-        const setPostListByCategoryAndSearch = (postProps: Post[], category) => {
+        const setPostListByCategoryAndSearch = (postProps: PostModel[], category) => {
             if (category != '') {
                 setPostList(
                     postProps.filter(post => post.category === categoria
@@ -135,9 +135,9 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
                     <DropDown objects={date}>Datas</DropDown>
                     <DropDown onChange={categoryDropdownonChange} objects={categorias}>Categorias</DropDown>
                 </S.FilterSearch>
-                <S.FilterSearch>            
+                <S.FilterSearch>
                     <SearchInput name='Search on table' display={searchInputOpen} onChange={searchInputOnChange} />
-                    <ButtonIcon insideValue={search ? 'Search': ''} onClick={searchInputOnClick} hoverActive isActive={searchInputOpen}>search</ButtonIcon>
+                    <ButtonIcon insideValue={search ? 'Search' : ''} onClick={searchInputOnClick} hoverActive isActive={searchInputOpen}>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>
             <S.Table>
@@ -177,8 +177,8 @@ const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
                                 <ButtonIcon insideValue={post.comments.length}>chat_bubble_outline</ButtonIcon>
                             </td>
                             <td id='Data'>
-                                <p>{post.updatedAt ? 'Última Modificação': 'Data de Publicação'}</p>
-                                <p>{post.updatedAt ? `${post.updatedAt}`: `${post.publisedAt}`}</p>
+                                <p>{post.updatedAt ? 'Última Modificação' : 'Data de Publicação'}</p>
+                                <p>{post.updatedAt ? `${post.updatedAt}` : `${post.createdAt}`}</p>
                             </td>
                             <td>
                                 <ButtonIcon hoverActive>edit</ButtonIcon>

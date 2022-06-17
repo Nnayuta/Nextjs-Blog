@@ -2,10 +2,10 @@ import Header from "../Header";
 import PostGallery from "../PostGallery";
 import * as S from "./styled";
 
-import { Post } from "../../../models/PostModel";
+import { PostModel } from "../../../models/PostModel";
 
 interface ILayoutMainProps {
-    posts: Post[];
+    posts: PostModel[];
 }
 
 const LayoutMain: React.FC<ILayoutMainProps> = ({ posts }) => {

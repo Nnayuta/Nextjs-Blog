@@ -2,10 +2,10 @@ import Link from 'next/link';
 import React from 'react';
 import * as S from './styled';
 
-import { Post } from '../../../models/PostModel';
+import { PostModel } from '../../../models/PostModel';
 
 interface IPostCardProps {
-    Post: Post;
+    Post: PostModel;
     Destaque?: boolean;
 }
 

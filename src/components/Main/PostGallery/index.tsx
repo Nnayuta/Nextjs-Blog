@@ -3,10 +3,10 @@ import ButtonIcon from '../../Default/LinkIcon';
 import PostCard from '../PostCard';
 import * as S from './styled';
 
-import { Post } from '../../../models/PostModel';
+import { PostModel } from '../../../models/PostModel';
 
 interface IPostGalleryProps {
-    posts: Post[];
+    posts: PostModel[];
 }
 
 const PostGallery: React.FC<IPostGalleryProps> = ({ posts }) => {

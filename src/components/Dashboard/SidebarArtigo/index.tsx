@@ -6,7 +6,7 @@ import LinkIcon from '../../Default/LinkIcon';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
-import { Post } from '../../../models/Post';
+import { Post } from '../../../models/PostModel';
 
 interface ISidebarArtigoProps {
     posts: Post[];

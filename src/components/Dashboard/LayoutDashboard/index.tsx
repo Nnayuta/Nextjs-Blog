@@ -9,19 +9,21 @@ import SideBarConfig from "../SidebarConfig";
 import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
 
-import { Post } from "../../../models/Post";
+import { PostModel } from "../../../models/PostModel";
 import { UserModel } from "../../../models/UserModel";
+import { MultimidiaModel } from "../../../models/MultimidiaModel";
 
 
 interface ILayoutDashboardProps {
-    posts: Post[];
+    posts: PostModel[];
     user: UserModel;
+    multimidia: MultimidiaModel[];
 }
 
-const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user }) => {
+const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user, multimidia }) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
-    
+
     const OnClick = (index) => {
         setSideBarActive(index);
     }
@@ -35,7 +37,7 @@ const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user }) => {
                 <S.Content>
                     {sideBarActive === 0 && <SidebarPainel />}
                     {sideBarActive === 1 && <SidebarArtigo posts={posts} />}
-                    {sideBarActive === 2 && <SidebarMultimidia />}
+                    {sideBarActive === 2 && <SidebarMultimidia multimidia={multimidia} />}
                     {sideBarActive === 3 && <SideBarConfig user={user} />}
                 </S.Content>
             </S.Container>

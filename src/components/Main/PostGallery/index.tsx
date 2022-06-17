@@ -3,7 +3,7 @@ import ButtonIcon from '../../Default/LinkIcon';
 import PostCard from '../PostCard';
 import * as S from './styled';
 
-import { Post } from '../../../models/Post';
+import { Post } from '../../../models/PostModel';
 
 interface IPostGalleryProps {
     posts: Post[];

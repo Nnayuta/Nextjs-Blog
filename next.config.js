@@ -6,8 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   env:{
-    JWT_SECRET: process.env.JWT_SECRET,
-    BCRYPT_SALT_ROUNDS: process.env.BCRYPT_SALT_ROUNDS
+    JWT_SECRET: process.env.JWT_SECRET
   }
 }
 

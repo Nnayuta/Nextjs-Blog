@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import * as S from './styled';
 
-import { Post } from '../../../models/Post';
+import { Post } from '../../../models/PostModel';
 
 interface IPostCardProps {
     Post: Post;

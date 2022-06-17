@@ -23,6 +23,6 @@ export class UserModel {
     }
 
     private hashPassword?(password: string): string {
-        return bcrypt.hashSync(password, process.env.BCRYPT_SALT_ROUNDS);
+        return bcrypt.hashSync(password, Number(process.env.BCRYPT_SALT_ROUNDS));
     }
 }

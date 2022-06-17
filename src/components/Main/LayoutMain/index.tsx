@@ -2,7 +2,7 @@ import Header from "../Header";
 import PostGallery from "../PostGallery";
 import * as S from "./styled";
 
-import { Post } from "../../../models/Post";
+import { Post } from "../../../models/PostModel";
 
 interface ILayoutMainProps {
     posts: Post[];

@@ -15,24 +15,43 @@ export const Container = styled.div`
     }
 `;
 
-export const AddButton = styled.button`
-    border: none;
-    background: ${({ theme }) => theme.colors.primary};
-    border-radius: 5px;
+export const FileUpload = styled.div`
+    display: flex;
+    align-items: center;
 
-    padding: 5px 12px;
+    label{
+        border: none;
+        background: ${({ theme }) => theme.colors.primary};
+        border-radius: 5px;
 
-    font-family: 'Dosis';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 25px;
-    color: ${({ theme }) => theme.colors.textMenuActive};
+        padding: 5px 12px;
 
-    &:hover{
-        background: ${({ theme }) => theme.colors.hover};
-        cursor: pointer;
+        font-family: 'Dosis';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 25px;
+        color: ${({ theme }) => theme.colors.textMenuActive};
+
+        &:hover{
+            background: ${({ theme }) => theme.colors.hover};
+            cursor: pointer;
+        }
     }
+
+    input{
+        margin-left: 10px;
+        font-family: 'Dosis';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 25px;
+        color: ${({ theme }) => theme.colors.text};
+        ::-webkit-file-upload-button{
+            display: none;
+        }
+    }
+
 `;
 
 export const FilterContainer = styled.div`

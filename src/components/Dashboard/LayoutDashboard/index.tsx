@@ -10,12 +10,12 @@ import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
 
 import { Post } from "../../../models/Post";
-import { User } from "../../../models/UserModel";
+import { UserModel } from "../../../models/UserModel";
 
 
 interface ILayoutDashboardProps {
     posts: Post[];
-    user: User;
+    user: UserModel;
 }
 
 const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user }) => {

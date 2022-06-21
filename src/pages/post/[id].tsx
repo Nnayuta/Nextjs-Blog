@@ -1,4 +1,3 @@
-
 import { GetStaticPaths, GetStaticProps } from 'next';
 import PostSchema from '../../schema/PostSchema';
 import { MongoConnection } from '../../services/mongoose';

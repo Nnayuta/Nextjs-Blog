@@ -15,6 +15,7 @@ export const theme = {
     background2: '#F0F0F0',
 
     noImage: '#BBBBBB',
+    noImageMain: '#D9D9D9',
     border: '#F0F0F0',
 
     hover: '#ff7e7bd5',

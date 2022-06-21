@@ -2,10 +2,10 @@ import bcrypt from 'bcrypt';
 
 export class UserModel {
 
-    public id?: string;
+    public _id?: string;
     public displayName?: string;
     public username: string;
-    public password: string;
+    public password?: string;
     public avatar?: string
 
     constructor(props: UserModel) {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.a`
+export const Button = styled.label`
   background: transparent;
   border: none;
   font-family: 'Material Icons';

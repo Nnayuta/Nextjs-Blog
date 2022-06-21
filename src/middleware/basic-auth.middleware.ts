@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import UserSchema from "../schema/UserSchema";
-import { MongoConnection } from "../services/mongoose";
 import bcrypt from 'bcrypt';
 import { UserModel } from "../models/UserModel";
+import { MongoConnection } from "../services/mongoose";
 
 export async function basicAuthMiddleware(req: NextApiRequest, res: NextApiResponse) {
-    try {
 
+    const Mongo = new MongoConnection();
+
+    try {
         const authHeader = req.headers['authorization'];
 
         if (!authHeader) {
@@ -24,12 +26,13 @@ export async function basicAuthMiddleware(req: NextApiRequest, res: NextApiRespo
         if (!username || !password) {
             throw new Error('Invalid authorization header');
         }
-
-        const mongo = new MongoConnection()
-        await mongo.connect();
+        
+       
+        await Mongo.connect();
         
         const userFind = await UserSchema.findOne({ username }) as UserModel;
-        await mongo.close();
+
+        await Mongo.close();
 
         if (!userFind) {
             throw new Error('Unauthorized');
@@ -40,7 +43,7 @@ export async function basicAuthMiddleware(req: NextApiRequest, res: NextApiRespo
         }
 
         const userR: Omit<UserModel, 'password'>  = {
-            id: userFind.id,
+            _id: userFind._id,
             displayName: userFind.displayName,
             username: userFind.username,
             avatar: userFind.avatar

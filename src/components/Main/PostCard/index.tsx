@@ -14,10 +14,12 @@ const PostCard: React.FC<IPostCardProps> = ({ Post, Destaque }) => {
     const { title, imagePath } = Post
 
     return (
-        <Link href={`/post/${title.replaceAll(' ' , '-') }`}>
+        <Link href={`/post/${Post._id}`}>
             <S.Card id={Destaque ? 'Destaque' : ''}>
-                <S.PostImage src={imagePath} />
-                {title}
+                <S.PostImage src={
+                    imagePath
+                } alt={title} />
+                <h2>{title}</h2>
             </S.Card>
         </Link>
     );

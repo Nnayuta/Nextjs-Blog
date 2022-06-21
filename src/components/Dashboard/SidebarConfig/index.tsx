@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styled';
 
-import { ButtonIcon } from '../../Default/ButtonIcon';
 import { UserModel } from '../../../models/UserModel';
+import { ButtonIcon } from '../../Default/ButtonIcon';
 
 interface SidebarConfigProps {
     user: UserModel;
@@ -10,7 +10,7 @@ interface SidebarConfigProps {
 
 const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
 
-    const [avatar, setAvatar] = useState('/images/default_avatar.jpg');
+    const [avatar, setAvatar] = useState('');
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
 
@@ -27,6 +27,8 @@ const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
 
     const [changeUsername, setChangeUsername] = useState(true);
     const [changePassword, setChangePassword] = useState(true);
+
+    ///images/default_avatar.jpg
 
     return (
         <S.Container>
@@ -47,9 +49,9 @@ const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
                         <S.WrapperAvatar>
                             <label htmlFor="">Avatar:</label>
                             <section>
-                                <img src={`${avatar}`} className={'avatar'} alt="me" width="177" height="177" />
-                                <img src={`${avatar}`} className={'avatar'} alt="me" width="128" height="128" />
-                                <img src={`${avatar}`} className={'avatar'} alt="me" width="70" height="70" />
+                                <img src={avatar ? '/images/default_avatar.jpg' : avatar} className={'avatar'} alt="avatar" width={177} height={177} />
+                                <img src={avatar ? '/images/default_avatar.jpg' : avatar} alt="avatar" width={128} height={128} />
+                                <img src={avatar ? '/images/default_avatar.jpg' : avatar} className={'avatar'} alt="avatar" width={70} height={70} />
                             </section>
                         </S.WrapperAvatar>
                     </div>

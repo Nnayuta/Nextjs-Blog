@@ -47,9 +47,7 @@ export const FileUpload = styled.div`
         font-size: 15px;
         line-height: 25px;
         color: ${({ theme }) => theme.colors.text};
-        ::-webkit-file-upload-button{
-            display: none;
-        }
+        display: none;
     }
 
 `;
@@ -128,6 +126,12 @@ export const GridImage = styled.div`
         :hover{
             border: 5px solid ${({ theme }) => theme.colors.primary};
             cursor: pointer;
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 `;

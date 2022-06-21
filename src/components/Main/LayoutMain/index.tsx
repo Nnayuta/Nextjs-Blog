@@ -2,18 +2,18 @@ import Header from "../Header";
 import PostGallery from "../PostGallery";
 import * as S from "./styled";
 
+import useSWR from "swr";
 import { PostModel } from "../../../models/PostModel";
 
-interface ILayoutMainProps {
-    posts: PostModel[];
-}
+const LayoutMain: React.FC = () => {
 
-const LayoutMain: React.FC<ILayoutMainProps> = ({ posts }) => {
+    const { data: posts } = useSWR<PostModel[]>('/api/posts');
+
     return (
         <S.MainContainer>
             <S.Container>
                 <Header></Header>
-                <PostGallery posts={posts}></PostGallery>
+                {posts ? <PostGallery posts={posts} /> : 'Loading'}
             </S.Container>
         </S.MainContainer>
     );

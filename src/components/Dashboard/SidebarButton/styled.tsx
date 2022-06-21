@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ISideBarProps } from "./index";
 
 export const liContainer = styled.li`
     list-style: none;
@@ -21,18 +22,25 @@ export const SideButton = styled.button`
     font-size: 30px;
     line-height: 38px;
     user-select: none;
-    background-color: transparent;
+    background: none;
 
-    &#active{
-        color: ${({ theme }) => theme.colors.textMenuActive} ;
-        
+    ${({ isActive }: ISideBarProps) => isActive && `
+        color: #FCFCFC;
         font-weight: 600;
         position: relative;
-        background: ${({ theme }) => theme.colors.primary} ;
+        background: #EE7674;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-    }
+    `};
 
     :hover{
         cursor: pointer;
-    }
+
+        ${({ hoverActive }: ISideBarProps) => hoverActive && `
+            color: #FCFCFC;
+            font-weight: 600;
+            position: relative;
+            background: #EE7674;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+        `
+    };
 `

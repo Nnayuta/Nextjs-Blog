@@ -6,7 +6,6 @@ export class MongoConnection {
             await mongoose.connect(process.env.MONGO_URI, {
                 dbName: process.env.MONGO_DB_NAME,
             });
-            console.log("MongoDB connected")
         } catch (err) {
             console.log(err)
         }
@@ -15,7 +14,6 @@ export class MongoConnection {
     public async close(): Promise<void> {
         try {
             await mongoose.connection.close();
-            console.log("MongoDB disconnected")
         } catch (err) {
             console.log(err)
         }

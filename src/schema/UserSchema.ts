@@ -4,6 +4,9 @@ import { UserModel } from "../models/UserModel";
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
+
+delete mongoose.models.User;
+
 const userSchema = new Schema<UserModel>(
     {
         displayName: {
@@ -28,6 +31,6 @@ const userSchema = new Schema<UserModel>(
     }
 );
 
-const UserSchema = mongoose.models.User || mongoose.model('User', userSchema)
+const UserSchema = mongoose.model('User', userSchema)
 
 export default UserSchema;

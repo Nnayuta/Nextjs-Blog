@@ -4,30 +4,33 @@ import { PostModel } from "../models/PostModel";
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
+delete mongoose.models.Post;
+
 const postSchema = new Schema<PostModel>(
     {
         title: {
             type: String,
-            required: true,
+            required: [true, "Title is required"],
         },
         content: {
             type: String,
-            required: true,
+            required: [true, "Content is required"],
         },
         imagePath: {
             type: String,
+            required: [true, "Image path is required"],
         },
         category: {
             type: String,
             default: "Geral"
         },
         author: {
-            type: String,
-            required: true,
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: [true, "Author is required"],
         },
         public: {
             type: Boolean,
-            required: true,
             default: true,
         }
     },
@@ -36,6 +39,6 @@ const postSchema = new Schema<PostModel>(
     }
 );
 
-const PostSchema = mongoose.models.Post || mongoose.model('Post', postSchema)
+const PostSchema = mongoose.model('Post', postSchema)
 
 export default PostSchema;

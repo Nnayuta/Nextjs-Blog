@@ -1,22 +1,16 @@
-import HeadSEO from "../components/Default/Head"
-import LayoutMain from "../components/Main/LayoutMain"
-import * as db from '../providers/Posts-Provider'
+import React from 'react';
+import HeadSEO from "../components/Default/Head";
+import LayoutMain from "../components/Main/LayoutMain";
 
-export async function getServerSideProps() {
-  const posts = await db.getAllPosts()
 
-  return {
-    props: {
-      posts
-    },
-  }
-}
+const Home: React.FC = () => {
 
-export default function Home({ posts }) {
   return (
     <>
       <HeadSEO title="Home" url={'/'} />
-      <LayoutMain posts={posts} />
+      <LayoutMain />
     </>
-  )
+  );
 }
+
+export default Home;

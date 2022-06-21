@@ -22,6 +22,6 @@
       "./src/@types"
     ],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Main/Header/index.tsx", "src/components/Dashboard/SidebarPainel/index.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Main/Header/index.tsx", "src/components/Dashboard/SidebarPainel/index.tsx", "src/components/Dashboard/SidebarArtigo/old"],
   "exclude": ["node_modules"]
 }

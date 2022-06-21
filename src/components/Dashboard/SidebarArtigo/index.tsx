@@ -8,187 +8,220 @@ import * as S from './styled';
 
 import { PostModel } from '../../../models/PostModel';
 
-interface ISidebarArtigoProps {
-    posts: PostModel[];
-}
+import useSWR from 'swr';
+import ApiAxios from '../../../services/axios';
 
-const SidebarArtigo: React.FC<ISidebarArtigoProps> = ({ posts }) => {
+const SidebarArtigo: React.FC = () => {
 
-    const [filter, setFilter] = useState('tudo');
-    const [postList, setPostList] = useState<PostModel[]>([]);
+    const { data, mutate } = useSWR<PostModel[]>('/api/post');
+    const [posts, setPosts] = useState<PostModel[]>([]);
+
+    //Filters
+    const [filter, setFilter] = useState('all');
     const [search, setSearch] = useState('');
+    const [openSearch, setOpenSearch] = useState(false);
 
-    const [publicados, setPublicados] = useState<PostModel[]>([]);
-    const [rascunhos, setRascunhos] = useState<PostModel[]>([]);
-
-    const [categorias, setCategorias] = useState([]);
-    const [categoria, setCategoria] = useState('');
     const [date, setDate] = useState([]);
+    const [category, setCategory] = useState('');
+    const [categoryList, setCategoryList] = useState([]);
+
+    const [published, setPublished] = useState(0);
+    const [draft, setDraft] = useState(0);
+
+    const [checkedAll, setCheckedAll] = useState(false);
+    const [checkedList, setCheckedList] = useState([]);
 
     useEffect(() => {
-        const publicados = posts.filter(postsList => postsList.public === true);
-        const rascunhos = posts.filter(postsList => postsList.public === false);
+        if (data) {
+            setPosts(
+                data.filter(post => {
+                    switch (filter) {
+                        case 'all':
+                            return post;
+                        case 'published':
+                            return post.public;
+                        case 'draft':
+                            return !post.public;
+                    }
+                }).filter(post => {
+                    if (search) {
+                        return post.title.toLowerCase().includes(search.toLowerCase())
+                            || post.author.displayName.toLowerCase().includes(search.toLowerCase());
+                    }
+                    return post;
+                }).filter(post => {
+                    if (category) {
+                        return post.category.toLowerCase() === category.toLowerCase();
+                    }
+                    return post;
+                })
+            );
 
-        setPublicados(publicados);
-        setRascunhos(rascunhos);
+            setPublished(data.filter(post => post.public).length);
+            setDraft(data.filter(post => !post.public).length);
 
-        const setDropdownCategoryByPostList = (cat: PostModel[]) => {
-            const categorias = cat.map(postsList => postsList.category).filter((categoria, index, self) => self.indexOf(categoria) === index);
-            setCategorias(categorias)
+            setCategoryList(
+                data.filter(post => {
+                    switch (filter) {
+                        case 'all':
+                            return post;
+                        case 'published':
+                            return post.public;
+                        case 'draft':
+                            return !post.public;
+                    }
+                }).map(post => post.category).filter((category, index, self) => self.indexOf(category) === index)
+            )
+
+            setDate(
+                data.filter(post => {
+                    switch (filter) {
+                        case 'all':
+                            return post;
+                        case 'published':
+                            return post.public;
+                        case 'draft':
+                            return !post.public;
+                    }
+                }).map(post => `${new Date(post.createdAt).toLocaleDateString('pt-BR')}`).filter((date, index, self) => self.indexOf(date) === index)
+            )
         }
 
-        const setPostListByCategoryAndSearch = (postProps: PostModel[], category) => {
-            if (category != '') {
-                setPostList(
-                    postProps.filter(post => post.category === categoria
-                        && (post.title.toLowerCase().includes(search.toLowerCase()) ||
-                            post.author.toLowerCase().includes(search.toLowerCase())
-                        )))
-            }
-            else {
-                setPostList(
-                    postProps.filter(post => (post.title.toLowerCase().includes(search.toLowerCase())
-                        || post.author.toLowerCase().includes(search.toLowerCase()))
-                    ))
-            }
+    }, [data, filter, search, category]);
+
+    const revalidateAll = () => {
+        mutate(data, true);
+        setCheckedList([]);
+        setCheckedAll(false);
+    };
+
+    const deletePost = async (id: string) => {
+        await mutate(data.filter(post => post._id !== id), false);
+        await ApiAxios.delete(`/api/post/${id}`).then(() => {
+            alert('Post deletado com sucesso!');
+        });
+    };
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
+
+    const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCategory(e.target.value);
+    };
+
+    const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id } = e.target;
+        setCheckedList(checkedList.includes(id) ? checkedList.filter(item => item !== id) : [...checkedList, id])
+    };
+
+    const handleCheckedAll = () => {
+        setCheckedAll(!checkedAll);
+        setCheckedList(posts.map((post) => post._id));
+        if (checkedAll) {
+            setCheckedList([]);
         }
-
-        switch (filter) {
-            case 'publicados':
-                setDropdownCategoryByPostList(publicados)
-                setPostListByCategoryAndSearch(publicados, categoria);
-                break;
-            case 'rascunhos':
-                setDropdownCategoryByPostList(rascunhos)
-                setPostListByCategoryAndSearch(rascunhos, categoria)
-                break;
-            default:
-                setDropdownCategoryByPostList(posts)
-                setPostListByCategoryAndSearch(posts, categoria)
-                break;
-        }
-
-    }, [posts, filter, categoria, search]);
-
-
-    // SideBar Checkbox
-
-    const [isCheckedAll, setIsCheckedAll] = useState(false);
-    const [isChecked, setIsChecked] = useState([]);
-
-    const tableCheckboxOnChange = (e) => {
-        const { id, checked } = e.target;
-        setIsChecked([...isChecked, id])
-        if (!checked) {
-            setIsChecked(isChecked.filter(item => item !== id));
-        }
-    }
-
-    const tableCheckboxOnChangeAll = (e) => {
-        setIsCheckedAll(!isCheckedAll);
-        setIsChecked(posts.map((post, index) => index.toString()));
-        if (isCheckedAll) {
-            setIsChecked([]);
-        }
-    }
-
-    //
-
-    const categoryDropdownonChange = (e) => {
-        const { value } = e.target;
-        setCategoria(value);
-    }
-
-    const searchInputOnChange = (e) => {
-        const { value } = e.target;
-        setSearch(value);
-    }
-
-    const [searchInputOpen, setSearchInputOpen] = useState(false);
-
-    const searchInputOnClick = () => {
-        setSearchInputOpen(!searchInputOpen);
-    }
+    };
 
     return (
         <S.Container>
             <S.ContainerPostCount>
-
-                <button
-                    id={filter === 'tudo' ? 'active' : ''}
-                    onClick={() => { setFilter('tudo') }}
-                >Tudo ({posts.length})</button>
-
-                <button
-                    id={filter === 'publicados' ? 'active' : ''}
-                    onClick={() => { setFilter('publicados') }}
-                >Publicados ({publicados.length})</button>
-
-                <button
-                    id={filter === 'rascunhos' ? 'active' : ''}
-                    onClick={() => { setFilter('rascunhos') }}
-                >Rascunhos ({rascunhos.length})</button>
-
+                <S.ContainerPostCountButton
+                    onClick={() => setFilter('all')}
+                    id={filter === 'all' ? 'active' : ''}
+                >{`Tudo (${published + draft})`}</S.ContainerPostCountButton>
+                <S.ContainerPostCountButton
+                    onClick={() => setFilter('published')}
+                    id={filter === 'published' ? 'active' : ''}
+                >{`Publicados (${published})`}</S.ContainerPostCountButton>
+                <S.ContainerPostCountButton
+                    onClick={() => setFilter('draft')}
+                    id={filter === 'draft' ? 'active' : ''}
+                >{`Rascunhos (${draft})`}</S.ContainerPostCountButton>
             </S.ContainerPostCount>
             <S.ContainerFilterSearch>
                 <S.FilterSearch>
                     <DropDown objects={date}>Datas</DropDown>
-                    <DropDown onChange={categoryDropdownonChange} objects={categorias}>Categorias</DropDown>
+                    <DropDown onChange={handleCategory} objects={categoryList}>Categorias</DropDown>
                 </S.FilterSearch>
                 <S.FilterSearch>
-                    <SearchInput name='Search on table' display={searchInputOpen} onChange={searchInputOnChange} />
-                    <ButtonIcon insideValue={search ? 'Search' : ''} onClick={searchInputOnClick} hoverActive isActive={searchInputOpen}>search</ButtonIcon>
+                    <SearchInput name='Search on table' display={openSearch} onChange={handleSearch} />
+                    <ButtonIcon insideValue={search ? '!' : ''} onClick={() => setOpenSearch(!openSearch)} hoverActive isActive={openSearch}>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>
-            <S.Table>
-                <thead>
-                    <S.theadTr>
-                        <th>
-                            <Checkbox
-                                id='selectAll'
-                                name='selectAll'
-                                isChecked={isCheckedAll}
-                                onChange={tableCheckboxOnChangeAll} />
-                        </th>
-                        <th>Título</th>
-                        <th>Author</th>
-                        <th>Categoria</th>
-                        <th id='icon'>chat_bubble_outline</th>
-                        <th>Data</th>
-                        <th></th>
-                    </S.theadTr>
-                </thead>
-                <tbody>
-                    {postList.map((post, index) => (
-                        <S.tbodyTr key={index}>
-                            <td>
+            <S.ContainerTable>
+                <S.Table>
+                    <thead>
+                        <S.TableHeadTr>
+                            <th>
                                 <Checkbox
-                                    id={index.toString()}
-                                    name={post.title}
-                                    isChecked={isChecked.includes(index.toString())}
-                                    onChange={tableCheckboxOnChange}
+                                    id='selectAll'
+                                    name='selectAll'
+                                    onChange={handleCheckedAll}
+                                    isChecked={checkedAll}
                                 />
-                            </td>
-                            <td>
-                                {post?.title}</td>
-                            <td>{post?.author}</td>
-                            <td>{post?.category}</td>
-                            <td>
-                                <ButtonIcon insideValue={post.comments.length}>chat_bubble_outline</ButtonIcon>
-                            </td>
-                            <td id='Data'>
-                                <p>{post.updatedAt ? 'Última Modificação' : 'Data de Publicação'}</p>
-                                <p>{post.updatedAt ? `${post.updatedAt}` : `${post.createdAt}`}</p>
-                            </td>
-                            <td>
-                                <ButtonIcon hoverActive>edit</ButtonIcon>
-                                <ButtonIcon hoverActive>delete</ButtonIcon>
-                                <LinkIcon href={`/post/${(post.title).replaceAll(" ", "-")}`}>preview</LinkIcon>
-                            </td>
-                        </S.tbodyTr>
-                    ))}
-                </tbody>
-            </S.Table>
+                            </th>
+                            <th>Título</th>
+                            <th>Author</th>
+                            <th>Categoria</th>
+                            <th id='icon'>chat_bubble_outline</th>
+                            <th>Data</th>
+                            <th>
+                                <ButtonIcon onClick={revalidateAll} hoverActive>sync</ButtonIcon>
+                            </th>
+                        </S.TableHeadTr>
+                    </thead>
+                    <tbody>
+                        {
+                            posts.map((post, index) => (
+                                <S.TableBodyTr key={index}>
+                                    <td>
+                                        <Checkbox
+                                            id={post._id}
+                                            name={post._id}
+                                            isChecked={checkedList.includes(post._id)}
+                                            onChange={handleChecked}
+                                        />
+                                    </td>
+                                    <td>
+                                        {post?.title}
+                                    </td>
+                                    <td>
+                                        {post?.author?.displayName}
+                                    </td>
+                                    <td>
+                                        {post?.category}
+                                    </td>
+                                    <td>
+                                        <ButtonIcon insideValue={post?.comments?.length ? post?.comments?.length : 0}>chat_bubble_outline</ButtonIcon>
+                                    </td>
+                                    <td>
+                                        <p>{post.updatedAt != post.createdAt ? 'Última Modificação' : 'Data de Publicação'}</p>
+                                        <p>{post.updatedAt != post.createdAt ?
+                                            `${new Date(post.updatedAt).toLocaleDateString('pt-BR')} as ${new Date(post.updatedAt).toLocaleTimeString('pt-BR')}` :
+                                            `${new Date(post.createdAt).toLocaleDateString('pt-BR')} as ${new Date(post.createdAt).toLocaleTimeString('pt-BR')}`}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <ButtonIcon hoverActive>edit</ButtonIcon>
+                                        <ButtonIcon
+                                            hoverActive
+                                            onClick={() => {
+                                                const deleteConfirm = confirm(`Deseja deletar o post: '${post.title}' ?`)
+
+                                                if (deleteConfirm) {
+                                                    deletePost(post._id);
+                                                }
+
+                                            }} >delete</ButtonIcon>
+                                        <LinkIcon target='_blank' href={`/post/${(post._id)}`}>preview</LinkIcon>
+                                    </td>
+                                </S.TableBodyTr>
+                            ))
+                        }
+                    </tbody>
+                </S.Table>
+            </S.ContainerTable>
         </S.Container>
     );
 }

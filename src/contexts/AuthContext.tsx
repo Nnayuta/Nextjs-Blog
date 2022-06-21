@@ -3,7 +3,6 @@ import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from "react";
 import { IUserLogin } from "../interface/IUserLogin";
 import { UserModel } from "../models/UserModel";
-import UserSchema from "../schema/UserSchema";
 import { JWToken } from "../services/JWToken";
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -28,12 +27,14 @@ export function AuthProvider({ children }: IAuthProviderProps) {
         async function findUser() {
             const { 'blog-token': token } = parseCookies();
 
-            if(token){
+            if (token) {
                 const userJWT = jwt.verify(token);
-                const data = await fetch(`/api/user/${userJWT.sub}`).then(res => res.json());
-                 if(userJWT){
-                    setUser(data);
-                 }
+                if (userJWT) {
+                    const data = await fetch(`/api/user/${userJWT.sub}`).then(res => res.json());
+                    if (data) {
+                        setUser(data);
+                    }
+                }
             }
         }
 
@@ -64,7 +65,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
 
                 setUser(DUser);
                 setCookie(null, 'blog-token', DToken, {
-                    maxAge: 60 * 5, // 5 minutes
+                    maxAge: 30 * 24 * 60 * 60, // 30 days
                     path: '/'
                 })
                 Router.push('/')

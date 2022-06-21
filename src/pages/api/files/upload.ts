@@ -37,10 +37,11 @@ const saveFile = async (file) => {
 
 const upload = async (req: NextApiRequest, res: NextApiResponse) => {
     const Mongo = new MongoConnection();
-    await Mongo.connect();
 
     switch (req.method) {
         case 'POST':
+            await Mongo.connect();
+
             const form = new formidable.IncomingForm();
             form.parse(req, async (err, fields, files) => {
                 if (err) {
@@ -50,15 +51,18 @@ const upload = async (req: NextApiRequest, res: NextApiResponse) => {
 
                 const fileUploaded = await saveFile(files.file);
 
-                Mongo.close();
 
                 res.status(StatusCodes.CREATED).json(fileUploaded);
+                await Mongo.close();
             });
             break
         case 'GET':
+            await Mongo.connect();
+            
             const files = await MultimidiaSchema.find({});
-            Mongo.close();
             res.status(StatusCodes.OK).json(files);
+            
+            await Mongo.close();
             break
         default:
             res.status(405).end(`Method ${req.method} Not Allowed`);

@@ -1,9 +1,13 @@
 import { StatusCodes } from "http-status-codes";
 import { JwtPayload, SignOptions } from 'jsonwebtoken';
-import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 import { basicAuthMiddleware } from "../../middleware/basic-auth.middleware";
+import { UserModel } from "../../models/UserModel";
 import { JWToken } from "../../services/JWToken";
+
+export interface IjwtPayload extends JwtPayload {
+    user: UserModel
+}
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
@@ -16,17 +20,18 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
                 throw new Error('Unauthorized');
             }
 
-            const JwTPayLoad: JwtPayload = {
+            const JwTPayLoad: IjwtPayload = {
                 user: user,
             }
 
-
             const options: SignOptions = {
-                subject: user.id
+                subject: user._id.toString(),
             }
-            
+
             const jwt = new JWToken();
             const token = jwt.sign(JwTPayLoad, options);
+
+            console.log(jwt.verify(token));
 
             return res.status(StatusCodes.OK).json({
                 "token": token,

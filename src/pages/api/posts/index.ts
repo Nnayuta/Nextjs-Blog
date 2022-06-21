@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
-import UserSchema from "../../../schema/UserSchema";
+import PostSchema from "../../../schema/PostSchema";
 import { MongoConnection } from "../../../services/mongoose";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,19 +11,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             try {
                 await Mongo.connect();
-                const findUser = await UserSchema.find().select('-password').select('-__v')
+                const findPost = await PostSchema.find().populate('author' , '-password -__v -createdAt -updatedAt -username').select('-__v')
                     .catch(err => {
                         throw new Error(err)
                     });
 
-                if (!findUser) {
+                if (!findPost) {
                     return res.status(StatusCodes.NOT_FOUND).json({
-                        message: 'User not found'
+                        message: 'Posts not found'
                     })
                 }
 
+                const filteredPost = findPost.filter(post => {
+                    return post.public === true
+                })
+
                 await Mongo.close();
-                return res.status(StatusCodes.OK).json(findUser)
+                return res.status(StatusCodes.OK).json(filteredPost)
 
             } catch (error) {
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

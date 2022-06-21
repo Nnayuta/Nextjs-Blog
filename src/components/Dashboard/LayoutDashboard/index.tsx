@@ -9,18 +9,14 @@ import SideBarConfig from "../SidebarConfig";
 import SidebarMultimidia from "../SidebarMultimidia";
 import SidebarPainel from "../SidebarPainel";
 
-import { PostModel } from "../../../models/PostModel";
 import { UserModel } from "../../../models/UserModel";
-import { MultimidiaModel } from "../../../models/MultimidiaModel";
 
 
 interface ILayoutDashboardProps {
-    posts: PostModel[];
     user: UserModel;
-    multimidia: MultimidiaModel[];
 }
 
-const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user, multimidia }) => {
+const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
 
@@ -28,7 +24,6 @@ const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user, multimi
         setSideBarActive(index);
     }
 
-    const [createPost, setCreatePost] = useState(true);
 
     const PainelGeral = () => {
         return (
@@ -36,22 +31,26 @@ const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ posts, user, multimi
                 <SideBar active={sideBarActive} onClick={OnClick} />
                 <S.Content>
                     {sideBarActive === 0 && <SidebarPainel />}
-                    {sideBarActive === 1 && <SidebarArtigo posts={posts} />}
-                    {sideBarActive === 2 && <SidebarMultimidia multimidia={multimidia} />}
+                    {sideBarActive === 1 && <SidebarArtigo />}
+                    {sideBarActive === 2 && <SidebarMultimidia />}
                     {sideBarActive === 3 && <SideBarConfig user={user} />}
                 </S.Content>
             </S.Container>
         )
     }
+    /// =================================================== \\\
 
-    const createPostOnClick = () => {
-        setCreatePost(!createPost);
+    const [activeHeader, setActiveHeader] = useState(0);
+
+    const createPostOnClick = (index: number) => {
+        setActiveHeader(index);
     }
 
     return (
         <>
-            <Header createPostOnClick={createPostOnClick} />
-            {createPost ? PainelGeral() : <CreatePost />}
+            <Header activeHeader={activeHeader} createPostOnClick={createPostOnClick} />
+            {activeHeader === 0 && <PainelGeral />}
+            {activeHeader === 1 && <CreatePost />}
         </>
     );
 }

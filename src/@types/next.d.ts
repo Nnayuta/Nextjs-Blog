@@ -1,7 +1,7 @@
-import User from "../schema/UserSchema";
+import { UserModel } from "../models/UserModel";
 
 declare module 'next'{
     interface NextApiRequest{
-        user?: User;
+        user?: UserModel;
     }
 }

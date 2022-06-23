@@ -1,36 +1,24 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import PostSchema from '../../schema/PostSchema';
-import { MongoConnection } from '../../services/mongoose';
 
-import { PostModel } from '../../models/PostModel';
 import PostPage from '../../components/Main/Posts';
-
-const Mongo = new MongoConnection();
+import { PostModel } from '../../models/PostModel';
+import PostSchema from '../../schema/PostSchema';
+import ApiAxios from '../../services/axios';
+import { MongoDB } from '../../utils/MongoDB';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-
-  await Mongo.connect();
-  const post = await PostSchema.find();
-  await Mongo.close();
-
-  const paths = post.map((post) => ({
-    params: { id: post.id },
-  }));
-
   return {
-    paths: [...paths],
+    paths: [],
     fallback: 'blocking',
   }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  await MongoDB.connect()
   const id = context.params.id;
-
-  await Mongo.connect();
   const post = await PostSchema.findById(id).populate('author', '-password -__v -createdAt -updatedAt -username').select('-__v')
-  await Mongo.close();
-
   const Post = JSON.parse(JSON.stringify(post));
+  await MongoDB.disconnect()
 
   return {
     props: {

@@ -6,7 +6,7 @@ import { UserModel } from "../../models/UserModel";
 import { JWToken } from "../../services/JWToken";
 
 export interface IjwtPayload extends JwtPayload {
-    user: UserModel
+    user: Omit<UserModel, 'password'>;
 }
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -30,8 +30,6 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
 
             const jwt = new JWToken();
             const token = jwt.sign(JwTPayLoad, options);
-
-            console.log(jwt.verify(token));
 
             return res.status(StatusCodes.OK).json({
                 "token": token,

@@ -4,6 +4,7 @@ import * as S from "./styled";
 
 import useSWR from "swr";
 import { PostModel } from "../../../models/PostModel";
+import Loading from "../../Default/Loading";
 
 const LayoutMain: React.FC = () => {
 
@@ -13,7 +14,7 @@ const LayoutMain: React.FC = () => {
         <S.MainContainer>
             <S.Container>
                 <Header></Header>
-                {posts ? <PostGallery posts={posts} /> : 'Loading'}
+                {posts ? <PostGallery posts={posts} /> : <Loading />}
             </S.Container>
         </S.MainContainer>
     );

@@ -2,11 +2,9 @@ import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 import { UserModel } from "../../../models/UserModel";
 import UserSchema from "../../../schema/UserSchema";
-import { MongoConnection } from "../../../services/mongoose";
+import { MongoDB } from "../../../utils/MongoDB";
 
 const createuser = async (req: NextApiRequest, res: NextApiResponse) => {
-    const Mongo = new MongoConnection();
-    
     switch (req.method) {
         case 'POST':
             try {
@@ -15,15 +13,13 @@ const createuser = async (req: NextApiRequest, res: NextApiResponse) => {
                     username: req.body.username,
                     password: req.body.password,
                 })
-                
-                await Mongo.connect();
-                const user = await new UserSchema(newUser)
-                
+
+                await MongoDB.connect()
+                const user = new UserSchema(newUser)
                 await user.save().catch(err => {
                     throw new Error(err)
                 })
-
-                await Mongo.close();
+                await MongoDB.disconnect()
                 return res.status(StatusCodes.CREATED).json({
                     message: 'User created'
                 });

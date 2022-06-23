@@ -65,6 +65,8 @@ export const WrapperAvatar = styled.div`
     font-size: 20px;
     line-height: 25px;
 
+    width: 100%;
+
     
     label {
         color: ${({ theme }) => theme.colors.primary};
@@ -102,6 +104,10 @@ export const WrapperTextArea = styled.div`
         margin-bottom: 18px;
     }
 
+    textarea{
+        padding: 10px;
+    }
+
     #biografia {
         width: 531px;
         height: 78px;
@@ -125,3 +131,15 @@ export const WrapperTextArea = styled.div`
     }
         
 `;
+
+export const testeDiv = styled.div`
+
+display: flex;
+position: fixed;
+
+width: 100px;
+height: 100px;
+
+background-color: red;
+
+`

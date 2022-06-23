@@ -4,6 +4,7 @@ import { MultimidiaModel } from '../../../models/MultimidiaModel';
 import ApiAxios from '../../../services/axios';
 import { ButtonIcon } from '../../Default/ButtonIcon';
 import DropDown from '../../Default/Dropdown';
+import Loading from '../../Default/Loading';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
@@ -34,8 +35,6 @@ const SidebarMultimidia: React.FC = () => {
         mutate([], true);
     }
 
-    if (!multimidia) return <div>Loading...</div>;
-
     return (
         <S.Container>
             <S.FileUpload>
@@ -65,7 +64,7 @@ const SidebarMultimidia: React.FC = () => {
             <S.GridContainer>
                 <p>{`A mostrar 0 de ${multimidia && multimidia.length} itens multimidia`}</p>
                 <S.GridImage>
-                    {multimidia ? multimidia.map((file, index) => (
+                    {multimidia?.map((file, index) => (
                         <div key={index} onClick={() => {
                             const deleteConfirm = confirm(`Deseja deletar a imagem: '${file.name}' ?`)
 
@@ -75,9 +74,10 @@ const SidebarMultimidia: React.FC = () => {
                         }} >
                             <img src={`.${file.path}`} alt={file.name} />
                         </div>
-                    )) : 'Loading'}
+                    ))}
                 </S.GridImage>
             </S.GridContainer>
+            {!multimidia && <Loading />}
         </S.Container>
     );
 }

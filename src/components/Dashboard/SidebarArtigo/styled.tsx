@@ -69,10 +69,11 @@ export const FilterSearch = styled.div`
 
 export const ContainerTable = styled.div`
     display: flex;
+    flex-direction: column;
     width: 100%;
 
-            overflow:scroll;
-            overflow-x:hidden;
+    overflow:scroll;
+    overflow-x:hidden;
 `;
 
 export const Table = styled.table`

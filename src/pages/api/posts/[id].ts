@@ -1,17 +1,14 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 import PostSchema from "../../../schema/PostSchema";
-import { MongoConnection } from "../../../services/mongoose";
+import { MongoDB } from "../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
-    const Mongo = new MongoConnection();
 
     switch (req.method) {
         case 'GET':
             try {
-                await Mongo.connect();
-
+                await MongoDB.connect()
                 const findPost = await PostSchema.findById(req.query.id).populate('author' , '-password -__v -createdAt -updatedAt -username').select('-__v')
                     .catch(err => {
                         throw new Error(err)
@@ -22,8 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         message: 'Posts not found'
                     })
                 }
-
-                await Mongo.close();
+                await MongoDB.disconnect()
                 return res.status(StatusCodes.OK).json(findPost)
 
             } catch (error) {

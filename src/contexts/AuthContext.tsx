@@ -3,6 +3,7 @@ import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from "react";
 import { IUserLogin } from "../interface/IUserLogin";
 import { UserModel } from "../models/UserModel";
+import ApiAxios from "../services/axios";
 import { JWToken } from "../services/JWToken";
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -30,7 +31,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
             if (token) {
                 const userJWT = jwt.verify(token);
                 if (userJWT) {
-                    const data = await fetch(`/api/user/${userJWT.sub}`).then(res => res.json());
+                    const { data } = await ApiAxios.get<UserModel>(`/api/user/${userJWT.sub}`)
                     if (data) {
                         setUser(data);
                     }

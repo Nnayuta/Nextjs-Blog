@@ -2,15 +2,15 @@ import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import PostSchema from "../../../schema/PostSchema";
-import { MongoConnection } from "../../../services/mongoose";
+import { MongoDB } from "../../../utils/MongoDB";
 
 const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
-    const Mongo = new MongoConnection();
-
     switch (req.method) {
         case 'DELETE':
             try {
-                await Mongo.connect();
+
+                await MongoDB.connect()
+
                 const findPost = await PostSchema.findByIdAndDelete(req.query.id)
                     .catch(err => {
                         throw new Error(err)
@@ -20,8 +20,7 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                         message: 'Posts not found'
                     })
                 }
-
-                await Mongo.close();
+                await MongoDB.disconnect();
                 return res.status(StatusCodes.OK).json({
                     message: 'Post deleted'
                 })

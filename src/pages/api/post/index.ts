@@ -7,17 +7,12 @@ import { IjwtPayload } from "../login";
 
 import PostSchema from "../../../schema/PostSchema";
 import UserSchema from "../../../schema/UserSchema";
-import { MongoConnection } from "../../../services/mongoose";
-import { UserModel } from "../../../models/UserModel";
+import { MongoDB } from "../../../utils/MongoDB";
 
 const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
-    const Mongo = new MongoConnection();
-
     switch (req.method) {
         case 'POST':
             try {
-                await Mongo.connect();
-
                 const jwt = new JWToken();
                 const [type, token] = req.headers['authorization'].split(' ');
 
@@ -28,7 +23,7 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                         message: 'Unauthorized'
                     })
                 }
-
+                await MongoDB.connect()
                 const user = await UserSchema.findById(decoded.sub).select('-password -__v');
 
                 if (!user) {
@@ -50,7 +45,8 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                     throw new Error(err)
                 });
 
-                await Mongo.close();
+                await MongoDB.disconnect()
+
                 return res.status(StatusCodes.CREATED).json({
                     message: 'Post created',
                     post: newPost,
@@ -61,27 +57,20 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                     message: error.message
                 })
             }
-        case 'PUT':
-            try {
-
-            } catch (error) {
-
-            }
-            break
         case 'DELETE':
             try {
-                await Mongo.connect();
+                await MongoDB.connect()
                 const findPost = await PostSchema.findByIdAndDelete(req.query.id)
                     .catch(err => {
                         throw new Error(err)
                     });
+                await MongoDB.disconnect()
                 if (!findPost) {
                     return res.status(StatusCodes.NOT_FOUND).json({
                         message: 'Posts not found'
                     })
                 }
 
-                await Mongo.close();
                 return res.status(StatusCodes.OK).json({
                     message: 'Post deleted'
                 })
@@ -91,28 +80,25 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                 })
             }
         case 'GET':
-            case 'GET':
-                try {
-                    await Mongo.connect();
-                    const findPost = await PostSchema.find().populate('author' , '-password -__v -createdAt -updatedAt -username').select('-__v')
-                        .catch(err => {
-                            throw new Error(err)
-                        });
-    
-                    if (!findPost) {
-                        return res.status(StatusCodes.NOT_FOUND).json({
-                            message: 'Posts not found'
-                        })
-                    }
-    
-                    await Mongo.close();
-                    return res.status(StatusCodes.OK).json(findPost)
-    
-                } catch (error) {
-                    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                        message: error.message
+            try {
+                await MongoDB.connect()
+                const findPost = await PostSchema.find().populate('author', '-password -__v -createdAt -updatedAt -username').select('-__v')
+                    .catch(err => {
+                        throw new Error(err)
+                    });
+                await MongoDB.disconnect()
+                if (!findPost) {
+                    return res.status(StatusCodes.NOT_FOUND).json({
+                        message: 'Posts not found'
                     })
                 }
+                return res.status(StatusCodes.OK).json(findPost)
+
+            } catch (error) {
+                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                    message: error.message
+                })
+            }
         default:
             return res.status(StatusCodes.METHOD_NOT_ALLOWED).json({
                 message: 'Method not allowed'

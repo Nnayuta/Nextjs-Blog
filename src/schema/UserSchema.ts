@@ -25,6 +25,13 @@ const userSchema = new Schema<UserModel>(
             type: String,
             default: "/images/default_avatar.jpg",
         },
+        bio:{
+            type: String
+        },
+        posts: {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
     },
     {
         timestamps: true,

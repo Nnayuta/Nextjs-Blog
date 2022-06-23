@@ -3,7 +3,7 @@ import fs from 'fs';
 import { StatusCodes } from 'http-status-codes';
 import { NextApiRequest, NextApiResponse } from 'next';
 import MultimidiaSchema from '../../../schema/MultimidiaSchema';
-import { MongoConnection } from '../../../services/mongoose';
+import { MongoDB } from '../../../utils/MongoDB';
 
 export const config = {
     api: {
@@ -20,6 +20,8 @@ const saveFile = async (file) => {
     fs.writeFileSync(`./public/uploads/${fileName}.${fileFormat}`, data);
     fs.unlinkSync(file.filepath);
 
+    await MongoDB.connect()
+
     const upload = await MultimidiaSchema.create({
         name: fileName,
         path: `/uploads/${fileName}.${fileFormat}`,
@@ -32,16 +34,15 @@ const saveFile = async (file) => {
         console.log(err);
     })
 
+    await MongoDB.disconnect();
+
     return upload;
 }
 
 const upload = async (req: NextApiRequest, res: NextApiResponse) => {
-    const Mongo = new MongoConnection();
 
     switch (req.method) {
         case 'POST':
-            await Mongo.connect();
-
             const form = new formidable.IncomingForm();
             form.parse(req, async (err, fields, files) => {
                 if (err) {
@@ -51,19 +52,14 @@ const upload = async (req: NextApiRequest, res: NextApiResponse) => {
 
                 const fileUploaded = await saveFile(files.file);
 
-
                 res.status(StatusCodes.CREATED).json(fileUploaded);
-                await Mongo.close();
             });
             break
         case 'GET':
-            await Mongo.connect();
-            
+            await MongoDB.connect()
             const files = await MultimidiaSchema.find({});
-            res.status(StatusCodes.OK).json(files);
-            
-            await Mongo.close();
-            break
+            await MongoDB.disconnect()
+            return res.status(StatusCodes.OK).json(files);
         default:
             res.status(405).end(`Method ${req.method} Not Allowed`);
             break

@@ -22,7 +22,6 @@ export class PostModel {
     }
 }
 
-
 export class CommentModel {
     public id?: string;
     public author: string;

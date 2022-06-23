@@ -10,6 +10,7 @@ import { PostModel } from '../../../models/PostModel';
 
 import useSWR from 'swr';
 import ApiAxios from '../../../services/axios';
+import Loading from '../../Default/Loading';
 
 const SidebarArtigo: React.FC = () => {
 
@@ -172,55 +173,61 @@ const SidebarArtigo: React.FC = () => {
                         </S.TableHeadTr>
                     </thead>
                     <tbody>
-                        {
-                            posts.map((post, index) => (
-                                <S.TableBodyTr key={index}>
-                                    <td>
-                                        <Checkbox
-                                            id={post._id}
-                                            name={post._id}
-                                            isChecked={checkedList.includes(post._id)}
-                                            onChange={handleChecked}
-                                        />
-                                    </td>
-                                    <td>
-                                        {post?.title}
-                                    </td>
-                                    <td>
-                                        {post?.author?.displayName}
-                                    </td>
-                                    <td>
-                                        {post?.category}
-                                    </td>
-                                    <td>
-                                        <ButtonIcon insideValue={post?.comments?.length ? post?.comments?.length : 0}>chat_bubble_outline</ButtonIcon>
-                                    </td>
-                                    <td>
-                                        <p>{post.updatedAt != post.createdAt ? 'Última Modificação' : 'Data de Publicação'}</p>
-                                        <p>{post.updatedAt != post.createdAt ?
-                                            `${new Date(post.updatedAt).toLocaleDateString('pt-BR')} as ${new Date(post.updatedAt).toLocaleTimeString('pt-BR')}` :
-                                            `${new Date(post.createdAt).toLocaleDateString('pt-BR')} as ${new Date(post.createdAt).toLocaleTimeString('pt-BR')}`}
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <ButtonIcon hoverActive>edit</ButtonIcon>
-                                        <ButtonIcon
-                                            hoverActive
-                                            onClick={() => {
-                                                const deleteConfirm = confirm(`Deseja deletar o post: '${post.title}' ?`)
+                        {posts.map((post, index) => (
+                            <S.TableBodyTr key={index}>
+                                <td>
+                                    <Checkbox
+                                        id={post._id}
+                                        name={post._id}
+                                        isChecked={checkedList.includes(post._id)}
+                                        onChange={handleChecked}
+                                    />
+                                </td>
+                                <td>
+                                    {post?.title}
+                                </td>
+                                <td>
+                                    {post?.author?.displayName}
+                                </td>
+                                <td>
+                                    {post?.category}
+                                </td>
+                                <td>
+                                    <ButtonIcon insideValue={post?.comments?.length ? post?.comments?.length : 0}>chat_bubble_outline</ButtonIcon>
+                                </td>
+                                <td>
+                                    <p>{post.updatedAt != post.createdAt
+                                        ? 'Última Modificação'
+                                        : 'Data de Publicação'}</p>
 
-                                                if (deleteConfirm) {
-                                                    deletePost(post._id);
-                                                }
+                                    <p>{post.updatedAt != post.createdAt
+                                        ? `${new Date(post.updatedAt).toLocaleDateString('pt-BR')} as ${new Date(post.updatedAt).toLocaleTimeString('pt-BR')}`
+                                        : `${new Date(post.createdAt).toLocaleDateString('pt-BR')} as ${new Date(post.createdAt).toLocaleTimeString('pt-BR')}`}
+                                    </p>
+                                </td>
+                                <td>
+                                    <ButtonIcon hoverActive>edit</ButtonIcon>
+                                    <ButtonIcon
+                                        hoverActive
+                                        onClick={() => {
+                                            const deleteConfirm = confirm(`Deseja deletar o post: '${post.title}' ?`)
 
-                                            }} >delete</ButtonIcon>
-                                        <LinkIcon target='_blank' href={`/post/${(post._id)}`}>preview</LinkIcon>
-                                    </td>
-                                </S.TableBodyTr>
-                            ))
-                        }
+                                            if (deleteConfirm) {
+                                                deletePost(post._id);
+                                            }
+
+                                        }} >delete</ButtonIcon>
+                                    <LinkIcon target='_blank' href={`/post/${(post._id)}`}>preview</LinkIcon>
+                                </td>
+                            </S.TableBodyTr>
+                        ))}
                     </tbody>
                 </S.Table>
+                {!data &&
+                    <Loading style={{
+                        marginTop: '20px'
+                    }} />
+                }
             </S.ContainerTable>
         </S.Container>
     );

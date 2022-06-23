@@ -21,6 +21,9 @@ export const PostContainer = styled.article`
     display: flex;
     flex-direction: column;
 
+    border: 0.5px solid ${({ theme }) => theme.colors.border};;
+    padding: 20px;
+
     font-family: 'Dosis';
     font-style: normal;
     font-weight: 400;
@@ -28,22 +31,23 @@ export const PostContainer = styled.article`
     line-height: 20px;
     text-align: center;
 
-    img{
-        width: 100%;
-        height: auto;
-        border: 5px solid ${({ theme }) => theme.colors.primary};
-    }
+    width: 100%;
+    height: 100%;
     
     color: ${({ theme }) => theme.colors.text};
 
     h1{
         text-align: center;
-        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
-    p{
-        margin-bottom: 15px;
-        margin-top: 20px;
-        text-align: justify;
+    .content{
+        margin: 50px 0;
+        text-align: center;
+        padding: 20px;
+
+        font-size: 18px;
     }
 `;

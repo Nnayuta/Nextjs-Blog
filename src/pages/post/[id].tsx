@@ -3,20 +3,20 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import PostPage from '../../components/Main/Posts';
 import { PostModel } from '../../models/PostModel';
 import PostSchema from '../../schema/PostSchema';
-import ApiAxios from '../../services/axios';
+import UserSchema from '../../schema/UserSchema';
 import { MongoDB } from '../../utils/MongoDB';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: 'blocking',
+    fallback: true,
   }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
   await MongoDB.connect()
   const id = context.params.id;
-  const post = await PostSchema.findById(id).populate('author', '-password -__v -createdAt -updatedAt -username').select('-__v')
+  const post = await PostSchema.findById(id).populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
   const Post = JSON.parse(JSON.stringify(post));
   await MongoDB.disconnect()
 

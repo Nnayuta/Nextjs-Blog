@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 import PostSchema from "../../../schema/PostSchema";
+import UserSchema from "../../../schema/UserSchema";
 import { MongoDB } from "../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             try {
                 await MongoDB.connect()
-                const findPost = await PostSchema.findById(req.query.id).populate('author' , '-password -__v -createdAt -updatedAt -username').select('-__v')
+                const findPost = await PostSchema.findById(req.query.id).populate('author' , '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
                     .catch(err => {
                         throw new Error(err)
                     });

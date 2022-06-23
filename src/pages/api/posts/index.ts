@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 import PostSchema from "../../../schema/PostSchema";
+import UserSchema from "../../../schema/UserSchema";
 import { MongoDB } from "../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             try {
                 await MongoDB.connect()
-                const findPost = await PostSchema.find().populate('author', '-password -__v -createdAt -updatedAt -username').select('-__v')
+                const findPost = await PostSchema.find({public: true}).populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
                     .catch(err => {
                         throw new Error(err)
                     });
@@ -20,11 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     })
                 }
 
-                const filteredPost = findPost.filter(post => {
-                    return post.public === true
-                })
-
-                return res.status(StatusCodes.OK).json(filteredPost)
+                return res.status(StatusCodes.OK).json(findPost)
 
             } catch (error) {
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

@@ -4,7 +4,6 @@ import { UserModel } from "../models/UserModel";
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
-
 delete mongoose.models.User;
 
 const userSchema = new Schema<UserModel>(
@@ -27,10 +26,6 @@ const userSchema = new Schema<UserModel>(
         },
         bio:{
             type: String
-        },
-        posts: {
-            type: Schema.Types.ObjectId,
-            ref: 'Post'
         }
     },
     {

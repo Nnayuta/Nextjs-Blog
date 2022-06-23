@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { PostModel } from './PostModel';
 
 export class UserModel {
 
@@ -9,7 +8,6 @@ export class UserModel {
     public password: string;
     public avatar?: string
     public bio?: string
-    public posts?: PostModel;
     
     public createdAt?: Date;
     public updatedAt?: Date;

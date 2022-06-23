@@ -1,7 +1,5 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
-import { PostModel } from "../../../models/PostModel";
-import PostSchema from "../../../schema/PostSchema";
 import UserSchema from "../../../schema/UserSchema";
 import { MongoDB } from "../../../utils/MongoDB";
 

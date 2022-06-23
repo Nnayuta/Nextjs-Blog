@@ -52,7 +52,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 headers: {
                     ...auth,
                 }
-            }).then(res => res.json());
+            }).then(res => res.json())
 
             if (data.token) {
                 const tokenPayload = jwt.verify(data.token)
@@ -61,8 +61,8 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                     throw new Error('Invalid token');
                 }
 
-                const DToken = data.token as string;
-                const DUser = tokenPayload.user as UserModel;
+                const DToken = await data.token as string;
+                const DUser = await tokenPayload.user as UserModel;
 
                 setUser(DUser);
                 setCookie(null, 'blog-token', DToken, {
@@ -71,7 +71,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 })
                 Router.push('/')
             } else {
-                return Promise.reject(data.message)
+                return Promise.reject(data)
             }
 
         } catch (error) {

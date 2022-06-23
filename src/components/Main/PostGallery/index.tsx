@@ -3,21 +3,23 @@ import ButtonIcon from '../../Default/LinkIcon';
 import PostCard from '../PostCard';
 import * as S from './styled';
 
+import useSWR from 'swr';
 import { PostModel } from '../../../models/PostModel';
+import Loading from '../../Default/Loading';
 
-interface IPostGalleryProps {
-    posts: PostModel[];
-}
+const PostGallery: React.FC = () => {
 
-const PostGallery: React.FC<IPostGalleryProps> = ({ posts }) => {
+    const { data: posts } = useSWR<PostModel[]>('/api/posts');
+
     return (
         <S.Container>
+            {!posts && <Loading />}
             <S.GridPosts>
-                {posts.map(post => (
-                    posts.indexOf(post) === 0 ?
-                        <PostCard key={posts.indexOf(post)} Post={post} Destaque />
+                {posts?.map((post, index) => (
+                    index === 0 ?
+                        <PostCard key={index} Post={post} Destaque />
                         :
-                        <PostCard key={posts.indexOf(post)} Post={post} />
+                        <PostCard key={index} Post={post} />
                 ))}
             </S.GridPosts>
             <ButtonIcon>expand_more</ButtonIcon>

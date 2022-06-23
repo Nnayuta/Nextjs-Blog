@@ -37,7 +37,8 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
         }
     } catch (error) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
-            error: error.message || 'Unexpected error'
+            message: error.message || 'Unexpected error',
+            status: StatusCodes.UNAUTHORIZED
         });
     }
 }

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { LoginAreaProps } from './index'
+
 export const FormContainer = styled.div`
     display: flex;
     width: 100vw;
@@ -38,6 +40,8 @@ export const Container = styled.div`
         font-size: 20px;
 
         background: ${({ theme }) => theme.colors.background};
+        background:  ${({ failToConnect }: LoginAreaProps) => failToConnect && 'red'};
+
         border: 1px solid ${({ theme }) => theme.colors.border};
         border-radius: 10px;
         width: 100%;

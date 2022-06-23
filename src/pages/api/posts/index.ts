@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             try {
                 await MongoDB.connect()
-                const findPost = await PostSchema.find({public: true}).populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
+                const findPost = await PostSchema.find({ public: true }).populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v').sort({ createdAt: -1 })
                     .catch(err => {
                         throw new Error(err)
                     });

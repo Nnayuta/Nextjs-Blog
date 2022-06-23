@@ -82,7 +82,7 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'GET':
             try {
                 await MongoDB.connect()
-                const findPost = await PostSchema.find().populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
+                const findPost = await PostSchema.find().populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v').sort({ createdAt: -1 })
                     .catch(err => {
                         throw new Error(err)
                     });

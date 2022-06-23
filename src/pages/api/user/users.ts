@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             try {
                 await MongoDB.connect()
-                const findUser = await UserSchema.find().select('-password -__v')
+                const findUser = await UserSchema.find().select('-password -__v').sort({ createdAt: -1 })
                     .catch(err => {
                         throw new Error(err)
                     });

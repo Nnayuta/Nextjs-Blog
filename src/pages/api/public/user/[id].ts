@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
-import UserSchema from "../../../schema/UserSchema";
-import { MongoDB } from "../../../utils/MongoDB";
+import UserSchema from "../../../../schema/UserSchema";
+import { MongoDB } from "../../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     

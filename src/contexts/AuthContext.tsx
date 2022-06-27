@@ -30,7 +30,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
             if (token) {
                 const userJWT = JWToken.verify(token);
                 if (userJWT) {
-                    const { data } = await AxiosAPI.get<UserModel>(`/api/user/${userJWT.sub}`)
+                    const { data } = await AxiosAPI.get<UserModel>(`/api/public/user/${userJWT.sub}`)
                     if (data) {
                         setUser(data);
                     }
@@ -45,7 +45,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
         try {
             const credentials = Buffer.from(`${username}:${password}`).toString('base64');
 
-            const { data } = await AxiosAPI.post(`/api/login`, null, {
+            const { data } = await AxiosAPI.post(`/api/public/login`, null, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Basic ${credentials}`

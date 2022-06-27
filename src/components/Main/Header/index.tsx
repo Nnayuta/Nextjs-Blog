@@ -8,7 +8,7 @@ import * as S from './styled';
 const Header: React.FC = () => {
 
     const { user } = useContext(AuthContext);
-    const { data } = useSWR('/api/settings')
+    const { data } = useSWR('/api/public/settings')
     
     return (
         <S.Header>

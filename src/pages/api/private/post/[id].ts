@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 
-import PostSchema from "../../../schema/PostSchema";
-import { MongoDB } from "../../../utils/MongoDB";
+import PostSchema from "../../../../schema/PostSchema";
+import { MongoDB } from "../../../../utils/MongoDB";
 
 const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {

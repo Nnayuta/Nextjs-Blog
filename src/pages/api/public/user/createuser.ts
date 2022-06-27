@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
-import { UserModel } from "../../../models/UserModel";
-import UserSchema from "../../../schema/UserSchema";
-import { MongoDB } from "../../../utils/MongoDB";
+import { UserModel } from "../../../../models/UserModel";
+import UserSchema from "../../../../schema/UserSchema";
+import { MongoDB } from "../../../../utils/MongoDB";
 
 const createuser = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {

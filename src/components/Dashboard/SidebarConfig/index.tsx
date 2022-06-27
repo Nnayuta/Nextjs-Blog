@@ -17,7 +17,7 @@ const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
     const [username, setUsername] = useState('');
     const [bio, setBio] = useState('A sociedade como um todo é feita de ilusões nos qual devemos seguir, Se você sair desta ilusão você é visto como anormal.')
 
-    const { data } = useSWR('/api/settings')
+    const { data } = useSWR('/api/public/settings')
 
     useEffect(() => {
         if (user) {

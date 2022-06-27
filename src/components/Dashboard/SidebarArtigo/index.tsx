@@ -14,7 +14,7 @@ import Loading from '../../Default/Loading';
 
 const SidebarArtigo: React.FC = () => {
 
-    const { data, mutate } = useSWR<PostModel[]>('/api/post');
+    const { data, mutate } = useSWR<PostModel[]>('/api/private/post');
     const [posts, setPosts] = useState<PostModel[]>([]);
 
     //Filters

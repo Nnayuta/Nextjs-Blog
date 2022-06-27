@@ -2,8 +2,8 @@ import formidable from 'formidable';
 import fs from 'fs';
 import { StatusCodes } from 'http-status-codes';
 import { NextApiRequest, NextApiResponse } from 'next';
-import MultimidiaSchema from '../../../schema/MultimidiaSchema';
-import { MongoDB } from '../../../utils/MongoDB';
+import MultimidiaSchema from '../../../../schema/MultimidiaSchema';
+import { MongoDB } from '../../../../utils/MongoDB';
 
 export const config = {
     api: {

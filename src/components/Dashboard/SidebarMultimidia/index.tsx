@@ -10,7 +10,7 @@ import * as S from './styled';
 
 const SidebarMultimidia: React.FC = () => {
 
-    const { data: multimidia, mutate } = useSWR<MultimidiaModel[]>('/api/files/upload');
+    const { data: multimidia, mutate } = useSWR<MultimidiaModel[]>('/api/private/files/upload');
 
     const [image, setImage] = React.useState(null);
 
@@ -22,7 +22,7 @@ const SidebarMultimidia: React.FC = () => {
             const formData = new FormData();
             formData.append('file', image);
 
-            await AxiosAPI.post('/api/files/upload', formData)
+            await AxiosAPI.post('/api/private/files/upload', formData)
 
             mutate([], true);
 
@@ -31,7 +31,7 @@ const SidebarMultimidia: React.FC = () => {
     }
 
     const deleteImage = async (id: string) => {
-        await AxiosAPI.delete(`/api/files/${id}`);
+        await AxiosAPI.delete(`/api/private/files/${id}`);
         mutate([], true);
     }
 

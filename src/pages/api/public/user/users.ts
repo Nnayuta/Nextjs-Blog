@@ -1,8 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
-import PostSchema from "../../../schema/PostSchema";
-import UserSchema from "../../../schema/UserSchema";
-import { MongoDB } from "../../../utils/MongoDB";
+import UserSchema from "../../../../schema/UserSchema";
+import { MongoDB } from "../../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -10,27 +9,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             try {
                 await MongoDB.connect()
-                const findPost = await PostSchema.findById(req.query.id).populate('author' , '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
+                const findUser = await UserSchema.find().select('-password -__v').sort({ createdAt: -1 })
                     .catch(err => {
                         throw new Error(err)
                     });
 
-                if (!findPost) {
+                await MongoDB.disconnect()
+                if (!findUser) {
                     return res.status(StatusCodes.NOT_FOUND).json({
-                        message: 'Posts not found'
+                        message: 'User not found'
                     })
                 }
-                await MongoDB.disconnect()
-                return res.status(StatusCodes.OK).json(findPost)
+                return res.status(StatusCodes.OK).json(findUser)
 
             } catch (error) {
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     message: error.message
                 })
             }
-        default:
-            return res.status(StatusCodes.METHOD_NOT_ALLOWED).json({
-                message: 'Method not allowed'
-            })
     }
 }

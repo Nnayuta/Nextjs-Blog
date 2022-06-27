@@ -10,7 +10,7 @@ import Loading from '../../Default/Loading';
 const PostGallery: React.FC = () => {
 
     const [perPage, setPerPage] = useState(5)
-    const { data, mutate } = useSWR<PostModel[]>(`/api/posts?&per_page=${perPage}`);
+    const { data, mutate } = useSWR<PostModel[]>(`/api/public/posts?&per_page=${perPage}`);
 
     const [posts, setPosts] = useState([])
 

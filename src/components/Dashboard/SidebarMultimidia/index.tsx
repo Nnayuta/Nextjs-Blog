@@ -1,7 +1,7 @@
 import React from 'react';
 import useSWR from 'swr';
 import { MultimidiaModel } from '../../../models/MultimidiaModel';
-import ApiAxios from '../../../services/axios';
+import { AxiosAPI } from '../../../services/axios';
 import { ButtonIcon } from '../../Default/ButtonIcon';
 import DropDown from '../../Default/Dropdown';
 import Loading from '../../Default/Loading';
@@ -22,7 +22,7 @@ const SidebarMultimidia: React.FC = () => {
             const formData = new FormData();
             formData.append('file', image);
 
-            await ApiAxios.post('/api/files/upload', formData)
+            await AxiosAPI.post('/api/files/upload', formData)
 
             mutate([], true);
 
@@ -31,7 +31,7 @@ const SidebarMultimidia: React.FC = () => {
     }
 
     const deleteImage = async (id: string) => {
-        await ApiAxios.delete(`/api/files/${id}`);
+        await AxiosAPI.delete(`/api/files/${id}`);
         mutate([], true);
     }
 

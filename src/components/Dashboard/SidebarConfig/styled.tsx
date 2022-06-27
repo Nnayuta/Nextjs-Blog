@@ -73,13 +73,18 @@ export const WrapperAvatar = styled.div`
         margin-bottom: 28px;
     }
 
-    img{
-        background: ${({ theme }) => theme.colors.background};
-        border: 1px solid ${({ theme }) => theme.colors.border};
-        margin-right: 24px;
+    div{
+        display: flex;
+        height: 100%;
+        align-items: baseline;
+        gap: 24px;
     }
 
 `
+
+export const Avatar = styled.div`
+    border: 1px dashed ${({ theme }) => theme.colors.border};
+`;
 
 export const Title = styled.h2`
     font-family: 'Dosis';

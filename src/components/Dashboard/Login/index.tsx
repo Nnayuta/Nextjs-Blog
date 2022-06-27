@@ -6,7 +6,7 @@ import HeadSEO from '../../Default/Head';
 import * as S from './styled';
 
 export interface LoginAreaProps {
-    failToConnect: string
+    failToConnect?: boolean
 }
 
 const LoginArea: React.FC = () => {
@@ -37,7 +37,7 @@ const LoginArea: React.FC = () => {
         <S.FormContainer>
             <HeadSEO title='Login' url='/dashboard' />
             <S.LoginArea onSubmit={handleSubmit(handleSignIn)}>
-                <S.Container failToConnect={failToConnect}>
+                <S.Container failToConnect={failToConnect} >
                     <label>Login:</label>
                     <input
                         {...register('username')}

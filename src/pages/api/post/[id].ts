@@ -8,7 +8,6 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
         case 'DELETE':
             try {
-
                 await MongoDB.connect()
 
                 const findPost = await PostSchema.findByIdAndDelete(req.query.id)

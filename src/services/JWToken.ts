@@ -1,11 +1,13 @@
-import JWT, { JwtPayload, SignOptions } from 'jsonwebtoken';
+import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 
-export class JWToken {
+class JWT {
     public sign(payload: JwtPayload, options: SignOptions): string {
-        return JWT.sign(payload, process.env.JWT_SECRET, options);
+        return jwt.sign(payload, process.env.JWT_SECRET, options);
     }
 
     public verify(token: string) {
-        return JWT.verify(token, process.env.JWT_SECRET);
+        return jwt.verify(token, process.env.JWT_SECRET);
     }
 }
+
+export const JWToken = new JWT();

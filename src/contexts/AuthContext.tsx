@@ -3,11 +3,10 @@ import { parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from "react";
 import { IUserLogin } from "../interface/IUserLogin";
 import { UserModel } from "../models/UserModel";
-import ApiAxios from "../services/axios";
+import { AxiosAPI } from "../services/axios";
 import { JWToken } from "../services/JWToken";
 
 export const AuthContext = createContext({} as AuthContextType);
-const jwt = new JWToken();
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -22,16 +21,16 @@ interface IAuthProviderProps {
 export function AuthProvider({ children }: IAuthProviderProps) {
     const [user, setUser] = useState<UserModel | null>(null)
 
-    const isAuthenticated = !!user;
+    const isAuthenticated = !user;
 
     useEffect(() => {
         async function findUser() {
             const { 'blog-token': token } = parseCookies();
 
             if (token) {
-                const userJWT = jwt.verify(token);
+                const userJWT = JWToken.verify(token);
                 if (userJWT) {
-                    const { data } = await ApiAxios.get<UserModel>(`/api/user/${userJWT.sub}`)
+                    const { data } = await AxiosAPI.get<UserModel>(`/api/user/${userJWT.sub}`)
                     if (data) {
                         setUser(data);
                     }
@@ -45,17 +44,16 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     async function signIn({ username, password }: IUserLogin) {
         try {
             const credentials = Buffer.from(`${username}:${password}`).toString('base64');
-            const auth = { Authorization: `Basic ${credentials}` };
 
-            const data = await fetch(`/api/login`, {
-                method: 'POST',
+            const { data } = await AxiosAPI.post(`/api/login`, null, {
                 headers: {
-                    ...auth,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${credentials}`
                 }
-            }).then(res => res.json())
+            })
 
             if (data.token) {
-                const tokenPayload = jwt.verify(data.token)
+                const tokenPayload = JWToken.verify(data.token)
 
                 if (typeof tokenPayload !== 'object' || !tokenPayload.sub) {
                     throw new Error('Invalid token');
@@ -71,7 +69,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
                 })
                 Router.push('/')
             } else {
-                return Promise.reject(data)
+                return Promise.reject()
             }
 
         } catch (error) {

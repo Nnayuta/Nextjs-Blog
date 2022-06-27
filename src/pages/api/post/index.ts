@@ -13,10 +13,9 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
         case 'POST':
             try {
-                const jwt = new JWToken();
                 const [type, token] = req.headers['authorization'].split(' ');
 
-                const decoded = jwt.verify(token) as IjwtPayload
+                const decoded = JWToken.verify(token) as IjwtPayload
 
                 if (!decoded) {
                     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -37,6 +36,7 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                     category: req.body.category,
                     author: user,
                     public: req.body.public,
+                    slug: req.body.slug
                 })
 
                 const newPost = new PostSchema(post)

@@ -12,6 +12,10 @@ const postSchema = new Schema<PostModel>(
             type: String,
             required: [true, "Title is required"],
         },
+        slug: {
+            type: String,
+            required: [true, "Slug is required"]
+        },
         content: {
             type: String,
             required: [true, "Content is required"],

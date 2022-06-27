@@ -1,27 +1,38 @@
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
+import { SettingsModel } from "../../../models/SettingsModel";
+import SettingsSchema from "../../../schema/SettingsSchema";
+import { MongoDB } from "../../../utils/MongoDB";
 
 const SettingsRouter = async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
-        case 'POST':
+        case 'GET':
             try {
-            
-                return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-                    message: 'Not Implemented!'
-                })
+                await MongoDB.connect()
+                const settings = await SettingsSchema.find();
+                await MongoDB.disconnect()
+
+                if (!settings) {
+                    throw new Error('?')
+                }
+
+                return res.status(StatusCodes.OK).json(settings[0])
 
             } catch (error) {
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     message: error.message
                 })
             }
-        case 'GET':
+        case 'PUT':
             try {
+                await MongoDB.connect()
+                const updateSettings = await SettingsSchema.findByIdAndUpdate("62b7f3612e00da0451284942", req.body, { new: true })
+                await MongoDB.disconnect()
 
-                return res.status(StatusCodes.NOT_IMPLEMENTED).json({
-                    message: 'Not Implemented!'
+                return res.status(StatusCodes.OK).json({
+                    message: 'Settings Updated!',
+                    NewSettings: updateSettings
                 })
-
             } catch (error) {
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     message: error.message

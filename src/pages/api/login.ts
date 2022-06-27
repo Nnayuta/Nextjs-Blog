@@ -28,8 +28,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
                 subject: user._id.toString(),
             }
 
-            const jwt = new JWToken();
-            const token = jwt.sign(JwTPayLoad, options);
+            const token = JWToken.sign(JwTPayLoad, options);
 
             return res.status(StatusCodes.OK).json({
                 "token": token,

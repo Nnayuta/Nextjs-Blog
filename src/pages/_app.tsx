@@ -3,7 +3,7 @@ import { SWRConfig } from 'swr'
 import { AuthProvider } from '../contexts/AuthContext'
 import { GlobalStyle } from '../styles/globalStyle'
 import { theme } from '../styles/theme'
-import axios from '../services/axios'
+import { AxiosAPI } from '../services/axios'
 
 export default function App({ Component, pageProps }) {
 
@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
       <SWRConfig
         value={
           {
-            fetcher: (url: string) => axios(url).then((res) => res.data),
+            fetcher: (url: string) => AxiosAPI(url).then((res) => res.data),
             dedupingInterval: 600000
           }}>
         <AuthProvider>

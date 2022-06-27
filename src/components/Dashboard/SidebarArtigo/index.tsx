@@ -9,7 +9,7 @@ import * as S from './styled';
 import { PostModel } from '../../../models/PostModel';
 
 import useSWR from 'swr';
-import ApiAxios from '../../../services/axios';
+import { AxiosAPI } from '../../../services/axios';
 import Loading from '../../Default/Loading';
 
 const SidebarArtigo: React.FC = () => {
@@ -98,7 +98,7 @@ const SidebarArtigo: React.FC = () => {
 
     const deletePost = async (id: string) => {
         await mutate(data.filter(post => post._id !== id), false);
-        await ApiAxios.delete(`/api/post/${id}`).then(() => {
+        await AxiosAPI.delete(`/api/post/${id}`).then(() => {
             alert('Post deletado com sucesso!');
         });
     };

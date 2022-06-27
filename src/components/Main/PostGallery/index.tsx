@@ -1,19 +1,33 @@
-import React from 'react';
-import ButtonIcon from '../../Default/LinkIcon';
+import React, { useEffect, useState } from 'react';
 import PostCard from '../PostCard';
 import * as S from './styled';
 
 import useSWR from 'swr';
 import { PostModel } from '../../../models/PostModel';
+import { ButtonIcon } from '../../Default/ButtonIcon';
 import Loading from '../../Default/Loading';
 
 const PostGallery: React.FC = () => {
 
-    const { data: posts } = useSWR<PostModel[]>('/api/posts');
+    const [perPage, setPerPage] = useState(5)
+    const { data, mutate } = useSWR<PostModel[]>(`/api/posts?&per_page=${perPage}`);
+
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        if (data) {
+            setPosts(data)
+        }
+
+    }, [data, posts])
+
+    const handleExpandMore = () => {
+        setPerPage(perPage + 3)
+        mutate(posts, true)
+    }
 
     return (
         <S.Container>
-            {!posts && <Loading />}
             <S.GridPosts>
                 {posts?.map((post, index) => (
                     index === 0 ?
@@ -22,7 +36,11 @@ const PostGallery: React.FC = () => {
                         <PostCard key={index} Post={post} />
                 ))}
             </S.GridPosts>
-            <ButtonIcon>expand_more</ButtonIcon>
+            {!data && <Loading />}
+            <ButtonIcon
+                hoverActive
+                onClick={handleExpandMore}
+            >expand_more</ButtonIcon>
         </S.Container>
     );
 }

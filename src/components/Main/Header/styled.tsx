@@ -25,7 +25,6 @@ export const Title = styled.div`
         font-weight: 400;
         font-size: 50px;
         line-height: 68px;
-
         color: ${({ theme }) => theme.colors.text};
     }
 `
@@ -35,10 +34,7 @@ export const ButtonArea = styled.div`
     width: 100%;
     height: 100%;
     justify-content: flex-end;
-
-    a {
-        margin-left: 24px;
-    }
+    gap: 24px;
 `;
 
 export const Paragraph = styled.p`

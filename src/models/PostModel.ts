@@ -15,10 +15,16 @@ export class PostModel {
     public createdAt?: string;
     public updatedAt?: string;
 
+    public slug: string;
+
     public comments?: CommentModel[];
 
     constructor(props: PostModel) {
         Object.assign(this, props);
+
+        if(this.slug){
+            this.slug = this.title.toLocaleLowerCase().replace(/\W+/g, '-')
+        }
     }
 }
 

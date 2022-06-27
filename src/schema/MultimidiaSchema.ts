@@ -4,6 +4,8 @@ import { MultimidiaModel } from "../models/MultimidiaModel";
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
+delete mongoose.models.Multimidia
+
 const multimidiaSchema = new Schema<MultimidiaModel>(
     {
         name: {
@@ -24,6 +26,6 @@ const multimidiaSchema = new Schema<MultimidiaModel>(
     }
 );
 
-const MultimidiaSchema = mongoose.models.Multimidia || mongoose.model('Multimidia', multimidiaSchema)
+const MultimidiaSchema = mongoose.model('Multimidia', multimidiaSchema)
 
 export default MultimidiaSchema;

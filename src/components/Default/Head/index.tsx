@@ -7,7 +7,7 @@ interface IHeadProps {
 }
 
 
-const HeadSEO: React.FC<IHeadProps> = ({ title, url }) => {
+export const HeadSEO: React.FC<IHeadProps> = ({ title, url }) => {
     return (
         <NextSeo
             title={`DizzProject & Nayuta | ${title}`}
@@ -45,5 +45,3 @@ const HeadSEO: React.FC<IHeadProps> = ({ title, url }) => {
         />
     );
 }
-
-export default HeadSEO;

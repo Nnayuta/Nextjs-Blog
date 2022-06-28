@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import LayoutDashboard from "../components/Dashboard/LayoutDashboard";
-import LoginArea from "../components/Dashboard/Login";
+import { LayoutDashboard } from "../components/Dashboard/LayoutDashboard";
+import { LoginArea } from "../components/Dashboard/Login";
 
 export default function Dashboard() {
 
@@ -9,7 +9,7 @@ export default function Dashboard() {
 
   return (
     <>
-      {user ? <LayoutDashboard user={user}/> : <LoginArea />}
+      {user ? <LayoutDashboard user={user} /> : <LoginArea />}
     </>
   )
 }

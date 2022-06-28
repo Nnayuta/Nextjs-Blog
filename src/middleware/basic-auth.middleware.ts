@@ -5,7 +5,6 @@ import { UserModel } from "../models/UserModel";
 import { MongoDB } from "../utils/MongoDB";
 
 export async function basicAuthMiddleware(req: NextApiRequest, res: NextApiResponse) {
-
     try {
         const authHeader = req.headers['authorization'];
 

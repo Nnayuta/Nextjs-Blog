@@ -9,7 +9,7 @@ export interface ISideBarProps {
     hoverActive?: boolean;
 }
 
-const SidebarButton: React.FC<ISideBarProps> = ({ children, onclick, isActive, type, hoverActive }) => {
+export const SidebarButton: React.FC<ISideBarProps> = ({ children, onclick, isActive, type, hoverActive }) => {
     return (
         <S.liContainer>
             <S.SideButton
@@ -21,5 +21,3 @@ const SidebarButton: React.FC<ISideBarProps> = ({ children, onclick, isActive, t
         </S.liContainer>
     );
 }
-
-export default SidebarButton;

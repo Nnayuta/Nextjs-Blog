@@ -2,14 +2,14 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { IUserLogin } from '../../../interface/IUserLogin';
-import HeadSEO from '../../Default/Head';
+import { HeadSEO } from '../../Default/Head';
 import * as S from './styled';
 
 export interface LoginAreaProps {
     failToConnect?: boolean
 }
 
-const LoginArea: React.FC = () => {
+export const LoginArea: React.FC = () => {
     const { register, handleSubmit } = useForm();
     const { signIn } = useContext(AuthContext);
 
@@ -65,5 +65,3 @@ const LoginArea: React.FC = () => {
         </S.FormContainer>
     );
 }
-
-export default LoginArea;

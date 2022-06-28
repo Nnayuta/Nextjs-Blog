@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Header from "../Header";
-import SideBar from "../Sidebar";
 import * as S from './styled';
 
-import CreatePost from "../CreatePost";
-import SidebarArtigo from "../SidebarArtigo";
-import SideBarConfig from "../SidebarConfig";
-import SidebarMultimidia from "../SidebarMultimidia";
-import SidebarPainel from "../SidebarPainel";
+import { Header } from "../Header";
+import { SideBar } from "../Sidebar";
+import { CreatePost } from "../CreatePost";
+import { SidebarArtigo } from "../SidebarArtigo";
+import { SideBarConfig } from "../SidebarConfig";
+import { SidebarMultimidia } from "../SidebarMultimidia";
+import { SidebarPainel } from "../SidebarPainel";
 
 import { UserModel } from "../../../models/UserModel";
 
@@ -16,7 +16,7 @@ interface ILayoutDashboardProps {
     user: UserModel;
 }
 
-const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
+export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
 
@@ -54,5 +54,3 @@ const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
         </>
     );
 }
-
-export default LayoutDashboard;

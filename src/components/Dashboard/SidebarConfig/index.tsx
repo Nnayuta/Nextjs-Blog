@@ -1,16 +1,17 @@
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import * as S from './styled';
 
 import { UserModel } from '../../../models/UserModel';
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import useSWR from 'swr';
-import Image from 'next/image';
+
 
 interface SidebarConfigProps {
     user: UserModel;
 }
 
-const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
+export const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
 
     const [avatar, setAvatar] = useState('/images/default_avatar.jpg');
     const [name, setName] = useState('');
@@ -26,8 +27,6 @@ const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
             setUsername(user?.username);
         }
     }, [user]);
-
-
 
     return (
         <S.Container>
@@ -92,5 +91,3 @@ const SideBarConfig: React.FC<SidebarConfigProps> = ({ user }) => {
         </S.Container>
     );
 }
-
-export default SideBarConfig;

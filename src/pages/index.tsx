@@ -1,22 +1,14 @@
-import dynamic from 'next/dynamic'
-import React, { Suspense } from 'react'
-import Loading from '../components/Default/Loading'
-
-const HeadSEO = dynamic(() => import('../components/Default/Head'), {
-  suspense: true,
-})
-
-const LayoutMain = dynamic(() => import('../components/Main/LayoutMain'), {
-  suspense: true,
-})
+import React from 'react'
+import { HeadSEO } from '../components/Default/Head';
+import { LayoutMain } from '../components/Main/LayoutMain';
 
 const Home: React.FC = () => {
 
   return (
-    <Suspense fallback={<Loading />}>
+    <>
       <HeadSEO title="Home" url={'/'} />
       <LayoutMain />
-    </Suspense>
+    </>
   );
 }
 

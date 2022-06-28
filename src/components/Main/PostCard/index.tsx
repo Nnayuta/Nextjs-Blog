@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import * as S from './styled';
 
 import { PostModel } from '../../../models/PostModel';
-import Loading from '../../Default/Loading';
+import { Loading } from '../../Default/Loading';
 
 interface IPostCardProps {
     Post: PostModel;
@@ -14,7 +14,7 @@ export interface PostCard {
     Destaque?: boolean
 }
 
-const PostCard: React.FC<IPostCardProps> = ({ Post, Destaque }) => {
+export const PostCard: React.FC<IPostCardProps> = ({ Post, Destaque }) => {
 
     const [title, setTitle] = useState('')
     const [imagePath, setImagePath] = useState('')
@@ -51,5 +51,3 @@ const PostCard: React.FC<IPostCardProps> = ({ Post, Destaque }) => {
         </Link>
     );
 }
-
-export default PostCard;

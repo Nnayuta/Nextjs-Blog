@@ -1,17 +1,19 @@
 import Image from 'next/image';
 import React from 'react';
+
 import { PostModel } from '../../../models/PostModel';
-import HeadSEO from '../../Default/Head';
-import LinkIcon from '../../Default/LinkIcon';
-import Loading from '../../Default/Loading';
-import Header from '../Header';
+import { HeadSEO } from '../../Default/Head';
+import { LinkIcon } from '../../Default/LinkIcon';
+import { Loading } from '../../Default/Loading';
+import { Header } from '../Header';
+
 import * as S from './styled';
 
 interface IPostProps {
     post: PostModel;
 }
 
-const PostPage: React.FC<IPostProps> = ({ post }) => {
+export const PostPage: React.FC<IPostProps> = ({ post }) => {
 
     return (
         <>
@@ -30,7 +32,7 @@ const PostPage: React.FC<IPostProps> = ({ post }) => {
                             </div>
                             <div>
                                 <label>Categoria: {post.category}</label>
-                                <div style={{ display: 'flex', justifyContent: 'end'}}>
+                                <div style={{ display: 'flex', justifyContent: 'end' }}>
                                     <Image src={post.author.avatar} alt="Author Avatar" width={'50px'} height={'50px'} />
                                     <label htmlFor="">{post.author.displayName}</label>
                                     <p>{post.author?.bio}</p>
@@ -38,10 +40,7 @@ const PostPage: React.FC<IPostProps> = ({ post }) => {
                             </div>
                         </S.PostContainer>}
                 </S.Container>
-
             </S.MainContainer>
         </>
     );
 }
-
-export default PostPage;

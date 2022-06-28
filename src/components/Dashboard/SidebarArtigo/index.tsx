@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import Checkbox from '../../Default/Checkbox';
-import DropDown from '../../Default/Dropdown';
-import LinkIcon from '../../Default/LinkIcon';
+import { Checkbox } from '../../Default/Checkbox';
+import { DropDown } from '../../Default/Dropdown';
+import { LinkIcon } from '../../Default/LinkIcon';
 import { SearchInput } from '../../Default/SearchInput';
+import { Loading } from '../../Default/Loading';
 import * as S from './styled';
 
 import { PostModel } from '../../../models/PostModel';
 
 import useSWR from 'swr';
 import { AxiosAPI } from '../../../services/axios';
-import Loading from '../../Default/Loading';
 
-const SidebarArtigo: React.FC = () => {
+
+export const SidebarArtigo: React.FC = () => {
 
     const { data, mutate } = useSWR<PostModel[]>('/api/private/post');
     const [posts, setPosts] = useState<PostModel[]>([]);
@@ -232,5 +233,3 @@ const SidebarArtigo: React.FC = () => {
         </S.Container>
     );
 }
-
-export default SidebarArtigo;

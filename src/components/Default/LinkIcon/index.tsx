@@ -10,12 +10,10 @@ interface ILinkProps {
     target?: '_blank' | '_self' | '_parent' | '_top';
 }
 
-const LinkIcon: React.FC<ILinkProps> = ({ children, href = '#', isActive, className, target }) => {
+export const LinkIcon: React.FC<ILinkProps> = ({ children, href = '#', isActive, className, target }) => {
     return (
         <Link href={href} target={target}>
             <S.Button className={className} id={isActive ? 'Active' : ''}  >{children}</S.Button>
         </Link>
     );
 }
-
-export default LinkIcon;

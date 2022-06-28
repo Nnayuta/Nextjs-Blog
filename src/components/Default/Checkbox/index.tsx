@@ -8,7 +8,7 @@ interface ICheckboxProps {
     isChecked?: boolean;
 }
 
-const Checkbox: React.FC<ICheckboxProps> = ({ id, name, onChange, isChecked }) => {
+export const Checkbox: React.FC<ICheckboxProps> = ({ id, name, onChange, isChecked }) => {
     return (
         <S.Checkbox >
             <input type='checkbox' name={name} id={id} checked={isChecked} onChange={onChange} />
@@ -16,5 +16,3 @@ const Checkbox: React.FC<ICheckboxProps> = ({ id, name, onChange, isChecked }) =
         </S.Checkbox>
     );
 }
-
-export default Checkbox;

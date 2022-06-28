@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import PostCard from '../PostCard';
+import useSWR from 'swr';
 import * as S from './styled';
 
-import useSWR from 'swr';
 import { PostModel } from '../../../models/PostModel';
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import Loading from '../../Default/Loading';
+import { Loading } from '../../Default/Loading';
+import { PostCard } from '../PostCard';
 
-const PostGallery: React.FC = () => {
+export const PostGallery: React.FC = () => {
 
     const [perPage, setPerPage] = useState(5)
     const { data, mutate } = useSWR<PostModel[]>(`/api/public/posts?&per_page=${perPage}`);
@@ -44,5 +44,3 @@ const PostGallery: React.FC = () => {
         </S.Container>
     );
 }
-
-export default PostGallery;

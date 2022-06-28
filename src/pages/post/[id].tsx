@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import PostPage from '../../components/Main/Posts';
+import { PostPage } from '../../components/Main/Posts';
 import { PostModel } from '../../models/PostModel';
 import PostSchema from '../../schema/PostSchema';
 import UserSchema from '../../schema/UserSchema';

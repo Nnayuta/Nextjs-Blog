@@ -3,12 +3,12 @@ import useSWR from 'swr';
 import { MultimidiaModel } from '../../../models/MultimidiaModel';
 import { AxiosAPI } from '../../../services/axios';
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import DropDown from '../../Default/Dropdown';
-import Loading from '../../Default/Loading';
+import { DropDown } from '../../Default/Dropdown';
+import { Loading } from '../../Default/Loading';
 import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
-const SidebarMultimidia: React.FC = () => {
+export const SidebarMultimidia: React.FC = () => {
 
     const { data: multimidia, mutate } = useSWR<MultimidiaModel[]>('/api/private/files/upload');
 
@@ -81,5 +81,3 @@ const SidebarMultimidia: React.FC = () => {
         </S.Container>
     );
 }
-
-export default SidebarMultimidia;

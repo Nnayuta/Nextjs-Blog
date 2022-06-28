@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import useSWR from 'swr';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import LinkIcon from '../../Default/LinkIcon';
+import { LinkIcon } from '../../Default/LinkIcon';
 import * as S from './styled';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
 
     const { user } = useContext(AuthContext);
     const { data } = useSWR('/api/public/settings')
-    
+
     return (
         <S.Header>
             <S.ButtonArea>
@@ -23,5 +23,3 @@ const Header: React.FC = () => {
         </S.Header>
     );
 }
-
-export default Header;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from '../../Default/ButtonIcon';
-import DropDown from '../../Default/Dropdown';
+import { DropDown } from '../../Default/Dropdown';
 import { SearchInput } from '../../Default/SearchInput';
-import SidebarButton from '../SidebarButton';
+import { SidebarButton } from '../SidebarButton';
 
 import * as S from './styled';
 
-const CreatePost: React.FC = () => {
+export const CreatePost: React.FC = () => {
 
     const { register, handleSubmit } = useForm();
 
@@ -26,7 +26,7 @@ const CreatePost: React.FC = () => {
     }, []);
 
     const onSubmit = (data) => {
-       console.log(data);
+        console.log(data);
     }
 
     return (
@@ -109,5 +109,3 @@ const CreatePost: React.FC = () => {
         </S.CreateContainer>
     );
 }
-
-export default CreatePost;

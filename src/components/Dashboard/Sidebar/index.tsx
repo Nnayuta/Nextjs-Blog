@@ -2,7 +2,7 @@ import Router from 'next/router';
 import { destroyCookie } from 'nookies';
 import React from 'react';
 
-import SidebarButton from '../SidebarButton';
+import { SidebarButton } from '../SidebarButton';
 import { sideBarItems } from './sidebarItems';
 
 import * as S from './styled';
@@ -12,7 +12,7 @@ interface ISideBarProps {
     onClick: (index: number) => void;
 }
 
-const SideBar: React.FC<ISideBarProps> = ({ active, onClick }) => {
+export const SideBar: React.FC<ISideBarProps> = ({ active, onClick }) => {
 
     const handleLogout = () => {
         destroyCookie(null, 'blog-token');
@@ -36,5 +36,3 @@ const SideBar: React.FC<ISideBarProps> = ({ active, onClick }) => {
         </S.SideContainer>
     );
 }
-
-export default SideBar;

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import LinkIcon from '../../Default/LinkIcon';
-import HeadSEO from '../../Default/Head';
-import * as S from './styled';
+import React from 'react';
+
 import { ButtonIcon } from '../../Default/ButtonIcon';
+import { HeadSEO } from '../../Default/Head';
+import { LinkIcon } from '../../Default/LinkIcon';
+
+import * as S from './styled';
 
 interface IHeaderProps {
     createPostOnClick: (id: number) => void;
     activeHeader: number;
 }
 
-const Header: React.FC<IHeaderProps> = ({ createPostOnClick, activeHeader }) => {
+export const Header: React.FC<IHeaderProps> = ({ createPostOnClick, activeHeader }) => {
 
     return (
         <>
@@ -30,4 +32,3 @@ const Header: React.FC<IHeaderProps> = ({ createPostOnClick, activeHeader }) => 
     );
 }
 
-export default Header;

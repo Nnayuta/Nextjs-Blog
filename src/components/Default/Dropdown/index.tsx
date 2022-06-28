@@ -7,7 +7,7 @@ interface IDropdownProps {
     onChange?: (e) => void;
 }
 
-const DropDown: React.FC<IDropdownProps> = ({ objects, children, onChange }) => {
+export const DropDown: React.FC<IDropdownProps> = ({ objects, children, onChange }) => {
     
     return (
         <S.DropDown onChange={onChange}>
@@ -18,5 +18,3 @@ const DropDown: React.FC<IDropdownProps> = ({ objects, children, onChange }) => 
         </S.DropDown>
     );
 }
-
-export default DropDown;

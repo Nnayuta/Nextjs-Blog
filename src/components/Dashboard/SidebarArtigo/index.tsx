@@ -3,8 +3,8 @@ import { ButtonIcon } from '../../Default/ButtonIcon';
 import { Checkbox } from '../../Default/Checkbox';
 import { DropDown } from '../../Default/Dropdown';
 import { LinkIcon } from '../../Default/LinkIcon';
-import { SearchInput } from '../../Default/SearchInput';
 import { Loading } from '../../Default/Loading';
+import { SearchInput } from '../../Default/SearchInput';
 import * as S from './styled';
 
 import { PostModel } from '../../../models/PostModel';
@@ -99,7 +99,7 @@ export const SidebarArtigo: React.FC = () => {
 
     const deletePost = async (id: string) => {
         await mutate(data.filter(post => post._id !== id), false);
-        await AxiosAPI.delete(`/api/post/${id}`).then(() => {
+        await AxiosAPI.delete(`/api/private/post/${id}`).then(() => {
             alert('Post deletado com sucesso!');
         });
     };
@@ -147,7 +147,7 @@ export const SidebarArtigo: React.FC = () => {
                     <DropDown onChange={handleCategory} objects={categoryList}>Categorias</DropDown>
                 </S.FilterSearch>
                 <S.FilterSearch>
-                    <SearchInput name='Search on table' display={openSearch} onChange={handleSearch} />
+                    <SearchInput name='Search on table' show={openSearch} onChange={handleSearch} />
                     <ButtonIcon insideValue={search ? '!' : ''} onClick={() => setOpenSearch(!openSearch)} hoverActive isActive={openSearch}>search</ButtonIcon>
                 </S.FilterSearch>
             </S.ContainerFilterSearch>

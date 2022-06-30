@@ -24,7 +24,7 @@ export const SidebarMultimidia: React.FC = () => {
 
             await AxiosAPI.post('/api/private/files/upload', formData)
 
-            mutate([], true);
+            mutate(multimidia, true);
 
             event.target.value = '';
         }
@@ -32,7 +32,7 @@ export const SidebarMultimidia: React.FC = () => {
 
     const deleteImage = async (id: string) => {
         await AxiosAPI.delete(`/api/private/files/${id}`);
-        mutate([], true);
+        mutate(multimidia, true);
     }
 
     return (
@@ -50,7 +50,7 @@ export const SidebarMultimidia: React.FC = () => {
             <S.FilterContainer>
                 <S.WrapperFilter>
                     <S.WrapperGridType>
-                        <ButtonIcon>view_list</ButtonIcon>
+                        <ButtonIcon >view_list</ButtonIcon>
                         <ButtonIcon id={'Active'}>grid_view</ButtonIcon>
                     </S.WrapperGridType>
                     <DropDown >Data</DropDown>

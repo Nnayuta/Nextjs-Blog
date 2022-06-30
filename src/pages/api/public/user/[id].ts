@@ -4,7 +4,6 @@ import UserSchema from "../../../../schema/UserSchema";
 import { MongoDB } from "../../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    
     switch (req.method) {
         case 'GET':
             try {
@@ -22,26 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             } catch (error) {
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     message: error.message
-                })
-            }
-        case 'PUT':
-            try {
-                await MongoDB.connect()
-                const updateUser = await UserSchema.findByIdAndUpdate(req.query.id, req.body, { new: true }).select('-password -__v')
-                await MongoDB.disconnect()
-                if (!updateUser) {
-                    return res.status(StatusCodes.NOT_FOUND).json({
-                        message: 'User not found'
-                    })
-                }
-
-                return res.status(StatusCodes.OK).json({
-                    message: 'User updated',
-                    updateUser
-                })
-            } catch (error) {
-                return res.status(StatusCodes.UNAUTHORIZED).json({
-                    message: 'Unauthorized'
                 })
             }
 

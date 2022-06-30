@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
         <S.Header>
             <S.ButtonArea>
                 <ButtonIcon>search</ButtonIcon>
-                {user ? <LinkIcon href='/dashboard'>settings</LinkIcon> : null}
+                {user && <LinkIcon href='/dashboard'>settings</LinkIcon>}
             </S.ButtonArea>
             <S.Title>
                 <h1>{data?.title}</h1>

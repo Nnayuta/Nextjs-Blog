@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const SideContainer = styled.aside`
     display: flex;
-    position: relative;
-    width: 373px;
+    width: 273px;
     flex-direction: column;
     justify-content: space-between;
     border-right: 1px solid ${({ theme }) => theme.colors.border};

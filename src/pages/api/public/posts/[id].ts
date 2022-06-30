@@ -5,7 +5,6 @@ import UserSchema from "../../../../schema/UserSchema";
 import { MongoDB } from "../../../../utils/MongoDB";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
     switch (req.method) {
         case 'GET':
             try {

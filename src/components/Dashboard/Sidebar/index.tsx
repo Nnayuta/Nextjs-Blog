@@ -19,7 +19,6 @@ export const SideBar: React.FC<ISideBarProps> = ({ active, onClick }) => {
         Router.reload();
     }
 
-
     return (
         <S.SideContainer>
             <S.Container>

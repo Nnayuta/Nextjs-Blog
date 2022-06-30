@@ -12,7 +12,7 @@ export const SearchInput = styled.input`
     border-radius: 5px;
     padding: 0 10px;
     transition: opacity 0.5s ease-in-out;
-    ${(props: ISearchInputProps) => props.display && 'opacity: 1;' || 'pointer-events: none; opacity: 0;'}
+    ${(props: ISearchInputProps) => props.show && 'opacity: 1;' || 'pointer-events: none; opacity: 0;'}
 
     font-family: 'Dosis';
     font-style: normal;

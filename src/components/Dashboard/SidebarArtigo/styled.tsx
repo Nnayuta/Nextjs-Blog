@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 20px 22px;
+    margin: 22px;
 `;
 
 export const ContainerPostCount = styled.div`

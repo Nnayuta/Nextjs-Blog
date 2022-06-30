@@ -3,7 +3,7 @@ import * as S from './styled';
 
 export interface ISearchInputProps {
     name: string;
-    display?: boolean;
+    show?: boolean;
     onChange?: (e) => void;
 }
 
@@ -11,13 +11,13 @@ export const SearchInput: React.FC<ISearchInputProps> =
     ({
         name = 'Search',
         onChange,
-        display
+        show
     }) => {
         return (
             <S.SearchInput
                 name={name}
                 onChange={onChange}
-                display={display}
+                show={show}
                 type='text'
             />
         );

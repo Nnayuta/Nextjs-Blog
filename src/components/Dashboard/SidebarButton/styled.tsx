@@ -4,10 +4,9 @@ import { ISideBarProps } from "./index";
 export const liContainer = styled.li`
     list-style: none;
     background: ${({ theme }) => theme.colors.background};
-
-
+    
     :nth-child(odd){
-         background: ${({ theme }) => theme.colors.backgrund2};
+         background: ${({ theme }) => theme.colors.background2};
     }
 `;
 
@@ -41,6 +40,6 @@ export const SideButton = styled.button`
             position: relative;
             background: #EE7674;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-        `
-    };
+        `};
+    }
 `

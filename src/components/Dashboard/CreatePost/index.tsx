@@ -38,14 +38,14 @@ export const CreatePost: React.FC = () => {
                         <SearchInput
                             {...register('title')}
                             name='title'
-                            display />
+                            show />
                     </div>
                     <div>
                         <label>Descr:</label>
                         <SearchInput
                             {...register('description')}
                             name='desc'
-                            display />
+                            show />
                     </div>
                 </S.WrapperTitleDesc>
                 <S.WrapperIcons>

@@ -14,15 +14,10 @@ export const Header = styled.header`
 export const Container = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 40px;
-
-    button {
-        margin-left: 24px;
-    }
+    margin: 0 40px;
+    gap: 24px;
 
     #Notification{
-        margin-left: 0;
         top: 3px;
     
         ::after{
@@ -30,19 +25,15 @@ export const Container = styled.div`
         }
     }
 
-    a{
-        margin-right: 24px;
-
-        &.home{
-            font-size: 40px;
-        }
+    &.home{
+        font-size: 40px;
     }
+
 `
 
 export const Logo = styled.div`
     width: 79px;
     height: 79px;
     background-color: ${({ theme }) => theme.colors.noImage};
-    margin-right: 18px;
 `;
 

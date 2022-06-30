@@ -11,7 +11,7 @@ export const DropDown: React.FC<IDropdownProps> = ({ objects, children, onChange
     
     return (
         <S.DropDown onChange={onChange}>
-            <option value="">{children}</option>
+            <option value="">{children} <p></p></option>
             {objects && objects.map(item => (
                 <option key={objects.indexOf(item)} value={item}>{item}</option>
             ))}

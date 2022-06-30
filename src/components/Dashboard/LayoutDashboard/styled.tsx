@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+export const MainContainer = styled.main`
     display: flex;
-    height: calc(100vh - 126px);
+    flex: 1;
 `
 
-export const Content = styled.main`
-    display: flex;
-    width: 100%;
-    height: 100%;
-
-    background: ${({ theme }) => theme.colors.backgroundGeral};
-`
+export const Content = styled.div`
+  flex: 1;
+`;

@@ -16,6 +16,9 @@ export const DropDown = styled.select`
     color: #262322;
     padding: 0 20px;
 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
     &:hover{
         cursor: pointer;
     }
@@ -23,5 +26,11 @@ export const DropDown = styled.select`
     option {
         text-align: start;
     }
+
+    .expand{
+
+    }
+
+
 
 `;

@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 20px 22px;
+    margin: 22px;
 
     p{
         font-family: 'Dosis';
@@ -110,15 +107,10 @@ export const GridImage = styled.div`
     flex-wrap: wrap;
     overflow:scroll;
     overflow-x:hidden;
-    height: 680px;
-    width: 100%;
+    height: 100%;
+    gap: 22px;
     
-
     div{
-        margin-right: 22px;
-        margin-bottom: 18px;
-
-        display: flex;
         width: 214px;
         height: 214px;
         background: ${({ theme }) => theme.colors.noImage};

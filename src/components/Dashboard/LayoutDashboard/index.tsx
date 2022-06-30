@@ -10,6 +10,7 @@ import { SidebarMultimidia } from "../SidebarMultimidia";
 import { SidebarPainel } from "../SidebarPainel";
 
 import { UserModel } from "../../../models/UserModel";
+import { HeadSEO } from "../../Default/Head";
 
 
 interface ILayoutDashboardProps {
@@ -27,7 +28,7 @@ export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
 
     const PainelGeral = () => {
         return (
-            <S.Container>
+            <S.MainContainer>
                 <SideBar active={sideBarActive} onClick={OnClick} />
                 <S.Content>
                     {sideBarActive === 0 && <SidebarPainel />}
@@ -35,7 +36,7 @@ export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
                     {sideBarActive === 2 && <SidebarMultimidia />}
                     {sideBarActive === 3 && <SideBarConfig user={user} />}
                 </S.Content>
-            </S.Container>
+            </S.MainContainer>
         )
     }
     /// =================================================== \\\
@@ -47,10 +48,11 @@ export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
     }
 
     return (
-        <>
+        <S.Layout>
+            <HeadSEO title={`Dashboard`} url={'/dashboard'} />
             <Header activeHeader={activeHeader} createPostOnClick={createPostOnClick} />
             {activeHeader === 0 && <PainelGeral />}
             {activeHeader === 1 && <CreatePost />}
-        </>
+        </S.Layout>
     );
 }

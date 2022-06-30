@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from './styled';
 
 import { Header } from "../Header";
@@ -11,6 +11,7 @@ import { SidebarPainel } from "../SidebarPainel";
 
 import { UserModel } from "../../../models/UserModel";
 import { HeadSEO } from "../../Default/Head";
+import { parseCookies, setCookie } from "nookies";
 
 
 interface ILayoutDashboardProps {
@@ -20,8 +21,19 @@ interface ILayoutDashboardProps {
 export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
 
     const [sideBarActive, setSideBarActive] = useState(0);
+    useEffect(() => {
+        const { 'sideBarActive': id } = parseCookies();
+        if(id){
+            setSideBarActive(Number(id))
+        }
+    }, [])
 
     const OnClick = (index) => {
+        setCookie(null, 'sideBarActive', index, {
+            maxAge: 30,
+            path: '/dashboard'
+        })
+
         setSideBarActive(index);
     }
 

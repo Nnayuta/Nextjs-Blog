@@ -2,9 +2,6 @@ import styled from "styled-components";
 import Image from 'next/image';
 
 export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
     margin: 28px 66px;
 `;
 

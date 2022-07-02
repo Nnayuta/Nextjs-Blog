@@ -1,10 +1,10 @@
 export class SettingsModel {
-    public _id?: string;
+    public readonly _id?: string;
 
     public title: string;
     public description: string;
     public icone: string;
 
-    public createdAt?: string;
-    public updatedAt?: string;
+    public readonly createdAt?: string;
+    public readonly updatedAt?: string;
 }

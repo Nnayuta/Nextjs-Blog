@@ -37,12 +37,14 @@ const PostRouter = async (req: NextApiRequest, res: NextApiResponse) => {
                     const post = new PostModel({
                         title: req.body.title,
                         content: req.body.content,
-                        imagePath: req.body.imagePath,
+                        thumbnail: req.body.thumbnail,
                         category: req.body.category,
                         author: user,
                         public: req.body.public,
-                        slug: req.body.slug
+                        description: req.body.description
                     })
+
+                    console.log(post)
 
                     const newPost = new PostSchema(post)
 

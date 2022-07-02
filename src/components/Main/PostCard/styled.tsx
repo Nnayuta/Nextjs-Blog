@@ -24,7 +24,6 @@ export const PostContainer = styled.div`
 
 export const CardImage = styled(Image)`
     object-fit: cover;
-    object-position: left;
 `;
 
 export const CardContainer = styled.div`
@@ -36,7 +35,6 @@ export const CardContainer = styled.div`
 
     align-items: ${({ Destaque }: PostCard) => Destaque ? 'center' : 'flex-end'};
     justify-content: flex-end;
-    
 
     div{
         display: flex;

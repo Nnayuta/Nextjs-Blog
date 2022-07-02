@@ -17,32 +17,34 @@ export interface PostCard {
 export const PostCard: React.FC<IPostCardProps> = ({ Post, Destaque }) => {
 
     const [title, setTitle] = useState('')
-    const [imagePath, setImagePath] = useState('')
+    const [thumbnail, setThumbnail] = useState('')
+    const [description, setDescription] = useState('')
 
     useEffect(() => {
         if (Post) {
             setTitle(Post?.title)
-            setImagePath(Post?.imagePath)
+            setThumbnail(Post?.thumbnail)
+            setDescription(Post?.description)
         }
     }, [Post])
 
-    if (!imagePath) {
+    if (!thumbnail) {
         return (
             <Loading />
         )
     }
 
     return (
-        <Link href={`/post/${Post._id}`}>
+        <Link href={`/post/${Post?.slug}`}>
             <S.PostContainer Destaque={Destaque}>
                 <S.CardContainer Destaque={Destaque}>
                     <div>
                         <strong>{title}</strong>
-                        <p>Caros amigos, a infinita diversidade da realidade única cumpre um papel essencial na formulação das condições epistemológicas e cognitivas exigidas. É por isso que Baudrillard e Deleuze - em sua melhor forma - concordaram que uma mutação pós-jungiana recorre à experiência efetiva da fundamentação metafísica das representações. Assim mesmo, a estrutura atual da ideação semântica exige a precisão e a definição do sistema de conhecimento geral.</p>
+                        <p>{description}</p>
                     </div>
                 </S.CardContainer>
                 <S.CardImage
-                    src={imagePath}
+                    src={`/uploads/${thumbnail}`}
                     alt={title}
                     width={Destaque ? 828 : 400}
                     height={435}

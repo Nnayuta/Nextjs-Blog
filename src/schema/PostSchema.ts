@@ -12,17 +12,22 @@ const postSchema = new Schema<PostModel>(
             type: String,
             required: [true, "Title is required"],
         },
+        description: {
+            type: String,
+            required: [true, 'Description is required']
+        },
         slug: {
             type: String,
+            unique: true,
             required: [true, "Slug is required"]
         },
         content: {
-            type: String,
+            type: String,  
             required: [true, "Content is required"],
         },
-        imagePath: {
+        thumbnail: {
             type: String,
-            required: [true, "Image path is required"],
+            required: [true, "Thumbnail is required"],
         },
         category: {
             type: String,

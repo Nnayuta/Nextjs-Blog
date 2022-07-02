@@ -2,15 +2,15 @@ import bcrypt from 'bcrypt';
 
 export class UserModel {
 
-    public _id?: string;
+    public readonly _id?: string;
     public displayName?: string;
     public username: string;
     public password: string;
     public avatar?: string
     public bio?: string
     
-    public createdAt?: Date;
-    public updatedAt?: Date;
+    public readonly createdAt?: Date;
+    public readonly updatedAt?: Date;
 
     constructor(props: UserModel) {
 

@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import React from 'react';
 
 import { PostPage } from '../../components/Main/Posts';
 import { PostModel } from '../../models/PostModel';
@@ -14,25 +15,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  await MongoDB.connect()
-  const id = context.params.id;
-  const post = await PostSchema.findById(id).populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v')
-  const Post = JSON.parse(JSON.stringify(post));
-  await MongoDB.disconnect()
+  const slug = context.params.slug
+  await MongoDB.connect();
+  const postFind = await PostSchema.find({ slug }).populate('author', '-password -__v -createdAt -updatedAt -username', UserSchema).select('-__v');
+  await MongoDB.disconnect();
+  const post = await JSON.parse(JSON.stringify(postFind))
 
   return {
     props: {
-      post: Post,
+      post: post[0]
     }
   }
 }
 
-const post = (props) => {
+interface postProps {
+  post: PostModel
+}
 
-  const { post }: { post: PostModel } = props
+const post: React.FC<postProps> = (props) => {
 
   return (
-    <PostPage post={post} />
+    <PostPage post={props?.post} />
   )
 }
 

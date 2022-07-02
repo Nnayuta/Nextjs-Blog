@@ -11,6 +11,7 @@ import { PostModel } from '../../../models/PostModel';
 
 import useSWR from 'swr';
 import { AxiosAPI } from '../../../services/axios';
+import { Confirmation } from '../../Default/Confirmation';
 
 
 export const SidebarArtigo: React.FC = () => {
@@ -97,11 +98,23 @@ export const SidebarArtigo: React.FC = () => {
         setCheckedAll(false);
     };
 
-    const deletePost = async (id: string) => {
-        await mutate(data.filter(post => post._id !== id), false);
-        await AxiosAPI.delete(`/api/private/post/${id}`).then(() => {
-            alert('Post deletado com sucesso!');
+    const postToDeleteDefault = {
+        status: false,
+        postTitle: '',
+        postID: ''
+    }
+
+    const [deleting, setDeleting] = useState(false);
+    const [postToDelete, setPostToDelete] = useState(postToDeleteDefault)
+
+    const deletePost = async () => {
+        setDeleting(true)
+        const { postID } = postToDelete
+        await AxiosAPI.delete(`/api/private/post/${postID}`).then((data) => {
+            setDeleting(false)
+            setPostToDelete(postToDeleteDefault)
         });
+        await mutate(data.filter(post => post._id !== postID), false);
     };
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,6 +140,16 @@ export const SidebarArtigo: React.FC = () => {
 
     return (
         <S.Container>
+            {postToDelete.status &&
+                <Confirmation
+                    deleting={deleting}
+                    title='Você deseja deletar?'
+                    toConfirm={postToDelete.postTitle}
+                    deleteConfirm={deletePost}
+                    deleteCancel={() => {
+                        setPostToDelete(postToDeleteDefault)
+                    }}
+                />}
             <S.ContainerPostCount>
                 <S.ContainerPostCountButton
                     onClick={() => setFilter('all')}
@@ -211,14 +234,13 @@ export const SidebarArtigo: React.FC = () => {
                                     <ButtonIcon
                                         hoverActive
                                         onClick={() => {
-                                            const deleteConfirm = confirm(`Deseja deletar o post: '${post.title}' ?`)
-
-                                            if (deleteConfirm) {
-                                                deletePost(post._id);
-                                            }
-
+                                            setPostToDelete({
+                                                status: true,
+                                                postTitle: post?.title,
+                                                postID: post?._id
+                                            })
                                         }} >delete</ButtonIcon>
-                                    <LinkIcon target='_blank' href={`/post/${(post._id)}`}>preview</LinkIcon>
+                                    <LinkIcon target='_blank' href={`/post/${(post?.slug)}`}>preview</LinkIcon>
                                 </td>
                             </S.TableBodyTr>
                         ))}

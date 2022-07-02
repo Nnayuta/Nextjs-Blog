@@ -14,10 +14,9 @@ interface IPostProps {
 }
 
 export const PostPage: React.FC<IPostProps> = ({ post }) => {
-
     return (
         <>
-            <HeadSEO title={post?.title} url={`/post/${post?._id}`} />
+            <HeadSEO title={post?.title} url={`/post/${post?.slug}`} />
             <S.MainContainer>
                 <S.Container>
                     <Header />
@@ -33,9 +32,9 @@ export const PostPage: React.FC<IPostProps> = ({ post }) => {
                             <div>
                                 <label>Categoria: {post.category}</label>
                                 <div style={{ display: 'flex', justifyContent: 'end' }}>
-                                    <Image src={post.author.avatar} alt="Author Avatar" width={'50px'} height={'50px'} />
-                                    <label htmlFor="">{post.author.displayName}</label>
-                                    <p>{post.author?.bio}</p>
+                                    {/* <Image src={post?.author?.avatar} alt="Author Avatar" width={'50px'} height={'50px'} /> */}
+                                    <label htmlFor="">{post?.author?.displayName}</label>
+                                    <p>{post?.author?.bio}</p>
                                 </div>
                             </div>
                         </S.PostContainer>}

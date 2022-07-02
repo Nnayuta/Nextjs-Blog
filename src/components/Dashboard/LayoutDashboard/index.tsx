@@ -20,16 +20,25 @@ interface ILayoutDashboardProps {
 
 export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
 
+    const [activeHeader, setActiveHeader] = useState(0);
     const [sideBarActive, setSideBarActive] = useState(0);
+
     useEffect(() => {
-        const { 'sideBarActive': id } = parseCookies();
-        if(id){
-            setSideBarActive(Number(id))
+        const { 'sideBarActive': sideID } = parseCookies();
+        const { 'activeHeader': headID } = parseCookies();
+
+        if (sideID) {
+            setSideBarActive(Number(sideID))
         }
+
+        if(headID){
+            setActiveHeader(Number(headID))
+        }
+
     }, [])
 
-    const OnClick = (index) => {
-        setCookie(null, 'sideBarActive', index, {
+    const OnClick = (index: number) => {
+        setCookie(null, 'sideBarActive', index.toString(), {
             maxAge: 30,
             path: '/dashboard'
         })
@@ -37,6 +46,15 @@ export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
         setSideBarActive(index);
     }
 
+    const createPostOnClick = (index: number) => {
+
+        setCookie(null, 'activeHeader', index.toString(), {
+            maxAge: 30,
+            path: '/dashboard'
+        })
+
+        setActiveHeader(index);
+    }
 
     const PainelGeral = () => {
         return (
@@ -50,13 +68,6 @@ export const LayoutDashboard: React.FC<ILayoutDashboardProps> = ({ user }) => {
                 </S.Content>
             </S.MainContainer>
         )
-    }
-    /// =================================================== \\\
-
-    const [activeHeader, setActiveHeader] = useState(0);
-
-    const createPostOnClick = (index: number) => {
-        setActiveHeader(index);
     }
 
     return (

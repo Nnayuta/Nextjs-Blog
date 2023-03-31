@@ -1,9 +1,4 @@
 <h1 align="center">Blog Pessoal em Next</h1>
-<p align="center">Readme em contrução</a>
-
-
-### Preview
-<p align="center"><a href="https://nizzy.vercel.app/">Preview on Vercel</a></p>
 
 ### 🛠 Tecnologias
 
